@@ -5,12 +5,9 @@ import Structure3D from './components/Structure3D';
 import DisplayTable from './components/Table';
 
 function App() {
-  const searchField = document.querySelector('.search-field');
 
 
   Search( 'Camphor' )
-
-
   
   return (
     < div id="root" >
@@ -150,6 +147,36 @@ function Header() {
 }
 
 function Main() {
+
+  const searchBtn = document.querySelector('.go-icon');
+
+  function handleSearchFocus() {
+    const logoEl = document.querySelector('.logo');
+    const searchEl = document.querySelector('.search-box');
+
+
+    // @ts-ignore
+    logoEl.classList.add('logo-rotate');
+    // @ts-ignore
+    searchEl.classList.add('border-searching');
+  }
+
+  function handleSearchBlur() {
+    const logoEl = document.querySelector('.logo');
+    const searchEl = document.querySelector('.search-box');
+    const searchField = document.querySelector('.search-field');
+
+    // @ts-ignore
+    searchField.blur();
+    // @ts-ignore
+    logoEl.classList.remove('logo-rotate');
+    // @ts-ignore
+    searchEl.classList.remove('border-searching');
+  }
+
+
+
+
   return(
     <div className='main--wrapper'>
 
@@ -160,7 +187,7 @@ function Main() {
               <div className="search-icon"><i className="fa fa-search search-icon"></i></div>
 
               <form className="search-form">
-                  <input type="text" className="search-field" id="search" autoComplete="off" value="ATP"/>
+                  <input type="text" className="search-field" id="search" autoComplete="off" defaultValue="ATP" onFocus={ handleSearchFocus } onBlur={ handleSearchBlur } />
               </form>
 
               <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">

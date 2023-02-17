@@ -14,6 +14,16 @@ function Structure3D( _3Dmolecule: any, size3d: number ) {
   display3D.styles.atoms_HBlack_2D = false;
   display3D.styles.bonds_symmetrical_2D = true;
   display3D.styles.backgroundColor = '#141414';
+
+
+  display3D.styles.atoms_display = false;
+
+
+
+
+
+
+
   display3D.dragPath = [];
   display3D.oldDrag = display3D.drag;
 
