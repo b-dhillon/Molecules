@@ -4,15 +4,26 @@ import Structure2D from './components/Structure2D';
 import Structure3D from './components/Structure3D';
 import DisplayTable from './components/Table';
 
+// To-do:
+/*
+Get describe working.
+Get stream working.
+Re-do the UI layout.
+*/
+
 function App() {
+  const [ searchedString, setSearchedString ] = useState("");
 
 
-  Search( 'Camphor' )
+
+  // Search( 'Camphor' )
   
   return (
     < div id="root" >
       < Logo />
-      < Main />
+      < SearchField setSearchedString={ setSearchedString } searchedString={ searchedString } />
+      < StructureFields />
+      < DescriptionField />
     </ div >
   )
 }
@@ -41,54 +52,54 @@ function Search( searchedString: string ) {
   }
 
 
-  if (firstLoad) 
-  {
-    firstLoad = false;
-    fetch(
-      `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=3d`
-    )
-      .then((res) =>
-      {
-        return res.blob();
-      })
-      .then((data) =>
-      {
-        reader3d.readAsText(data);
-        reader3d.onload = function ()
-        {
-          molecule3d = reader3d.result;
-          Structure3D( molecule3d, size3d );
-        };
-      });
+  // if (firstLoad) 
+  // {
+  //   firstLoad = false;
+  //   fetch(
+  //     `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=3d`
+  //   )
+  //     .then((res) =>
+  //     {
+  //       return res.blob();
+  //     })
+  //     .then((data) =>
+  //     {
+  //       reader3d.readAsText(data);
+  //       reader3d.onload = function ()
+  //       {
+  //         molecule3d = reader3d.result;
+  //         Structure3D( molecule3d, size3d );
+  //       };
+  //     });
 
-    fetch(
-      `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=2d`
-    )
-      .then((res) =>
-      {
-        return res.blob();
-      })
-      .then((data) =>
-      {
-        reader2d.readAsText(data);
-        reader2d.onload = function ()
-        {
-          molecule2d = reader2d.result;
-          Structure2D( molecule2d, size2d );
-        };
-      });
+  //   fetch(
+  //     `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=2d`
+  //   )
+  //     .then((res) =>
+  //     {
+  //       return res.blob();
+  //     })
+  //     .then((data) =>
+  //     {
+  //       reader2d.readAsText(data);
+  //       reader2d.onload = function ()
+  //       {
+  //         molecule2d = reader2d.result;
+  //         Structure2D( molecule2d, size2d );
+  //       };
+  //     });
 
-    fetch(
-      `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/property/Title,IUPACName,MolecularFormula,MolecularWeight/JSON`
-    )
-      .then((res) => res.json())
-      .then((data) =>
-      {
-        chemical_property_data = Object.values(data.PropertyTable.Properties[0]);
-        DisplayTable(chemical_property_data);
-      });
-  } else
-  {
+  //   fetch(
+  //     `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/property/Title,IUPACName,MolecularFormula,MolecularWeight/JSON`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) =>
+  //     {
+  //       chemical_property_data = Object.values(data.PropertyTable.Properties[0]);
+  //       DisplayTable(chemical_property_data);
+  //     });
+  // } else
+  // {
     fetch(
       `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${searchedString}/SDF?record_type=3d`
     )
@@ -132,7 +143,7 @@ function Search( searchedString: string ) {
         chemical_property_data = Object.values(data.PropertyTable.Properties[0]);
         DisplayTable(chemical_property_data);
       });
-  }
+  // }
 }
 
 
@@ -146,6 +157,7 @@ function Logo() {
   )
 }
 
+/*
 function Main() {
 
   return(
@@ -156,8 +168,10 @@ function Main() {
     </div>
   )
 }
+*/
 
-function SearchField() {
+function SearchField( props: any ) {
+
   function handleSearchFocus() {
     const logoEl = document.querySelector('.logo');
     const searchEl = document.querySelector('.search-box');
@@ -182,6 +196,11 @@ function SearchField() {
     searchEl.classList.remove('border-searching');
   }
 
+  function onSubmit(e: Event | any) {
+    e.preventDefault();
+    Search( props.searchedString )
+  }
+
   return (
     <div className="search--wrapper">
 
@@ -189,8 +208,17 @@ function SearchField() {
 
         <div className="search-icon"><i className="fa fa-search search-icon"></i></div>
 
-        <form className="search-form">
-            <input type="text" className="search-field" id="search" autoComplete="off" defaultValue="ATP" onFocus={ handleSearchFocus } onBlur={ handleSearchBlur } />
+        <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
+            <input 
+              type="text" 
+              className="search-field" 
+              id="search" 
+              placeholder="Enter molecule name" 
+              onChange={ (e) => props.setSearchedString(e.target.value) }
+              onFocus={ handleSearchFocus } 
+              onBlur={ handleSearchBlur } 
+              // autoComplete="off" 
+            />
         </form>
 
         <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
