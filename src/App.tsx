@@ -3,20 +3,20 @@ import logo from './img/logo.png';
 import Structure2D from './components/Structure2D';
 import Structure3D from './components/Structure3D';
 import DisplayTable from './components/Table';
+//@ts-ignore
+import Describe from './components/describe';
 
 // To-do:
 /*
-Get describe working.
-Get stream working.
-Re-do the UI layout.
+Friday:
+  Get stream working.
+Saturday: 
+  Re-do the UI layout.
 */
 
-function App() {
+function App(): JSX.Element {
+
   const [ searchedString, setSearchedString ] = useState("");
-
-
-
-  // Search( 'Camphor' )
   
   return (
     < div id="root" >
@@ -198,7 +198,8 @@ function SearchField( props: any ) {
 
   function onSubmit(e: Event | any) {
     e.preventDefault();
-    Search( props.searchedString )
+    Describe( props.searchedString );
+    Search( props.searchedString );
   }
 
   return (

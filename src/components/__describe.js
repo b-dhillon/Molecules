@@ -1,3 +1,4 @@
+/*
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
@@ -73,3 +74,4 @@ function generatePrompt(molecule)
 // Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
 // Animal: ${capitalizedAnimal}
 // Names:`;
+*/
