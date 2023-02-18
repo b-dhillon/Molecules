@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import logo from './img/logo.png';
 import Structure2D from './components/Structure2D';
 import Structure3D from './components/Structure3D';
@@ -17,13 +17,17 @@ Saturday:
 function App(): JSX.Element {
 
   const [ searchedString, setSearchedString ] = useState("");
+  const [ description, setDescription ] = useState("");
   
   return (
     < div id="root" >
       < Logo />
-      < SearchField setSearchedString={ setSearchedString } searchedString={ searchedString } />
+      < SearchField setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription }/>
       < StructureFields />
-      < DescriptionField />
+      {/* < DescriptionField /> */}
+      <Suspense>
+        < UseData description={ description }/>
+      </Suspense>
     </ div >
   )
 }
@@ -141,7 +145,7 @@ function Search( searchedString: string ) {
       .then((data) =>
       {
         chemical_property_data = Object.values(data.PropertyTable.Properties[0]);
-        DisplayTable(chemical_property_data);
+        // DisplayTable(chemical_property_data);
       });
   // }
 }
@@ -196,10 +200,14 @@ function SearchField( props: any ) {
     searchEl.classList.remove('border-searching');
   }
 
-  function onSubmit(e: Event | any) {
+  async function onSubmit(e: Event | any) {
     e.preventDefault();
-    Describe( props.searchedString );
     Search( props.searchedString );
+    const data = await Describe( props.searchedString );
+    const description: string = data.choices[0].text.trim();
+
+    props.setDescription( () => description )
+    // useData( props.searchedString )
   }
 
   return (
@@ -251,7 +259,9 @@ function DescriptionField() {
 
       <div className='table--background'>
 
-        <h1 className="table-title">---</h1>
+        {/* <p>{describeText}</p> */}
+
+        {/* <h1 className="table-title">---</h1>
 
         <table>
             <tbody>
@@ -272,7 +282,7 @@ function DescriptionField() {
                     <td id="cid">------</td>
                 </tr>
             </tbody>
-        </table>
+        </table> */}
 
       </div>
 
@@ -280,3 +290,20 @@ function DescriptionField() {
   )
 
 }
+
+function UseData( props: any ) {
+  // const data = await Describe( searchedString );
+  // console.log(data);
+  // const description: string = data.choices[0].text.trim();
+
+
+  return (
+      <div className='table--wrapper'>
+        <div className='table--background'>
+            <p>{props.description}</p>
+          </div>
+      </div>
+  );
+
+}
+
