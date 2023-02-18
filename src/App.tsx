@@ -11,7 +11,7 @@ function App() {
   
   return (
     < div id="root" >
-      < Header />
+      < Logo />
       < Main />
     </ div >
   )
@@ -136,7 +136,7 @@ function Search( searchedString: string ) {
 }
 
 
-function Header() {
+function Logo() {
   return (
     <header className='header--wrapper'>
       <div className='logo--wrapper'>
@@ -148,8 +148,16 @@ function Header() {
 
 function Main() {
 
-  const searchBtn = document.querySelector('.go-icon');
+  return(
+    <div className='main--wrapper'>
+      < SearchField />
+      < StructureFields />
+      < DescriptionField />
+    </div>
+  )
+}
 
+function SearchField() {
   function handleSearchFocus() {
     const logoEl = document.querySelector('.logo');
     const searchEl = document.querySelector('.search-box');
@@ -174,69 +182,72 @@ function Main() {
     searchEl.classList.remove('border-searching');
   }
 
+  return (
+    <div className="search--wrapper">
 
+      <div className="search-box">
 
+        <div className="search-icon"><i className="fa fa-search search-icon"></i></div>
 
-  return(
-    <div className='main--wrapper'>
+        <form className="search-form">
+            <input type="text" className="search-field" id="search" autoComplete="off" defaultValue="ATP" onFocus={ handleSearchFocus } onBlur={ handleSearchBlur } />
+        </form>
 
-      <div className="search--wrapper">
+        <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
+            <path className="border" d="m335.5 108.5h-280c-29.3 0-53-23.7-53-53s23.7-53 53-53h280"/>
+            <path className="border" d="m335.5 108.5h280c29.3 0 53-23.7 53-53s-23.7-53-53-53h-280"/>
+        </svg>
 
-        <div className="search-box">
-
-              <div className="search-icon"><i className="fa fa-search search-icon"></i></div>
-
-              <form className="search-form">
-                  <input type="text" className="search-field" id="search" autoComplete="off" defaultValue="ATP" onFocus={ handleSearchFocus } onBlur={ handleSearchBlur } />
-              </form>
-
-              <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
-                  <path className="border" d="m335.5 108.5h-280c-29.3 0-53-23.7-53-53s23.7-53 53-53h280"/>
-                  <path className="border" d="m335.5 108.5h280c29.3 0 53-23.7 53-53s-23.7-53-53-53h-280"/>
-              </svg>
-
-              <div className="go-icon"><i className="fa fa-arrow-right" ></i></div>
-        </div>
+        <div className="go-icon"><i className="fa fa-arrow-right" ></i></div>
 
       </div>
 
-      <div className='canvas--wrapper'>
-          <canvas id='display2D'></canvas>
-
-          <canvas id='display3D'></canvas>      
-      </div>
-
-      <div className='table--wrapper'>
-
-        <div className='table--background'>
-
-            <h1 className="table-title">---</h1>
-
-            <table>
-                <tbody>
-                    <tr>
-                        <td>IUPAC Name</td>
-                        <td id='iupac-name'>--</td>
-                    </tr>
-                    <tr>
-                        <td>Molecular Formula</td>
-                        <td id="molecular-formula">---</td>
-                    </tr>
-                    <tr>
-                        <td>Molecular Weight</td>
-                        <td id="molecular-weight">----</td>
-                    </tr>
-                    <tr>
-                        <td>Chemical ID</td>
-                        <td id="cid">------</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-      </div>
-
-  </div>
+    </div>
   )
+}
+
+function StructureFields() {
+  return (
+    <div className='canvas--wrapper'>
+      <canvas id='display2D'></canvas>
+
+      <canvas id='display3D'></canvas>      
+    </div>
+  )
+}
+
+function DescriptionField() {
+  return (
+    <div className='table--wrapper'>
+
+      <div className='table--background'>
+
+        <h1 className="table-title">---</h1>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>IUPAC Name</td>
+                    <td id='iupac-name'>--</td>
+                </tr>
+                <tr>
+                    <td>Molecular Formula</td>
+                    <td id="molecular-formula">---</td>
+                </tr>
+                <tr>
+                    <td>Molecular Weight</td>
+                    <td id="molecular-weight">----</td>
+                </tr>
+                <tr>
+                    <td>Chemical ID</td>
+                    <td id="cid">------</td>
+                </tr>
+            </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  )
+
 }
