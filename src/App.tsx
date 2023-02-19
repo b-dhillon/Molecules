@@ -8,10 +8,16 @@ import Describe from './components/describe';
 
 // To-do:
 /*
-Friday:
-  Get stream working.
 Saturday: 
-  Re-do the UI layout.
+  Re-do UI layout
+    - Two pages like google. 
+      - One page for search
+        - Select and install font. 
+
+
+      - One page for description
+
+  Get stream working
 */
 
 function App(): JSX.Element {
@@ -23,10 +29,10 @@ function App(): JSX.Element {
     < div id="root" >
       < Logo />
       < SearchField setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription }/>
-      < StructureFields />
+      {/* < StructureFields /> */}
       {/* < DescriptionField /> */}
       <Suspense>
-        < UseData description={ description }/>
+        < Description description={ description }/>
       </Suspense>
     </ div >
   )
@@ -153,11 +159,13 @@ function Search( searchedString: string ) {
 
 function Logo() {
   return (
-    <header className='header--wrapper'>
-      <div className='logo--wrapper'>
+    // <header className='header-wrapper'>
+      <div className='logo-wrapper'>
           <img className='logo' src={logo}/>
+          {/* <h1>MOLECULE</h1> */}
+          <h2 className='logo-subtitle' >Quickly find information on any chemical.</h2>
       </div>
-    </header>
+    // </header>
   )
 }
 
@@ -178,7 +186,7 @@ function SearchField( props: any ) {
 
   function handleSearchFocus() {
     const logoEl = document.querySelector('.logo');
-    const searchEl = document.querySelector('.search-box');
+    const searchEl = document.querySelector('.search-container');
 
 
     // @ts-ignore
@@ -189,11 +197,11 @@ function SearchField( props: any ) {
 
   function handleSearchBlur() {
     const logoEl = document.querySelector('.logo');
-    const searchEl = document.querySelector('.search-box');
-    const searchField = document.querySelector('.search-field');
+    const searchEl = document.querySelector('.search-container');
+    const searchField = document.querySelector('.search-input');
 
     // @ts-ignore
-    searchField.blur();
+    searchInput.blur();
     // @ts-ignore
     logoEl.classList.remove('logo-rotate');
     // @ts-ignore
@@ -201,43 +209,51 @@ function SearchField( props: any ) {
   }
 
   async function onSubmit(e: Event | any) {
+    console.log('SUBMIT');
     e.preventDefault();
     Search( props.searchedString );
     const data = await Describe( props.searchedString );
+    console.log(data);
     const description: string = data.choices[0].text.trim();
+    console.log('SEARCHED STRING: ', props.searchedString);
 
     props.setDescription( () => description )
     // useData( props.searchedString )
   }
 
   return (
-    <div className="search--wrapper">
+    <div className="search-wrapper">
 
-      <div className="search-box">
+      <div className="search-container">
 
         <div className="search-icon"><i className="fa fa-search search-icon"></i></div>
 
         <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
             <input 
+              className="search-input" 
               type="text" 
-              className="search-field" 
               id="search" 
-              placeholder="Enter molecule name" 
-              onChange={ (e) => props.setSearchedString(e.target.value) }
+              // placeholder="What molecule would you like to learn about?" 
+              placeholder="Sugar" 
+              onChange={ (e) => {
+                props.setSearchedString(e.target.value)
+                console.log(props.searchedString);
+                } }
               onFocus={ handleSearchFocus } 
               onBlur={ handleSearchBlur } 
-              // autoComplete="off" 
+              autoComplete="off" 
             />
         </form>
 
-        <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
+        {/* <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
             <path className="border" d="m335.5 108.5h-280c-29.3 0-53-23.7-53-53s23.7-53 53-53h280"/>
             <path className="border" d="m335.5 108.5h280c29.3 0 53-23.7 53-53s-23.7-53-53-53h-280"/>
-        </svg>
+        </svg> */}
 
         <div className="go-icon"><i className="fa fa-arrow-right" ></i></div>
 
       </div>
+      {/* <button>Chemical Search</button> */}
 
     </div>
   )
@@ -291,19 +307,19 @@ function DescriptionField() {
 
 }
 
-function UseData( props: any ) {
+function Description( props: any ) {
   // const data = await Describe( searchedString );
-  // console.log(data);
+  console.log( props.description );
   // const description: string = data.choices[0].text.trim();
 
 
   return (
-      <div className='table--wrapper'>
-        <div className='table--background'>
-            <p>{props.description}</p>
-          </div>
+      <div style={{width: '100%', display: 'flex', justifyContent: 'center' }} >
+          <p style={ { width: '60%' } }>{props.description}</p>
       </div>
   );
 
 }
 
+// <div className='table--wrapper'>
+// <div className='table--background'>

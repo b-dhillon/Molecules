@@ -5,12 +5,15 @@ export default async function Describe( searchedString: string )
 
   // const apiKey = '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';
   // const apiKey = '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';
-  const apiKey = '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'
+  // const apiKey = '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'
+  const apiKey = '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'
 
 
 
-  // const prompt = `Give a three paragraph organic chemistry description of the chemical compound ${searchedString}`;
-  const prompt = `Give a description of the chemical compound ${searchedString}`;
+  // const prompt = `Explain ${searchedString} in your own words`;
+  // const prompt = `Give a Wikipedia description of the chemical compound ${searchedString}`;
+  const prompt = `Give a long organic chemistry description of the chemical compound ${searchedString}`;
+  // const prompt = `Give a long medical description of the chemical compound ${searchedString}`;
   // const apiUrl = 'https://api.openai.com/v1/engines/text-curie-001/completions';
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
 
@@ -22,8 +25,8 @@ export default async function Describe( searchedString: string )
         },
         body: JSON.stringify({
             'prompt': prompt,
-            'max_tokens': 1000,
-            'temperature': 0.1,
+            'max_tokens': 2000,
+            'temperature': 0.2,
         })
     });
 
