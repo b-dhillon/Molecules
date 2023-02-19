@@ -6,7 +6,6 @@ export default async function Describe( searchedString: string )
   // const apiKey = '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';
   // const apiKey = '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';
   // const apiKey = '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'
-  const apiKey = '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'
 
 
 
