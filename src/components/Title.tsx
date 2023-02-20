@@ -1,5 +1,5 @@
 
-function Tagline() {
+function Title() {
     return (
         <div className="tagline-wrapper">
             <h1>My Molecules</h1>
@@ -8,4 +8,4 @@ function Tagline() {
     )
 };
 
-export default Tagline;
+export default Title;

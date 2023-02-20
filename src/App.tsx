@@ -4,20 +4,12 @@ import Structure3D from './components/Structure3D';
 import DisplayTable from './components/Table';
 //@ts-ignore
 import Describe from './components/Describe';
-import Home from './components/Home';
+import HomePage from './components/HomePage';
 
 // To-do:
 /*
-Saturday: 
-  Re-do UI layout
-    - Two pages like google. 
-      - One page for search
-        - Select and install font. 
-
-
-      - One page for description
-
-  Get stream working
+  - Set up SearchPage
+  - Get stream working
 */
 
 function App(): JSX.Element {
@@ -26,9 +18,7 @@ function App(): JSX.Element {
   const [ description, setDescription ] = useState("");
   
   return (
-    // < div id="root" >
-      < Home setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
-    // </ div >
+    < HomePage setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
   )
 }
 
@@ -36,19 +26,22 @@ function App(): JSX.Element {
 export default App
 
 
-
-  {/* < Logo /> */}
-  {/* < SearchField setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription }/> */}
-
-
-
-
-  {/* < StructureFields /> */}
-  {/* < DescriptionField /> */}
-  {/* <Suspense>
-    < Description description={ description }/>
-  </Suspense> */}
-
+// Old component setup before refactor
+/*
+return (
+  <div className="root" >
+  
+    < Logo /> 
+    < SearchField setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription }/>
+    < StructureFields />
+    < DescriptionField />
+    < Suspense >
+      < Description description={ description }/>
+    </ Suspense >
+  
+  </div>
+)
+*/
 
 
 

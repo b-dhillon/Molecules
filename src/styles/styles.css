@@ -206,6 +206,12 @@ body {
     height: 225px; 
     width: 225px; 
     margin: 30px;
+    border-radius: 40px;
+    background: #141414 !important;
+    box-shadow:  -9px -9px 9px #080808,
+                10px 10px 10px #080808;
+
+    
     /* border-radius: 50px;
     background: #259872;
     box-shadow:  20px 20px 60px #1f8161,
@@ -216,10 +222,7 @@ body {
     box-shadow:  9px 9px 18px #676767,
     -9px -9px 18px #ffffff; */
 
-    border-radius: 40px;
-    background: #141414 !important;
-    box-shadow:  -9px -9px 9px #080808,
-                10px 10px 10px #080808;
+
 }
 .table--wrapper {
     /* width: 96%; */

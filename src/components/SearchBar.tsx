@@ -2,7 +2,7 @@ import Search from "./Search";
 import Describe from "./Describe";
 import SearchStyles from '../styles/SearchStyles.module.css';
 
-export default function SearchField( props: any ) {
+export default function SearchBar( props: any ) {
 
     function handleSearchFocus() {
       const logoEl = document.querySelector('.logo');
@@ -55,7 +55,7 @@ export default function SearchField( props: any ) {
 
             <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
               <input 
-                className={ SearchStyles.searchInput } 
+                // className={ SearchStyles.searchInput } 
                 type="text" 
                 id={ SearchStyles.search }
                 placeholder="What chemical would you like to learn about?" 
