@@ -1,4 +1,8 @@
-function SearchField( props: any ) {
+import Search from "./Search";
+import Describe from "./Describe";
+import SearchStyles from '../styles/SearchStyles.module.css';
+
+export default function SearchField( props: any ) {
 
     function handleSearchFocus() {
       const logoEl = document.querySelector('.logo');
@@ -43,17 +47,17 @@ function SearchField( props: any ) {
     }
   
     return (
-      <div className="search-wrapper">
+      <div className={ SearchStyles.searchWrapper }>
   
-        <div className="search-container">
-  
-          <div className="search-icon"><i className="fa fa-search search-icon"></i></div>
-  
-          <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
+        <div className={ SearchStyles.searchContainer }>
+
+            <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
+
+            <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
               <input 
-                className="search-input" 
+                className={ SearchStyles.searchInput } 
                 type="text" 
-                id="search" 
+                id={ SearchStyles.search }
                 // placeholder="What molecule would you like to learn about?" 
                 placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
                 onChange={ (e) => {
@@ -62,20 +66,25 @@ function SearchField( props: any ) {
                   } }
                 onFocus={ handleSearchFocus } 
                 onBlur={ handleSearchBlur } 
-                autoComplete="off" 
-              />
-          </form>
+                autoComplete="off" />
+            </form>
+
+            <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
+
   
-          {/* <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
-              <path className="border" d="m335.5 108.5h-280c-29.3 0-53-23.7-53-53s23.7-53 53-53h280"/>
-              <path className="border" d="m335.5 108.5h280c29.3 0 53-23.7 53-53s-23.7-53-53-53h-280"/>
-          </svg> */}
-  
-          <div className="go-icon"><i className="fa fa-arrow-right" ></i></div>
   
         </div>
-        {/* <button>Chemical Search</button> */}
+        <button className={SearchStyles.button1} onClick={ () => console.log('clicked') }>Chemical Search</button>
   
       </div>
     )
 }
+
+
+  
+/* 
+<svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
+    <path className="border" d="m335.5 108.5h-280c-29.3 0-53-23.7-53-53s23.7-53 53-53h280"/>
+    <path className="border" d="m335.5 108.5h280c29.3 0 53-23.7 53-53s-23.7-53-53-53h-280"/>
+</svg> 
+*/

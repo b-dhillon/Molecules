@@ -3,7 +3,7 @@ import Structure2D from './components/Structure2D';
 import Structure3D from './components/Structure3D';
 import DisplayTable from './components/Table';
 //@ts-ignore
-import Describe from './components/describe';
+import Describe from './components/Describe';
 import Home from './components/Home';
 
 // To-do:
@@ -26,9 +26,9 @@ function App(): JSX.Element {
   const [ description, setDescription ] = useState("");
   
   return (
-    < div id="root" >
+    // < div id="root" >
       < Home setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
-    </ div >
+    // </ div >
   )
 }
 
