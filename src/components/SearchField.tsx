@@ -58,14 +58,14 @@ export default function SearchField( props: any ) {
                 className={ SearchStyles.searchInput } 
                 type="text" 
                 id={ SearchStyles.search }
-                // placeholder="What molecule would you like to learn about?" 
-                placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
+                placeholder="What chemical would you like to learn about?" 
+                // placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
                 onChange={ (e) => {
                   props.setSearchedString(e.target.value)
                   console.log(props.searchedString);
                   } }
-                onFocus={ handleSearchFocus } 
-                onBlur={ handleSearchBlur } 
+                // onFocus={ handleSearchFocus } 
+                // onBlur={ handleSearchBlur } 
                 autoComplete="off" />
             </form>
 
