@@ -4,6 +4,7 @@ import LoadingPage from './LoadingPage';
 
 export default function SearchPage( props: any ): JSX.Element {
 
+
     return (
         < TestFetch props={ props.setLoading } />
     );
@@ -25,7 +26,7 @@ function TestFetch( props: any ): JSX.Element {
                 props.setLoading( false );
             });
 
-        }, 4000 );
+        }, 30000 );
 
     }, []);
 

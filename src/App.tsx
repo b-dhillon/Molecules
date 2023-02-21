@@ -1,12 +1,16 @@
 import { Suspense, useState } from 'react';
 import HomePage from './components/HomePage';
-import SearchPage from './components/SearchPage'
+import SearchPage from './components/SearchPage';
+import Data from './data';
 
 // To-do:
 /*
-  - Set up SearchPage
-  - Get stream working
+  - Set up SearchPage UI
+  - Get TypeWriteer working
+  - Set up data passing and finish writing data structure, at least a first draft
 */
+
+// 
 
 function App(): JSX.Element {
 
@@ -14,13 +18,14 @@ function App(): JSX.Element {
   const [ description, setDescription ] = useState("");
   const [ loading, setLoading ] = useState(false);
   const [ firstSearch, setFirstSearch ] = useState(true);
+  const [ data, setData ] = useState<any>( Data );
   
   return (
     firstSearch 
     ? 
-    < HomePage setFirstSearch={ setFirstSearch } setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
+    < HomePage data={ data } setFirstSearch={ setFirstSearch } setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
     :
-    < SearchPage setLoading={ setLoading } />
+    < SearchPage data={ data } setLoading={ setLoading } />
   );
 };
 

@@ -40,13 +40,19 @@ export default function SearchBar( props: any ) {
       console.log('SUBMIT');
       e.preventDefault();
       props.setFirstSearch(false);
-      // Search( props.searchedString );
-      // const data = await Describe( props.searchedString );
-      // console.log(data);
-      // const description: string = data.choices[0].text.trim();
+
+
+
+      // Turning search off momentarily
+      /*
+      Search( props.searchedString );
+      const data = await Describe( props.searchedString );
+      console.log(data);
+      const description: string = data.choices[0].text.trim();
       console.log('SEARCHED STRING: ', props.searchedString);
-  
-      // props.setDescription( () => description )
+      props.setDescription( () => description );
+      */
+
       // useData( props.searchedString )
     }
   
@@ -75,7 +81,7 @@ export default function SearchBar( props: any ) {
           <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
   
         </div>
-        <button className={ Styles.button1 } onClick={ () => console.log('clicked') }>Chemical Search</button>
+        <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Chemical Search</button>
   
       </div>
     )
