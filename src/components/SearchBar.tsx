@@ -39,13 +39,14 @@ export default function SearchBar( props: any ) {
     async function onSubmit(e: Event | any) {
       console.log('SUBMIT');
       e.preventDefault();
-      Search( props.searchedString );
-      const data = await Describe( props.searchedString );
-      console.log(data);
-      const description: string = data.choices[0].text.trim();
+      props.setFirstSearch(false);
+      // Search( props.searchedString );
+      // const data = await Describe( props.searchedString );
+      // console.log(data);
+      // const description: string = data.choices[0].text.trim();
       console.log('SEARCHED STRING: ', props.searchedString);
   
-      props.setDescription( () => description )
+      // props.setDescription( () => description )
       // useData( props.searchedString )
     }
   

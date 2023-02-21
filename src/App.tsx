@@ -12,12 +12,17 @@ function App(): JSX.Element {
 
   const [ searchedString, setSearchedString ] = useState("");
   const [ description, setDescription ] = useState("");
+  const [ loading, setLoading ] = useState(false);
+  const [ firstSearch, setFirstSearch ] = useState(true);
   
   return (
-    // < SearchPage />
-    < HomePage setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
-  )
-}
+    firstSearch 
+    ? 
+    < HomePage setFirstSearch={ setFirstSearch } setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
+    :
+    < SearchPage setLoading={ setLoading } />
+  );
+};
 
 
 export default App

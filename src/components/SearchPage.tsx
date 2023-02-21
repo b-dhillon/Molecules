@@ -2,15 +2,18 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import LoadingPage from './LoadingPage';
 
 
-export default function SearchPage() {
+export default function SearchPage( props: any ): JSX.Element {
 
     return (
-        < TestFetch />
-    )
-}
+        < TestFetch props={ props.setLoading } />
+    );
 
-function TestFetch() {
+};
+
+function TestFetch( props: any ): JSX.Element {
     const [ _data, setData] = useState<any>(null);
+
+
 
     useEffect(() => {
 
@@ -18,16 +21,16 @@ function TestFetch() {
             fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=2d`)
             .then( res => {
                 console.log(res);
-                setData( () => res.status )
-            } 
-        );
-        }, 40000  )
+                setData( () => res.status );
+                props.setLoading( false );
+            });
 
+        }, 4000 );
 
     }, []);
 
     if (_data === null) {
-        return <LoadingPage />
+        return < LoadingPage />
     }
 
     return (
@@ -35,7 +38,7 @@ function TestFetch() {
             <div>{_data}</div>
         </>
     );
-}
+};
 
 
 
