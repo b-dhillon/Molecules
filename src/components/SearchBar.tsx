@@ -1,8 +1,11 @@
 import Search from "./Search";
 import Describe from "./Describe";
-import SearchStyles from '../styles/SearchStyles.module.css';
+import Styles from '../styles/SearchBar.module.css';
 
 export default function SearchBar( props: any ) {
+
+  // destructuring props
+  const { searchedString, setSearchedString, setDescription, tagline } = props;
 
     function handleSearchFocus() {
       const logoEl = document.querySelector('.logo');
@@ -47,34 +50,31 @@ export default function SearchBar( props: any ) {
     }
   
     return (
-      <div className={ SearchStyles.searchWrapper }>
+      <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
   
-        <div className={ SearchStyles.searchContainer }>
+        <div className={ Styles.searchContainer }>
 
-            <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
+          <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
 
-            <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
-              <input 
-                // className={ SearchStyles.searchInput } 
-                type="text" 
-                id={ SearchStyles.search }
-                placeholder="What chemical would you like to learn about?" 
-                // placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
-                onChange={ (e) => {
-                  props.setSearchedString(e.target.value)
-                  console.log(props.searchedString);
-                  } }
-                // onFocus={ handleSearchFocus } 
-                // onBlur={ handleSearchBlur } 
-                autoComplete="off" />
-            </form>
+          <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
+            <input 
+              id={ Styles.search }
+              type="text" 
+              placeholder="What chemical would you like to learn about?" 
+              // placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
+              onChange={ (e) => {
+                props.setSearchedString(e.target.value)
+                console.log(props.searchedString);
+                } }
+              // onFocus={ handleSearchFocus } 
+              // onBlur={ handleSearchBlur } 
+              autoComplete="off" />
+          </form>
 
-            <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
-
-  
+          <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
   
         </div>
-        <button className={SearchStyles.button1} onClick={ () => console.log('clicked') }>Chemical Search</button>
+        <button className={ Styles.button1 } onClick={ () => console.log('clicked') }>Chemical Search</button>
   
       </div>
     )

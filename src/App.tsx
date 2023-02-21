@@ -1,10 +1,6 @@
 import { Suspense, useState } from 'react';
-import Structure2D from './components/Structure2D';
-import Structure3D from './components/Structure3D';
-import DisplayTable from './components/Table';
-//@ts-ignore
-import Describe from './components/Describe';
 import HomePage from './components/HomePage';
+import SearchPage from './components/SearchPage'
 
 // To-do:
 /*
@@ -18,6 +14,7 @@ function App(): JSX.Element {
   const [ description, setDescription ] = useState("");
   
   return (
+    // < SearchPage />
     < HomePage setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
   )
 }

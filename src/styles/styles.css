@@ -3,6 +3,10 @@
     font-family: 'Poppins-Thin';
     src: url('../fonts/Poppins/Poppins-Thin.ttf');
 }
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('../fonts/Poppins/Poppins-Regular.ttf');
+}
 
 * {
     box-sizing: border-box;
@@ -11,6 +15,8 @@
 }
 html,
 body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     overflow: none;
     background: #141414;
@@ -18,17 +24,31 @@ body {
 #root {
     width: 100%;
     height: 100%;
-    margin-top: 180px;
     padding: 0;
     /* background: #259872; */
     /* background: #e0e0e0; */
     background: #141414;
-
     color: white;
 }
-#root {
+/* #root {
     height: auto !important;
+} */
+
+
+
+
+.home-wrapper {
+    /* position: relative; */
+    margin-top: 150px;
 }
+
+
+
+
+
+
+
+
 .header--wrapper {
     /* position: relative;
     height: -200px; 
@@ -64,13 +84,16 @@ body {
 }
 .tagline-wrapper {
     width: 100%; 
+    /* height: 60px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .tagline-wrapper h1 {
-    letter-spacing: 5px;
+    font-family: Poppins-Regular;
+
+    letter-spacing: 4px;
 }
 .tagline {
     letter-spacing: 2px;
