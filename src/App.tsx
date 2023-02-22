@@ -32,12 +32,28 @@ function App(): JSX.Element {
   const [ page, setPage ] = useState( "HomePage" );
   // const [ firstSearch, setFirstSearch ] = useState(true);
   
+
   return (
     page === "HomePage" 
     ? 
-    < HomePage page={ page } setPage={ setPage } data={ data } setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
+    < HomePage 
+      data={ data }
+      page={ page }
+      searchedString={ searchedString }
+      setPage={ setPage }
+      setSearchedString={ setSearchedString }
+      setDescription={ setDescription }
+    />
     :
-    < SearchPage page={ page } data={ data } setLoading={ setLoading } />
+    < SearchPage 
+      data={ data } 
+      page={ page }
+      searchedString={ searchedString }
+      setPage={ setPage }
+      setSearchedString={ setSearchedString }
+      setDescription={ setDescription }
+      setLoading={ setLoading }
+    />
   );
 };
 

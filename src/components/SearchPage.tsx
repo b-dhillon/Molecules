@@ -8,7 +8,7 @@ import SearchBar from './SearchBar';
 
 export default function SearchPage( props: any ): JSX.Element {
 
-    const { page } = props;
+    const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
 
     const [ API_DATA, setAPI_DATA ] = useState<any>( null );
 
@@ -18,7 +18,14 @@ export default function SearchPage( props: any ): JSX.Element {
 
     return (
         <>
-            < Header page={ page } />
+            < Header 
+                page={ page }  
+                data={ data } 
+                setPage={ setPage } 
+                searchedString={ searchedString } 
+                setSearchedString={ setSearchedString } 
+            />
+            
 	        < Body />
         </>
     );
@@ -26,6 +33,9 @@ export default function SearchPage( props: any ): JSX.Element {
 };
 
 function Header( props: any ): JSX.Element {
+
+    // destrucutre all props that will be passed to < SearchBar >
+    const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
 
     const headerWrapper = {
         width: '100%',
@@ -37,7 +47,13 @@ function Header( props: any ): JSX.Element {
     return (
         < div style={ headerWrapper } >
             < Logo page={ props.page } />
-            < SearchBar page={ props.page } /> 
+            < SearchBar 
+                page={ page }  
+                data={ data } 
+                setPage={ setPage } 
+                searchedString={ searchedString } 
+                setSearchedString={ setSearchedString } 
+            /> 
         </ div >
     );
 };

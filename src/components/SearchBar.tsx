@@ -5,109 +5,111 @@ import Styles from '../styles/SearchBar.module.css';
 export default function SearchBar( props: any ) {
 
   // destructuring props
-  const { searchedString, setSearchedString, setDescription, tagline, page } = props;
+  const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
 
-    function handleSearchFocus() {
-      const logoEl = document.querySelector('.logo');
-      const searchEl = document.querySelector('.search-container');
+
+  function handleSearchFocus() {
+    const logoEl = document.querySelector('.logo');
+    const searchEl = document.querySelector('.search-container');
+
+
+    // @ts-ignore
+    logoEl.classList.add('logo-rotate');
+    // @ts-ignore
+    searchEl.classList.add('border-searching');
+  }
+
+  function handleSearchBlur() {
+    console.log('BLUR');
+    const logoEl = document.querySelector('.logo');
+    const searchEl = document.querySelector('.search-container');
+    const searchInput = document.querySelector('.search-input');
+
+    // @ts-ignore
+    searchInput.blur();
+    // @ts-ignore
+    logoEl.classList.remove('logo-rotate');
+    // @ts-ignore
+    searchInput.classList.remove('logo-rotate');
+    // @ts-ignore
+    searchEl.classList.remove('border-searching');
+    // @ts-ignore
+    searchInput.classList.remove('border-searching');
+  }
+
+  async function onSubmit(e: Event | any) {
+    console.log('SUBMIT');
+    e.preventDefault();
+    props.setPage("SearchPage");
+
+
+
+    // Turning search off momentarily
+    /*
+    Search( props.searchedString );
+    const data = await Describe( props.searchedString );
+    console.log(data);
+    const description: string = data.choices[0].text.trim();
+    console.log('SEARCHED STRING: ', props.searchedString);
+    props.setDescription( () => description );
+    */
+
+    // useData( props.searchedString )
+  }
+
+  const homePageSearchWrapper = {
+    width: '100%',
+  }
+
+  const searchPageSearchWrapper = {
+    width: '600px',
+    marginLeft: '30px',
+  }
+
+  const homePageSearchBarContainer = {
+    height: '50px',
+    width: '100%',
+    maxWidth: '800px'
+  }
   
+  const searchPageSearchBarContainer = {
+    height: '45px',
+    width: '100%',
+    maxWidth: '600px'
+  }
   
-      // @ts-ignore
-      logoEl.classList.add('logo-rotate');
-      // @ts-ignore
-      searchEl.classList.add('border-searching');
-    }
-  
-    function handleSearchBlur() {
-      console.log('BLUR');
-      const logoEl = document.querySelector('.logo');
-      const searchEl = document.querySelector('.search-container');
-      const searchInput = document.querySelector('.search-input');
-  
-      // @ts-ignore
-      searchInput.blur();
-      // @ts-ignore
-      logoEl.classList.remove('logo-rotate');
-      // @ts-ignore
-      searchInput.classList.remove('logo-rotate');
-      // @ts-ignore
-      searchEl.classList.remove('border-searching');
-      // @ts-ignore
-      searchInput.classList.remove('border-searching');
-    }
-  
-    async function onSubmit(e: Event | any) {
-      console.log('SUBMIT');
-      e.preventDefault();
-      props.setPage("SearchPage");
+  return (
+    // <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
+    <div className={ Styles.searchWrapper } style={ page === "HomePage" ? homePageSearchWrapper : searchPageSearchWrapper }>
 
+      <div className={ Styles.searchContainer } style={ page === "HomePage" ? homePageSearchBarContainer : searchPageSearchBarContainer  }>
 
+        <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
 
-      // Turning search off momentarily
-      /*
-      Search( props.searchedString );
-      const data = await Describe( props.searchedString );
-      console.log(data);
-      const description: string = data.choices[0].text.trim();
-      console.log('SEARCHED STRING: ', props.searchedString);
-      props.setDescription( () => description );
-      */
+        <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
+          <input 
+            className={ Styles.searchInput }
+            id={ Styles.search }
+            type="text" 
+            // placeholder="What molecule would you like to learn about?" 
+            placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : `${searchedString}` } 
+            onChange={ (e) => {
+              props.setSearchedString(e.target.value)
+              console.log(props.searchedString);
+              } }
+            // onFocus={ handleSearchFocus } 
+            // onBlur={ handleSearchBlur } 
+            autoComplete="off" />
+        </form>
 
-      // useData( props.searchedString )
-    }
+        <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
 
-    const homePageSearchWrapper = {
-      width: '100%',
-    }
-
-    const searchPageSearchWrapper = {
-      width: '600px',
-      marginLeft: '30px',
-    }
-
-    const homePageSearchBarContainer = {
-      height: '50px',
-      width: '100%',
-      maxWidth: '800px'
-    }
-    const searchPageSearchBarContainer = {
-      height: '45px',
-      width: '100%',
-      maxWidth: '600px'
-    }
-  
-    return (
-      // <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
-      <div className={ Styles.searchWrapper } style={ page === "HomePage" ? homePageSearchWrapper : searchPageSearchWrapper }>
-  
-        <div className={ Styles.searchContainer } style={ page === "HomePage" ? homePageSearchBarContainer : searchPageSearchBarContainer  }>
-
-          <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
-
-          <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
-            <input 
-              className={ Styles.searchInput }
-              id={ Styles.search }
-              type="text" 
-              // placeholder="What molecule would you like to learn about?" 
-              placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "Search" } 
-              onChange={ (e) => {
-                props.setSearchedString(e.target.value)
-                console.log(props.searchedString);
-                } }
-              // onFocus={ handleSearchFocus } 
-              // onBlur={ handleSearchBlur } 
-              autoComplete="off" />
-          </form>
-
-          <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
-  
-        </div>
-
-        {/* <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> */}
-  
       </div>
-    )
+
+      {/* <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> */}
+
+    </div>
+  )
 }
 
 
