@@ -1,42 +1,62 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import LoadingPage from './LoadingPage';
+import Logo from './Logo';
+import SearchBar from './SearchBar';
 
 
 export default function SearchPage( props: any ): JSX.Element {
 
 
     return (
-        < TestFetch props={ props.setLoading } />
+        <>
+            < Header page={ props.page } />
+        </>
+        // < TestFetch props={ props.setLoading } />
     );
 
 };
 
-function TestFetch( props: any ): JSX.Element {
-    const [ _data, setData] = useState<any>(null);
+function Header( props: any ): JSX.Element {
 
-
-
-    useEffect(() => {
-
-        setTimeout( () => {
-            fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=2d`)
-            .then( res => {
-                console.log(res);
-                setData( () => res.status );
-                props.setLoading( false );
-            });
-
-        }, 30000 );
-
-    }, []);
-
-    if (_data === null) {
-        return < LoadingPage />
+    const headerWrapper = {
+        width: '100%',
+        display: "flex",
+        // justifyContent: "space-around",
+        border: '2px solid blue',
     }
 
     return (
+        <div style={ headerWrapper } >
+            < Logo page={ props.page } />
+            < SearchBar page={ props.page }/> 
+        </div>
+    )
+}
+
+function TestFetch( props: any ): JSX.Element {
+
+    const [ _data, setData] = useState<any>(null);
+
+    // useEffect(() => {
+
+    //     setTimeout( () => {
+    //         fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ATP/SDF?record_type=2d`)
+    //         .then( res => {
+    //             console.log(res);
+    //             setData( () => res.status );
+    //             props.setLoading( false );
+    //         });
+
+    //     }, 30000 );
+
+    // }, []);
+
+    // if (_data === null) {
+    //     return < LoadingPage />
+    // }
+
+    return (
         <>
-            <div>{_data}</div>
         </>
     );
 };

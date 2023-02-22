@@ -5,7 +5,7 @@ import Styles from '../styles/SearchBar.module.css';
 export default function SearchBar( props: any ) {
 
   // destructuring props
-  const { searchedString, setSearchedString, setDescription, tagline } = props;
+  const { searchedString, setSearchedString, setDescription, tagline, page } = props;
 
     function handleSearchFocus() {
       const logoEl = document.querySelector('.logo');
@@ -39,7 +39,7 @@ export default function SearchBar( props: any ) {
     async function onSubmit(e: Event | any) {
       console.log('SUBMIT');
       e.preventDefault();
-      props.setFirstSearch(false);
+      props.setPage("SearchPage");
 
 
 
@@ -55,20 +55,42 @@ export default function SearchBar( props: any ) {
 
       // useData( props.searchedString )
     }
+
+    const homePageSearchWrapper = {
+      width: '100%',
+    }
+
+    const searchPageSearchWrapper = {
+      width: '600px',
+      marginLeft: '10px',
+    }
+
+    const homePageSearchBarContainer = {
+      height: '50px',
+      width: '100%',
+      maxWidth: '800px'
+    }
+    const searchPageSearchBarContainer = {
+      height: '45px',
+      width: '100%',
+      maxWidth: '600px'
+    }
   
     return (
-      <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
+      // <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
+      <div className={ Styles.searchWrapper } style={ page === "HomePage" ? homePageSearchWrapper : searchPageSearchWrapper }>
   
-        <div className={ Styles.searchContainer }>
+        <div className={ Styles.searchContainer } style={ page === "HomePage" ? homePageSearchBarContainer : searchPageSearchBarContainer  }>
 
           <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
 
           <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
             <input 
+              className={ Styles.searchInput }
               id={ Styles.search }
               type="text" 
-              placeholder="What chemical would you like to learn about?" 
-              // placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
+              // placeholder="What molecule would you like to learn about?" 
+              placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
               onChange={ (e) => {
                 props.setSearchedString(e.target.value)
                 console.log(props.searchedString);
@@ -81,7 +103,8 @@ export default function SearchBar( props: any ) {
           <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
   
         </div>
-        <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Chemical Search</button>
+
+        {/* <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> */}
   
       </div>
     )

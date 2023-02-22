@@ -7,25 +7,25 @@ import Data from './data';
 /*
   - Set up SearchPage UI
   - Get TypeWriteer working
-  - Set up data passing and finish writing data structure, at least a first draft
+  - Set up data passing and finish writing data structure, at least a first draft, 
 */
 
-// 
 
 function App(): JSX.Element {
 
   const [ searchedString, setSearchedString ] = useState("");
   const [ description, setDescription ] = useState("");
   const [ loading, setLoading ] = useState(false);
-  const [ firstSearch, setFirstSearch ] = useState(true);
   const [ data, setData ] = useState<any>( Data );
+  const [ page, setPage ] = useState( "HomePage" );
+  // const [ firstSearch, setFirstSearch ] = useState(true);
   
   return (
-    firstSearch 
+    page === "HomePage" 
     ? 
-    < HomePage data={ data } setFirstSearch={ setFirstSearch } setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
+    < HomePage page={ page } setPage={ setPage } data={ data } setSearchedString={ setSearchedString } searchedString={ searchedString } setDescription={ setDescription } />
     :
-    < SearchPage data={ data } setLoading={ setLoading } />
+    < SearchPage page={ page } data={ data } setLoading={ setLoading } />
   );
 };
 

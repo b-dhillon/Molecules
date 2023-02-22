@@ -3,9 +3,8 @@
     height: 100%; 
     display: flex; 
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-
 }
 
 .spinner {
@@ -39,11 +38,12 @@ to {
 
 
 .scannerWrapper{
-    margin-top: 30px;
+    margin-top: 300px;
 }
 
 
 .scanner span {
+    font-family: Poppins-Regular;
     color: transparent;
     letter-spacing: 3px;
     font-size: 2rem;
