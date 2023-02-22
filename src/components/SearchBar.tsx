@@ -62,7 +62,7 @@ export default function SearchBar( props: any ) {
 
     const searchPageSearchWrapper = {
       width: '600px',
-      marginLeft: '10px',
+      marginLeft: '30px',
     }
 
     const homePageSearchBarContainer = {
@@ -90,7 +90,7 @@ export default function SearchBar( props: any ) {
               id={ Styles.search }
               type="text" 
               // placeholder="What molecule would you like to learn about?" 
-              placeholder="Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." 
+              placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "Search" } 
               onChange={ (e) => {
                 props.setSearchedString(e.target.value)
                 console.log(props.searchedString);

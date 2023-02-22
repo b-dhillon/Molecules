@@ -8,11 +8,11 @@ function Logo( props: any ) {
     const homeStyles = {
         logoWrapper: {
             display: 'flex',
-            // flexDirection: 'column', 
             justifyContent: 'center', 
             flexGrow: '1', 
             width: '100% !important',
             border: '1px sold red',
+            // flexDirection: 'column', 
         },
 
         logo: {
