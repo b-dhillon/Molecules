@@ -40,7 +40,7 @@ function Logo( props: any ) {
             // flexGrow: '1', 
         },
         logo: {
-            maxWidth: '45px',
+            maxWidth: '50px',
             height: 'auto',
             // willChange: 'transform',
             // transition: 'transform 275ms 220ms ease-out',

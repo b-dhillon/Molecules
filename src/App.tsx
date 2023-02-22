@@ -5,8 +5,21 @@ import Data from './data';
 
 // To-do:
 /*
-  - Get TypeWriteer working
+  - Wireframe the searchpage layout and all of it's components. 
+    - Description 
+    - Chemical properties
+    - Molecular structures
+
+
+
+
+
+
+
+
+  - Get TypeWriteer working.
   - Set up data passing and finish writing data structure, at least a first draft, 
+  - Refactor global CSS styles.
 */
 
 

@@ -4,14 +4,23 @@ import Logo from './Logo';
 import SearchBar from './SearchBar';
 
 
+
+
 export default function SearchPage( props: any ): JSX.Element {
 
+    const { page } = props;
+
+    const [ API_DATA, setAPI_DATA ] = useState<any>( null );
+
+    // if ( API_DATA === null ) {
+    //     return < LoadingPage />
+    // };
 
     return (
         <>
-            < Header page={ props.page } />
+            < Header page={ page } />
+	        < Body />
         </>
-        // < TestFetch props={ props.setLoading } />
     );
 
 };
@@ -21,20 +30,62 @@ function Header( props: any ): JSX.Element {
     const headerWrapper = {
         width: '100%',
         display: "flex",
-        // justifyContent: "space-around",
-        border: '2px solid blue',
-        padding: '20px 70px',
-    }
+        borderBottom: '2px solid gray',
+        padding: '30px 70px 20px 70px',
+    };
 
     return (
-        <div style={ headerWrapper } >
+        < div style={ headerWrapper } >
             < Logo page={ props.page } />
-            < SearchBar page={ props.page }/> 
-        </div>
+            < SearchBar page={ props.page } /> 
+        </ div >
+    );
+};
+
+function Body(): JSX.Element {
+
+    return (
+        <>
+        	< AI_Description />   
+            < Chemical_Properties  />
+            < Molecular_Structures />
+        </>
     )
 }
 
-function TestFetch( props: any ): JSX.Element {
+function AI_Description(): JSX.Element {
+
+    return (
+        <>
+        </>
+    );
+};
+
+function Chemical_Properties(): JSX.Element {
+
+    return (
+        <>
+        </>
+    );
+};
+
+function Molecular_Structures(): JSX.Element {
+
+    return (
+        <>
+        </>
+    );
+};
+
+
+
+
+
+
+
+
+
+{/* function TestFetch( props: any ): JSX.Element {
 
     const [ _data, setData] = useState<any>(null);
 
@@ -60,12 +111,12 @@ function TestFetch( props: any ): JSX.Element {
         <>
         </>
     );
-};
+}; */}
 
 
 
 
-
+/* 
 // lazy() to test suspense
 /*
 const TestLazy = lazy(() => {
@@ -79,4 +130,4 @@ const TestLazy = lazy(() => {
     );
     return new Promise(resolve => setTimeout(resolve, 1000))
 });
-*/
+*/ 
