@@ -5,7 +5,6 @@ import Data from './data';
 
 // To-do:
 /*
-  - Set up SearchPage UI
   - Get TypeWriteer working
   - Set up data passing and finish writing data structure, at least a first draft, 
 */

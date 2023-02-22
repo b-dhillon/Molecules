@@ -23,7 +23,7 @@ function Header( props: any ): JSX.Element {
         display: "flex",
         // justifyContent: "space-around",
         border: '2px solid blue',
-        padding: '10px 70px',
+        padding: '20px 70px',
     }
 
     return (
