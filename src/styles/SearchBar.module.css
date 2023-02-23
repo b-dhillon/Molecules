@@ -67,14 +67,15 @@
 
 #search:focus {
     border: 1px solid rgb(61, 106, 255) !important;
+    box-shadow: 10px 10px 20px #080808;
 }
 
 #search:hover {
-    background: rgba(255,255,255,0.05);
     box-shadow: 10px 10px 20px #080808;
 }
 #search:active {
     transform: scale(0.97) !important;
+    background: rgba(255,255,255,0.05);
     border: 1px solid rgb(61, 106, 255);
 };
 #search::selection {

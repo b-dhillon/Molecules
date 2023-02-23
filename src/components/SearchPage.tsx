@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import LoadingPage from './LoadingPage';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
+import Styles from '../styles/SearchPage.module.css';
 
 
 
@@ -16,8 +17,15 @@ export default function SearchPage( props: any ): JSX.Element {
     //     return < LoadingPage />
     // };
 
+    const searchPageWrapper = {
+        width: '100%',
+        display: "flex",
+        flexDirection: "column",
+        border: "2px solid green"
+    }
+
     return (
-        <>
+        <div id="SearchPage" style={ searchPageWrapper as React.CSSProperties }>
             < Header 
                 page={ page }  
                 data={ data } 
@@ -27,7 +35,7 @@ export default function SearchPage( props: any ): JSX.Element {
             />
             
 	        < Body />
-        </>
+        </div>
     );
 
 };
@@ -45,7 +53,7 @@ function Header( props: any ): JSX.Element {
     };
 
     return (
-        < div style={ headerWrapper } >
+        < div style={ headerWrapper } id="header" >
             < Logo page={ props.page } />
             < SearchBar 
                 page={ page }  
@@ -60,36 +68,87 @@ function Header( props: any ): JSX.Element {
 
 function Body(): JSX.Element {
 
+    const bodyWrapper = {
+        width: '100%',
+        display: "flex",
+        borderBottom: '2px solid black',
+        padding: '30px 70px 20px 70px',
+        border: "2px solid red"
+    };
+
+    const leftSideWrapper = {
+        width: "50%",
+        margin: "0 auto",
+        border: "3px solid blue",
+        height: "500px",
+        flexDirection: "column-reverse"
+    };
+
+    const rightSideWrapper = {
+        width: "50%",
+        margin: "0 auto",
+        border: "3px solid blue",
+        height: "500px"
+    };
+
     return (
-        <>
-        	< AI_Description />   
-            < Chemical_Properties  />
-            < Molecular_Structures />
-        </>
+        <div id="body" style={ bodyWrapper } >
+
+            < div id="left-side" style={ leftSideWrapper as React.CSSProperties } >
+                < AI_Description />   
+                < Chemical_Properties  />
+            </ div >
+
+            < div id="right-side" style={ rightSideWrapper as React.CSSProperties } >
+                < Molecular_Structures />
+            </ div >
+        	
+        </div>
     )
 }
 
 function AI_Description(): JSX.Element {
 
+    const descriptionWrapper = {
+        height: "50%",
+        margin: "0 auto",
+        border: "2px solid white"
+    };
+
     return (
-        <>
-        </>
+        <div id="description" style={ descriptionWrapper } >
+            < LoadingPage />
+        </div>
     );
 };
 
 function Chemical_Properties(): JSX.Element {
 
+    const propertiesWrapper = {
+        height: "50%",
+        margin: "0 auto",
+        border: "2px solid white"
+    };
+
     return (
-        <>
-        </>
+        < div id="properties" style={ propertiesWrapper } >
+            
+        </ div >
     );
 };
 
 function Molecular_Structures(): JSX.Element {
 
+    const structureWrapper = {
+        height: "100%",
+        margin: "0 auto",
+        border: "2px solid white"
+    };
+
     return (
-        <>
-        </>
+        < div id="structure" style={ structureWrapper } >
+
+        </ div >
     );
 };
 

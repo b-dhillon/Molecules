@@ -1,16 +1,20 @@
 import Styles from '../styles/LoadingPage.module.css'
 
 function LoadingPage(): JSX.Element {
-    return (
-        <div className={ Styles.wrapper } >
-            {/* <div className={ Styles.spinner }>
-                <div className={ Styles.spinner1 }></div>
-            </div>    */}
 
-            <div className={ Styles.scannerWrapper }>
-                <div className={ Styles.scanner }>
-                    <span>Thinking...</span>
-                </div>
+    const loadingPageWrapper = {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    };
+
+
+    return (
+        <div id="loading-wrapper" style={ loadingPageWrapper as React.CSSProperties } >
+            <div className={ Styles.loading }>
+                <span>Thinking...</span>
             </div>
         </div>
     );

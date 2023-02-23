@@ -1,0 +1,15 @@
+.description-wrapper{
+    width: 50% !important;; 
+    margin: 0 auto;
+    border: 1px solid red;
+}
+.properties-wrapper{
+    width: 50%; 
+    margin: 0 auto;
+    border: 1px solid red;
+}
+.structure-wrapper{
+    width: 50%; 
+    margin: 0 auto;
+    border: 1px solid red;
+}
