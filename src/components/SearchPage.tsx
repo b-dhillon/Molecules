@@ -1,8 +1,9 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import LoadingElement from './LoadingElement';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
 import Styles from '../styles/SearchPage.module.css';
+import Stream from './Stream';
 
 
 
@@ -34,7 +35,7 @@ export default function SearchPage( props: any ): JSX.Element {
                 wrapperBorders={ wrapperBorders }
             />
             
-	        < Body wrapperBorders={ wrapperBorders } />
+	        < Body wrapperBorders={ wrapperBorders } data={ data }  />
         </div>
     );
 
@@ -76,7 +77,7 @@ function Header( props: any ): JSX.Element {
 
 function Body( props: any ): JSX.Element {
 
-    const { wrapperBorders } = props;
+    const { wrapperBorders, data } = props;
 
     const bodyWrapper = {
         width: '100%',
@@ -98,7 +99,7 @@ function Body( props: any ): JSX.Element {
         width: "50%",
         margin: "0 auto",
         border: `${ wrapperBorders ? "2px solid blue" : "none" } `,
-        height: "500px",
+        height: "800px",
         borderLeft: '2px solid gray',
     };
 
@@ -106,7 +107,7 @@ function Body( props: any ): JSX.Element {
         <div id="search-body" style={ bodyWrapper } >
 
             < div id="left-side" style={ leftSideWrapper as React.CSSProperties } >
-                < AI_Description wrapperBorders={ wrapperBorders } />
+                < AI_Description wrapperBorders={ wrapperBorders } data={ data }/>
                 < Chemical_Properties  wrapperBorders={ wrapperBorders } />
             </ div >
 
@@ -120,31 +121,74 @@ function Body( props: any ): JSX.Element {
 
 function AI_Description( props: any ): JSX.Element {
 
-    const [ API_DATA, setAPI_DATA ] = useState<any>( null );
+    const ref: any = useRef();
+    
+    const { wrapperBorders, data } = props;
+
+    const sampleDescription: string = data.compounds.find( ( compound: any ) => compound.title === "ATP" ).description; 
+
+    const [ DESCRIPTION_DATA, setDESCRIPTION_DATA ] = useState<any>( null );
+
+    setTimeout( () => {
+        setDESCRIPTION_DATA( sampleDescription );
+    }, 3000 )
 
     /*
-    if ( API_DATA === null ) {
-        return < LoadingElement />
+    if ( DESCRIPTION_DATA === null ) {
+        <div id="description" style={ descriptionWrapper } >
+            return < LoadingElement />
+        </div>
     };
     */
 
-    const { wrapperBorders } = props;
+    // useEffect( () => {
+    //     console.log('DESCRIPTION_DATA: ', DESCRIPTION_DATA);
+    //     if ( DESCRIPTION_DATA ) {
+    //         console.log('sample right before call: ',sampleDescription);
+    //         TypeWriter( sampleDescription, ref.current )
+    //     };
+    // }, [ DESCRIPTION_DATA ] );
+    
+
 
 
     const descriptionWrapper = {
         height: "50%",
         margin: "0 auto",
         border: `${ wrapperBorders ? "2px solid white" : "none" }`,
-        // border: "2px solid white",
         display: "flex",
+        padding: "0px 20px ",
     };
 
+    // return (
+    //     <div id="description" style={ descriptionWrapper } >
+    //         { DESCRIPTION_DATA ? <p id="descriptionParagraph" ref={ ref }> { DESCRIPTION_DATA } </p> : < LoadingElement /> }
+    //     </div>
+    // );
     return (
         <div id="description" style={ descriptionWrapper } >
-            < LoadingElement />
+            { DESCRIPTION_DATA ? < Stream d={ sampleDescription } /> : < LoadingElement /> }
         </div>
     );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function Chemical_Properties( props: any): JSX.Element {
     const { wrapperBorders } = props;

@@ -92,7 +92,7 @@ export default function SearchBar( props: any ) {
             id={ Styles.search }
             type="text" 
             // placeholder="What molecule would you like to learn about?" 
-            placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : `${searchedString}` } 
+            placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "My Molecules" } 
             onChange={ (e) => {
               props.setSearchedString(e.target.value)
               console.log(props.searchedString);
