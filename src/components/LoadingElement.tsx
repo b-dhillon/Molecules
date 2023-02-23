@@ -1,13 +1,11 @@
 import Styles from '../styles/LoadingPage.module.css'
 
-function LoadingPage(): JSX.Element {
+function LoadingElement(): JSX.Element {
 
     const loadingPageWrapper = {
         width: '100%',
         height: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
     };
 
 
@@ -20,4 +18,4 @@ function LoadingPage(): JSX.Element {
     );
 };
 
-export default LoadingPage
+export default LoadingElement

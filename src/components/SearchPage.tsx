@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import LoadingPage from './LoadingPage';
+import LoadingElement from './LoadingElement';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
 import Styles from '../styles/SearchPage.module.css';
@@ -11,17 +11,16 @@ export default function SearchPage( props: any ): JSX.Element {
 
     const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
 
-    const [ API_DATA, setAPI_DATA ] = useState<any>( null );
 
-    // if ( API_DATA === null ) {
-    //     return < LoadingPage />
-    // };
+
+    const wrapperBorders = false;
+
 
     const searchPageWrapper = {
         width: '100%',
         display: "flex",
         flexDirection: "column",
-        border: "2px solid green"
+        border: `${ wrapperBorders ? "2px solid green" : "none" } `,
     }
 
     return (
@@ -32,9 +31,10 @@ export default function SearchPage( props: any ): JSX.Element {
                 setPage={ setPage } 
                 searchedString={ searchedString } 
                 setSearchedString={ setSearchedString } 
+                wrapperBorders={ wrapperBorders }
             />
             
-	        < Body />
+	        < Body wrapperBorders={ wrapperBorders } />
         </div>
     );
 
@@ -43,43 +43,53 @@ export default function SearchPage( props: any ): JSX.Element {
 function Header( props: any ): JSX.Element {
 
     // destrucutre all props that will be passed to < SearchBar >
-    const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
+    const { data, searchedString, setSearchedString, setDescription, setPage, page, wrapperBorders } = props;
 
     const headerWrapper = {
         width: '100%',
         display: "flex",
-        borderBottom: '2px solid gray',
         padding: '30px 70px 20px 70px',
     };
 
+    const divider = {
+        borderBottom: '2px solid gray',
+        display: "flex",
+        width: "100%",
+        padding: "0px 0px 28px 0px",
+    }
+
     return (
         < div style={ headerWrapper } id="header" >
-            < Logo page={ props.page } />
-            < SearchBar 
-                page={ page }  
-                data={ data } 
-                setPage={ setPage } 
-                searchedString={ searchedString } 
-                setSearchedString={ setSearchedString } 
-            /> 
+            <div style={ divider } >
+                < Logo page={ props.page } />
+                < SearchBar 
+                    page={ page }  
+                    data={ data } 
+                    setPage={ setPage } 
+                    searchedString={ searchedString } 
+                    setSearchedString={ setSearchedString } 
+                /> 
+            </div>
         </ div >
     );
 };
 
-function Body(): JSX.Element {
+function Body( props: any ): JSX.Element {
+
+    const { wrapperBorders } = props;
 
     const bodyWrapper = {
         width: '100%',
         display: "flex",
         borderBottom: '2px solid black',
-        padding: '30px 70px 20px 70px',
-        border: "2px solid red"
+        padding: '5px 70px 20px 70px',
+        border: ` ${ wrapperBorders ? "2px solid red" : "none" } `
     };
 
     const leftSideWrapper = {
-        width: "50%",
+        width: "80%",
         margin: "0 auto",
-        border: "3px solid blue",
+        border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
         height: "500px",
         flexDirection: "column-reverse"
     };
@@ -87,47 +97,63 @@ function Body(): JSX.Element {
     const rightSideWrapper = {
         width: "50%",
         margin: "0 auto",
-        border: "3px solid blue",
-        height: "500px"
+        border: `${ wrapperBorders ? "2px solid blue" : "none" } `,
+        height: "500px",
+        borderLeft: '2px solid gray',
     };
 
     return (
-        <div id="body" style={ bodyWrapper } >
+        <div id="search-body" style={ bodyWrapper } >
 
             < div id="left-side" style={ leftSideWrapper as React.CSSProperties } >
-                < AI_Description />   
-                < Chemical_Properties  />
+                < AI_Description wrapperBorders={ wrapperBorders } />
+                < Chemical_Properties  wrapperBorders={ wrapperBorders } />
             </ div >
 
             < div id="right-side" style={ rightSideWrapper as React.CSSProperties } >
-                < Molecular_Structures />
+                < Molecular_Structures wrapperBorders={ wrapperBorders } />
             </ div >
         	
         </div>
     )
 }
 
-function AI_Description(): JSX.Element {
+function AI_Description( props: any ): JSX.Element {
+
+    const [ API_DATA, setAPI_DATA ] = useState<any>( null );
+
+    /*
+    if ( API_DATA === null ) {
+        return < LoadingElement />
+    };
+    */
+
+    const { wrapperBorders } = props;
+
 
     const descriptionWrapper = {
         height: "50%",
         margin: "0 auto",
-        border: "2px solid white"
+        border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+        // border: "2px solid white",
+        display: "flex",
     };
 
     return (
         <div id="description" style={ descriptionWrapper } >
-            < LoadingPage />
+            < LoadingElement />
         </div>
     );
 };
 
-function Chemical_Properties(): JSX.Element {
+function Chemical_Properties( props: any): JSX.Element {
+    const { wrapperBorders } = props;
+
 
     const propertiesWrapper = {
         height: "50%",
         margin: "0 auto",
-        border: "2px solid white"
+        border: `${ wrapperBorders ? "2px solid white" : "none" }`,
     };
 
     return (
@@ -137,12 +163,14 @@ function Chemical_Properties(): JSX.Element {
     );
 };
 
-function Molecular_Structures(): JSX.Element {
+function Molecular_Structures( props: any ): JSX.Element {
+    const { wrapperBorders } = props;
+
 
     const structureWrapper = {
         height: "100%",
         margin: "0 auto",
-        border: "2px solid white"
+        border: `${ wrapperBorders ? "2px solid white" : "none" }`,
     };
 
     return (

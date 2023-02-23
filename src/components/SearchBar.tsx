@@ -63,7 +63,7 @@ export default function SearchBar( props: any ) {
 
   const searchPageSearchWrapper = {
     width: '600px',
-    marginLeft: '30px',
+    marginLeft: '50px',
   }
 
   const homePageSearchBarContainer = {
@@ -99,14 +99,16 @@ export default function SearchBar( props: any ) {
               } }
             // onFocus={ handleSearchFocus } 
             // onBlur={ handleSearchBlur } 
-            autoComplete="off" />
+            autoComplete="off" 
+            value={ props.page === "HomePage" ? null : props.searchedString }
+            />
         </form>
 
         <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
 
       </div>
 
-      {/* <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> */}
+      { page === "HomePage" ? <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> : null }
 
     </div>
   )
