@@ -127,13 +127,43 @@ function AI_Description( props: any ): JSX.Element {
     // );
     return (
         <div id="description" style={ descriptionWrapper } >
-            { DESCRIPTION_DATA ? < Stream text={ sampleDescription } /> : < LoadingElement /> }
+            {/* { DESCRIPTION_DATA ? < Stream text={ sampleDescription } /> : < LoadingElement /> } */}
         </div>
     );
 };
 
 
 function Chemical_Properties( props: any): JSX.Element {
+
+    const [ showColumn1, setShowColumn1 ] = useState(false);
+    const [ showColumn2, setShowColumn2 ] = useState(false);
+    const [ showColumn3, setShowColumn3 ] = useState(false);
+
+    useEffect(() => {
+
+        const timeout1 = setTimeout(() => {
+          setShowColumn1(true);
+        }, 1000);
+
+        const timeout2 = setTimeout(() => {
+            setShowColumn2(true);
+        }, 2000);
+
+
+        const timeout3 = setTimeout(() => {
+            setShowColumn3(true);
+        }, 3000);
+    
+
+        return () => {
+          clearTimeout(timeout1);
+          clearTimeout(timeout2);
+          clearTimeout(timeout3);
+        };
+
+    }, []);
+    
+
 
     // const { wrapperBorders } = props;
 
@@ -160,15 +190,16 @@ function Chemical_Properties( props: any): JSX.Element {
         < div id="properties" style={ propertiesWrapper } >
 
             < div id="property-column1" style={ column } >
-                < Stream text={ properties1 } />
+                { showColumn1 && < Stream text={ properties1 } /> }
+                {/* { setInterval( () => < Stream text={ properties1 } delay={100} />, 1000 ) } */}
             </ div >
 
             < div id="property-column2" style={ column } >
-                < Stream text={ properties2 } />
+                { showColumn2 && < Stream text={ properties2 }  />}
             </ div >
 
             < div id="property-column3" style={ column } >
-                < Stream text={ properties3 } />
+                { showColumn3 && < Stream text={ properties3 } />}
             </ div >
 
         </ div >
@@ -184,10 +215,15 @@ function Molecular_Structures( props: any ): JSX.Element {
         height: "100%",
         margin: "0 auto",
         border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+        display: "flex",
+        flexDirection: "column",
     };
 
     return (
-        < div id="structure" style={ structureWrapper } >
+        < div id="structure" style={ structureWrapper as React.CSSProperties } >
+
+            < div id="display2D" ></ div >
+            < div id="display3D" ></ div >
 
         </ div >
     );

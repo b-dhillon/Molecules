@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 function Stream( props: any ) {
 
+  // destructure props
+
   const [ text, setText ] = useState<string>( props.text ); 
   const [ displayText, setDisplayText ] = useState("");
 
@@ -17,6 +19,7 @@ function Stream( props: any ) {
     console.log('streamed called with', text );
 
     let i = 0;
+
     const interval = setInterval(() => {
 
       if( i === 1 ) console.log( "I EQUALS 1 OUTSIDE SETTER");
@@ -34,8 +37,9 @@ function Stream( props: any ) {
         clearInterval( interval );
       }
     }, 15);
-
+  
     return () => clearInterval( interval );
+
   }, [text] );
 
   return < p style={ textStyle } > { displayText } </p>;
