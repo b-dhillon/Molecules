@@ -12,7 +12,8 @@ function Stream( props: any ) {
     fontFamily: "Poppins-Regular",
     padding: "0px",
     margin: "0px",
-    fontSize: "1.2rem"
+    fontSize: "1.2rem",
+    ...props.style,
   };
 
   useEffect(() => {
