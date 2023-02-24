@@ -1,27 +1,42 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function Stream( props: any ) {
 
-  const [ text, setText ] = useState<string>( props.d ); 
-  const [ displayText, setDisplayText ] = useState('');
+  const [ text, setText ] = useState<string>( props.text ); 
+  const [ displayText, setDisplayText ] = useState("");
 
   const textStyle = {
     color: "white",
     fontFamily: "Poppins-Regular",
+    padding: "0px",
+    margin: "0px",
+    fontSize: "1.2rem"
   };
 
-
   useEffect(() => {
+    console.log('streamed called with', text );
+
     let i = 0;
     const interval = setInterval(() => {
-      setDisplayText(prevText => prevText + text[ i ]);
-      i++;
+
+      if( i === 1 ) console.log( "I EQUALS 1 OUTSIDE SETTER");
+
+      setDisplayText( (prevText: any ) => {
+        console.log('prevText: ', prevText, "i", i, 'text[i]: ', text[i]);
+        if( i === 1 ) console.log( "I EQUALS 1 INSIDE SETTER ");
+        console.log(text[i]);
+        const newText = prevText + text[i];
+        i++;
+        return newText;
+      });
+
       if ( i === text.length - 1 ) {
         clearInterval( interval );
       }
-    }, 20);
+    }, 15);
+
     return () => clearInterval( interval );
-  }, [ text ] );
+  }, [text] );
 
   return < p style={ textStyle } > { displayText } </p>;
 }
@@ -29,7 +44,7 @@ function Stream( props: any ) {
 export default Stream;
 
 
-// Old implementation
+// Old implementation with useRef()
 /*
 function TypeWriter( props: any ) {
   console.log('TypeWriter Called');

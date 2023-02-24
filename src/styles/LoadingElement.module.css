@@ -2,8 +2,8 @@
 .loading span {
     font-family: Poppins-Regular;
     color: transparent;
-    letter-spacing: 3px;
-    font-size: 1rem;
+    /* letter-spacing: 3px; */
+    font-size: 1.1rem;
     position: relative;
     overflow: hidden;
 }
