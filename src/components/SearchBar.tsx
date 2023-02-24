@@ -100,7 +100,7 @@ export default function SearchBar( props: any ) {
             // onFocus={ handleSearchFocus } 
             // onBlur={ handleSearchBlur } 
             autoComplete="off" 
-            value={ props.page === "HomePage" ? null : props.searchedString }
+            value={ props.searchedString }
             />
         </form>
 

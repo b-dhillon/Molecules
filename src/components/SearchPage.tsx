@@ -99,6 +99,9 @@ function AI_Description( props: any ): JSX.Element {
     const { wrapperBorders, data, searchedString } = props;
 
     const sampleDescription: string = data.compounds.find( ( compound: any ) => compound.title === searchedString ).description; 
+
+
+
     if (!sampleDescription) throw new Error('Compound not found.');
 
     const [ DESCRIPTION_DATA, setDESCRIPTION_DATA ] = useState<any>( null );
@@ -121,14 +124,9 @@ function AI_Description( props: any ): JSX.Element {
         margin: "0 auto",
         border: `${ wrapperBorders ? "2px solid white" : "none" }`,
         display: "flex",
-        padding: "0px 80px 0px 0px",
+        padding: "10px 120px 0px 0px",
     };
 
-    // return (
-    //     <div id="description" style={ descriptionWrapper } >
-    //         { DESCRIPTION_DATA ? <p id="descriptionParagraph" ref={ ref }> { DESCRIPTION_DATA } </p> : < LoadingElement /> }
-    //     </div>
-    // );
     return (
         <div id="description" style={ descriptionWrapper } >
             {/* { DESCRIPTION_DATA ? < Stream text={ sampleDescription } /> : < LoadingElement /> } */}
@@ -139,71 +137,143 @@ function AI_Description( props: any ): JSX.Element {
 
 function Chemical_Properties( props: any): JSX.Element {
 
+
+    // const { wrapperBorders } = props;
+    const wrapperBorders = false;
+
+
+
+
+
+
     const [ showColumn1, setShowColumn1 ] = useState(false);
-    const [ showColumn2, setShowColumn2 ] = useState(false);
-    const [ showColumn3, setShowColumn3 ] = useState(false);
+    // const [ showColumn1_2, setShowColumn1_2 ] = useState(false);
+    // const [ showColumn1_2_3, setShowColumn1_2_3 ] = useState(false);
+
+    // const [ showColumn2, setShowColumn2 ] = useState(false);
+    // const [ showColumn2_2, setShowColumn2_2 ] = useState(false);
+    // const [ showColumn2_2_3, setShowColumn2_2_3 ] = useState(false);
+
+    // const [ showColumn3, setShowColumn3 ] = useState(false);
+    // const [ showColumn3_2, setShowColumn3_2 ] = useState(false);
+    // const [ showColumn3_2_3, setShowColumn3_2_3 ] = useState(false);
+
+
+    const start = 2000;
 
     useEffect(() => {
 
         const timeout1 = setTimeout(() => {
           setShowColumn1(true);
-        }, 1000);
+        }, start);
+        // const timeout1_2 = setTimeout(() => {
+        //   setShowColumn1_2(true);
+        // }, start + 200 );
+        // const timeout1_2_3 = setTimeout(() => {
+        //   setShowColumn1_2_3(true);
+        // }, start + 200 );
 
-        const timeout2 = setTimeout(() => {
-            setShowColumn2(true);
-        }, 2000);
+        // const timeout2 = setTimeout(() => {
+        //     setShowColumn2(true);
+        // }, start + 700 );
 
+        // const timeout2_2 = setTimeout(() => {
+        //     setShowColumn2_2(true);
+        // }, start + 800 );
 
-        const timeout3 = setTimeout(() => {
-            setShowColumn3(true);
-        }, 3000);
-    
+        // const timeout2_2_3 = setTimeout(() => {
+        //     setShowColumn2_2_3(true);
+        // }, start + 900 );
+
+        // const timeout3 = setTimeout(() => {
+        //     setShowColumn3(true);
+        // }, start + 900 );
+
+        // const timeout3_2 = setTimeout(() => {
+        //     setShowColumn3_2(true);
+        // }, start + 1000 );
+
+        // const timeout3_2_3 = setTimeout(() => {
+        //     setShowColumn3_2_3(true);
+        // }, start + 1100 );
 
         return () => {
+
           clearTimeout(timeout1);
-          clearTimeout(timeout2);
-          clearTimeout(timeout3);
+        //   clearTimeout(timeout1_2);
+        //   clearTimeout(timeout1_2_3);
+
+        //   clearTimeout(timeout2);
+        //   clearTimeout(timeout2_2);
+        //   clearTimeout(timeout2_2_3);
+
+        //   clearTimeout(timeout3);
+        //   clearTimeout(timeout3_2);
+        //   clearTimeout(timeout3_2_3);
+
         };
 
     }, []);
     
 
 
-    // const { wrapperBorders } = props;
-
-    const wrapperBorders = true;
 
     const propertiesWrapper = {
         height: "50%",
         margin: "0 auto",
         border: `${ wrapperBorders ? "2px solid white" : "none" }`,
-        display: "flex"
+        display: "flex",
+        padding: "80px 0px",
     };
 
     const column = {
         width: "33.33%",
         height: "100%",
         border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
     };
 
-    const properties1 = "Test 1"
-    const properties2 = "Test 2"
-    const properties3 = "Test 3"
+    const textStyle = {
+        margin: "10px 0px",
+        textAlign: "right"
+    }
+
+    // const properties1 = "Molecular Formula: C6H12O6 \n Molecular Weight: 180.16 g/mol \n Molecular Complexity: 3.0";
+    const properties1 = `Molecular Formula:\nMolecular Weight:\nMolecular Complexity:`;
+    
+    const properties1_2 = "Molecular Weight: 180.16 g/mol"
+    const properties1_2_3 = "Molecular Complexity: 3.0"
+
+    const properties2 = "Molecular Formula: C6H12O6"
+    const properties2_2 = "Molecular Weight: 180.16 g/mol"
+    const properties2_2_3 = "Molecular Complexity: 3.0"
+
+    const properties3 = "Molecular Formula: C6H12O6"
+    const properties3_2 = "Molecular Weight: 180.16 g/mol"
+    const properties3_2_3 = "Molecular Complexity: 3.0"
+
 
     return (
         < div id="properties" style={ propertiesWrapper } >
 
-            < div id="property-column1" style={ column } >
-                { showColumn1 && < Stream text={ properties1 } /> }
-                {/* { setInterval( () => < Stream text={ properties1 } delay={100} />, 1000 ) } */}
+            < div id="property-column1" style={ column as React.CSSProperties } >
+                { showColumn1 && < Stream text={ properties1 } style={ textStyle } /> }
+                {/* { showColumn1_2 && < Stream text={ properties1_2 } style={ textStyle } /> }
+                { showColumn1_2_3 && < Stream text={ properties1_2_3 } style={ textStyle } /> } */}
             </ div >
 
-            < div id="property-column2" style={ column } >
-                { showColumn2 && < Stream text={ properties2 }  />}
+            < div id="property-column2" style={ column as React.CSSProperties } >
+                {/* { showColumn2 && < Stream text={ properties2 } style={ textStyle } /> } */}
+                {/* { showColumn2_2 && < Stream text={ properties2_2 } style={ textStyle } /> }
+                { showColumn2_2_3 && < Stream text={ properties2_2_3 } style={ textStyle } /> }             */}
             </ div >
 
-            < div id="property-column3" style={ column } >
-                { showColumn3 && < Stream text={ properties3 } />}
+            < div id="property-column3" style={ column as React.CSSProperties } >
+                {/* { showColumn3 && < Stream text={ properties3 } style={ textStyle } /> } */}
+                {/* { showColumn3_2 && < Stream text={ properties3_2 } style={ textStyle } /> }
+                { showColumn3_2_3 && < Stream text={ properties3_2_3 }style={ textStyle } /> }             */}
             </ div >
 
         </ div >
@@ -219,24 +289,26 @@ function Molecular_Structures( props: any ): JSX.Element {
     const [ show2DCanvas, setShow2DCanvas ] = useState(false);
     const [ show3DCanvas, setShow3DCanvas ] = useState(false);
 
+    const start = 13000;
+
     useEffect(() => {
 
         const timeout1 = setTimeout(() => {
           setShow2DTitle(true);
-        }, 4000);
+        }, start);
 
         const timeout1_5 = setTimeout(() => {
             setShow2DCanvas(true);
-        }, 4500);
+        }, start + 500);
 
         const timeout2 = setTimeout(() => {
             setShow3DTitle(true);
-        }, 5000);
+        }, start + 1000);
 
         
         const timeout2_5 = setTimeout(() => {
             setShow3DCanvas(true);
-        }, 5500);
+        }, start + 1500 );
 
 
         return () => {
@@ -248,6 +320,9 @@ function Molecular_Structures( props: any ): JSX.Element {
 
     }, []);
     
+    const canvasWrapper = {
+        maxWidth: "300px"
+    }
 
     const structureWrapper = {
         height: "100%",
@@ -260,8 +335,9 @@ function Molecular_Structures( props: any ): JSX.Element {
 
     const titleStyle = {
         textAlign: "center",
-        margin: "15px 0px",
-        padding: "15px 0px",
+        margin: "0px 15px 15px 15px",
+        padding: "0px 0px 15px 0px",
+        fontSize: "1.3rem",
     };
 
 
@@ -269,13 +345,13 @@ function Molecular_Structures( props: any ): JSX.Element {
     return (
         < div id="structure" style={ structureWrapper as React.CSSProperties } >
 
-            < div id="display2D-wrapper">
-                { show2DTitle && < Stream text={ "2D Line Structure" } style={ titleStyle } /> }
+            < div id="display2D-wrapper" style={canvasWrapper} >
+                { show2DTitle && < Stream text={ "Chemical Line Structure: " } style={ titleStyle } /> }
                 { show2DCanvas && <div id="display2D" ></div> }
             </ div >
 
-            < div id="display3D-wrapper">
-                { show3DTitle && < Stream text={ "Computed Molecular Geometry" } style={ titleStyle } /> }
+            < div id="display3D-wrapper" style={canvasWrapper} >
+                { show3DTitle && < Stream text={ "Computed Molecular Geometry:" } style={ titleStyle } /> }
                 { show3DCanvas && <div id="display3D" ></div> }
             </ div >
 
@@ -323,6 +399,18 @@ function Header( props: any ): JSX.Element {
 
 
 
+/*
+return (
+    <div id="description" style={ descriptionWrapper } >
+        { DESCRIPTION_DATA ? <p id="descriptionParagraph" ref={ ref }> { DESCRIPTION_DATA } </p> : < LoadingElement /> }
+    </div>
+);
+*./
+
+
+
+
+
 {/* function TestFetch( props: any ): JSX.Element {
 
     const [ _data, setData] = useState<any>(null);
@@ -349,7 +437,7 @@ function Header( props: any ): JSX.Element {
         <>
         </>
     );
-}; */}
+}; */
 
 
 
@@ -369,3 +457,4 @@ const TestLazy = lazy(() => {
     return new Promise(resolve => setTimeout(resolve, 1000))
 });
 */ 
+

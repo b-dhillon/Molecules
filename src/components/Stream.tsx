@@ -23,13 +23,23 @@ function Stream( props: any ) {
 
     const interval = setInterval(() => {
 
-      if( i === 1 ) console.log( "I EQUALS 1 OUTSIDE SETTER");
-
       setDisplayText( (prevText: any ) => {
-        console.log('prevText: ', prevText, "i", i, 'text[i]: ', text[i]);
-        if( i === 1 ) console.log( "I EQUALS 1 INSIDE SETTER ");
-        console.log(text[i]);
+        // console.log('prevText: ', prevText, "i", i, 'text[i]: ', text[i]);
+        // console.log(text[i]);
+
+
         const newText = prevText + text[i];
+
+        if( text[i] + text[ i+ 1 ] === "\n" ) {
+          console.log('newline');
+          return newText + "\n";
+        }
+
+
+
+
+
+
         i++;
         return newText;
       });
@@ -37,7 +47,7 @@ function Stream( props: any ) {
       if ( i === text.length - 1 ) {
         clearInterval( interval );
       }
-    }, 15);
+    }, 8);
   
     return () => clearInterval( interval );
 

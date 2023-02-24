@@ -5,19 +5,14 @@ import Data from './data';
 
 // To-do:
 /*
-  - Wireframe the searchpage layout and all of it's components. 
-    - Description 
-    - Chemical properties
-    - Molecular structures
+  - Get Chemical Properties laid out properly and find better way to call sequentially
 
 
 
+  
+  - Fix setSearchedString bug where if you delete a letter from search the app crashes
+  - Hook up the NCBI API
 
-
-
-
-
-  - Get TypeWriteer working.
   - Set up data passing and finish writing data structure, at least a first draft, 
   - Refactor global CSS styles.
 */
