@@ -2,11 +2,17 @@ import { Suspense, useState } from 'react';
 import HomePage from './components/HomePage';
 import PropertyFetcher from './components/PropertyFetcher';
 import SearchPage from './components/SearchPage';
+import Structure2DFetcher from './components/Structure2DFetcherLoader';
+import Structure3DFetcher from './components/Structure3DFetcher';
 import DATA from './data';
 // To-do:
 /*
-  - 1st : Make API call to NCBI and get all the chemical property data you need. Turn it into JSON? 
-  - Get Chemical Properties laid out properly and find better way to call sequentially
+- Get the SDF file displayed in console -- need to figure out async behavior of the FileReader.
+
+
+
+
+- Get Chemical Properties laid out properly and find better way to call sequentially
 
 
 
@@ -21,9 +27,21 @@ import DATA from './data';
 interface Data {
   // compounds: Compound[]
 };
+
+// write a function that will consume the promise and return the data of Structure2DFetcher
+// function Structure2DFetcher( searchedString: string ) {
+//   const data = Structure2DFetcher( searchedString );
+//   return data;
+// }
+
+
+
+
 function App(): JSX.Element {
 
-  PropertyFetcher("ATP");
+
+
+  // const structure3D = Structure3DFetcher("ATP");
 
   const [ SEARCH_INPUT, setSEARCH_INPUT ] = useState("");
   const [ __DATA__, set__DATA__ ] = useState< Data >( DATA );

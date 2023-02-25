@@ -4,9 +4,15 @@ import Logo from './Logo';
 import SearchBar from './SearchBar';
 import Styles from '../styles/SearchPage.module.css';
 import Stream from './Stream';
+import PropertyFetcher from './PropertyFetcher';
+import Structure2DFetcher from './Structure2DFetcherLoader';
 
 
 export default function SearchPage( props: any ): JSX.Element {
+
+
+
+    
 
     const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
 

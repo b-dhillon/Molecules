@@ -24,11 +24,11 @@ async function PropertyFetcher( compound: string ) {
         cid: number
     };
 
-    console.log( 'data break', data);
+    console.log( 'properties fetch data', data);
 
     const properties: Properties = data.PropertyTable.Properties[0];
     console.log( 'properties', properties );
-    
+
     // Return the values
     return properties;
 };
