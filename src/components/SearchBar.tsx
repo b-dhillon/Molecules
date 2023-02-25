@@ -4,9 +4,27 @@ import Styles from '../styles/SearchBar.module.css';
 
 export default function SearchBar( props: any ) {
 
-  // destructuring props
   const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, PAGE, setPAGE } = props;
 
+  const inlineStyles = {
+    homePageSearchBarWrapper: {
+      width: '100%',
+    },
+    searchPageSearchBarWrapper: {
+      width: '600px',
+      marginLeft: '50px',
+    },
+    homePageSearchBarContainer: {
+      height: '50px',
+      width: '100%',
+      maxWidth: '800px'
+    },
+    searchPageSearchBarContainer: {
+      height: '45px',
+      width: '100%',
+      maxWidth: '600px'
+    },
+  }
 
   function handleSearchFocus() {
     const logoEl = document.querySelector('.logo');
@@ -47,55 +65,29 @@ export default function SearchBar( props: any ) {
     console.log( "Search() finished" );
     console.log( "Search Results:", SearchResults );
   };
-
-
-
-  const homePageSearchWrapper = {
-    width: '100%',
-  }
-
-  const searchPageSearchWrapper = {
-    width: '600px',
-    marginLeft: '50px',
-  }
-
-  const homePageSearchBarContainer = {
-    height: '50px',
-    width: '100%',
-    maxWidth: '800px'
-  }
-  
-  const searchPageSearchBarContainer = {
-    height: '45px',
-    width: '100%',
-    maxWidth: '600px'
-  }
   
   return (
-    // <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
-    <div className={ Styles.searchWrapper } style={ PAGE === "HomePage" ? homePageSearchWrapper : searchPageSearchWrapper }>
+    <div className={ Styles.searchBarWrapper } style={ PAGE === "HomePage" ? inlineStyles.homePageSearchBarWrapper : inlineStyles.searchPageSearchBarWrapper }>
 
-      <div className={ Styles.searchContainer } style={ PAGE === "HomePage" ? homePageSearchBarContainer : searchPageSearchBarContainer  }>
+      <div className={ Styles.searchBarContainer } style={ PAGE === "HomePage" ? inlineStyles.homePageSearchBarContainer : inlineStyles.searchPageSearchBarContainer  }>
 
         <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
 
         <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
           <input 
-            className={ Styles.searchInput }
-            id={ Styles.search }
-            type="text" 
-            // placeholder="What molecule would you like to learn about?" 
-            placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "My Molecules" } 
-            
-            onChange={ (e) => {
-              setSEARCH_INPUT( e.target.value )
-            }}
-
-            // onFocus={ handleSearchFocus } 
-            // onBlur={ handleSearchBlur } 
-            autoComplete="off" 
-            value={ props.searchedString }
-            />
+          className={ Styles.searchInput }
+          id={ Styles.search }
+          type="text" 
+          placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "My Molecules" } 
+          onChange={ (e) => {
+            setSEARCH_INPUT( e.target.value )
+          }}
+          autoComplete="off" 
+          value={ props.searchedString }
+          // placeholder="What molecule would you like to learn about?" 
+          // onFocus={ handleSearchFocus } 
+          // onBlur={ handleSearchBlur } 
+          />
         </form>
 
         <i className="fa fa-arrow-right goIcon" style={{ margin: '25px' }}></i>
@@ -108,7 +100,7 @@ export default function SearchBar( props: any ) {
   )
 }
 
-
+// <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
   
 /* 
 <svg className="search-border" enableBackground="new 0 0 671 111" version="1.1" viewBox="0 0 671 111" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">

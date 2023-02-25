@@ -1,4 +1,4 @@
-.searchWrapper{
+.searchBarWrapper{
     z-index: 2;
     display: flex; 
     flex-direction: column;
@@ -8,21 +8,7 @@
     padding: 0;
 }
 
-.searchWrapperNoTagline {
-
-    z-index: 2;
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 10px;
-    padding: 0;
-    margin: 40px 0px;
-
-}
-
-.searchContainer {
+.searchBarContainer {
     position: relative;
     /* width: 800px; */
     /* width: 100%; */
@@ -113,19 +99,6 @@
     pointer-events: none;
     font-size: 1.1em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* BUTTONS */
@@ -222,3 +195,23 @@ to {
     -moz-transition: box-shadow 0.2s ease-in;
     transition: box-shadow 0.2s ease-in;
 }
+
+
+
+
+
+
+
+/* .searchWrapperNoTagline {
+
+    z-index: 2;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 10px;
+    padding: 0;
+    margin: 40px 0px;
+
+} */
