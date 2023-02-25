@@ -6,17 +6,15 @@ import Styles from '../styles/SearchPage.module.css';
 import Stream from './Stream';
 import PropertyFetcher from './PropertyFetcher';
 import Structure2DFetcher from './Structure2DFetcherLoader';
+import Search from './Search';
 
 
 export default function SearchPage( props: any ): JSX.Element {
 
-
-
-    
-
-    const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
-
+    const { data, SEARCH_INPUT, setSEARCH_INPUT, setDescription, setPage, page } = props;
     const wrapperBorders = false;
+
+
 
     const searchPageWrapper = {
         width: '100%',
@@ -33,15 +31,18 @@ export default function SearchPage( props: any ): JSX.Element {
                 page={ page }  
                 data={ data } 
                 setPage={ setPage } 
-                searchedString={ searchedString } 
-                setSearchedString={ setSearchedString } 
+                SEARCH_INPUT={ SEARCH_INPUT }
+                setSEARCH_INPUT={ setSEARCH_INPUT }
+
                 wrapperBorders={ wrapperBorders }
+                // searchedString={ searchedString } 
+                // setSearchedString={ setSearchedString } 
             />
             
 	        < Body 
-                wrapperBorders={ wrapperBorders } 
                 data={ data }
-                searchedString={ searchedString } 
+                SEARCH_INPUT={ SEARCH_INPUT }
+                wrapperBorders={ wrapperBorders } 
             />
         </div>
     );
@@ -368,8 +369,7 @@ function Molecular_Structures( props: any ): JSX.Element {
 
 function Header( props: any ): JSX.Element {
 
-    // destrucutre all props that will be passed to < SearchBar >
-    const { data, searchedString, setSearchedString, setDescription, setPage, page, wrapperBorders } = props;
+    const { data, SEARCH_INPUT, setSEARCH_INPUT, setDescription, setPage, page, wrapperBorders } = props;
 
     const headerWrapper = {
         width: '100%',
@@ -389,11 +389,14 @@ function Header( props: any ): JSX.Element {
             <div style={ divider } >
                 < Logo page={ props.page } />
                 < SearchBar 
-                    page={ page }  
                     data={ data } 
+                    SEARCH_INPUT={ SEARCH_INPUT }
+                    setSEARCH_INPUT={ setSEARCH_INPUT }
+                    page={ page }  
                     setPage={ setPage } 
-                    searchedString={ searchedString } 
-                    setSearchedString={ setSearchedString } 
+                    
+                    // searchedString={ searchedString } 
+                    // setSearchedString={ setSearchedString } 
                 /> 
             </div>
         </ div >

@@ -1,7 +1,7 @@
-async function Structure2DFetcherLoader( compound: string ) {
+async function Structure2DFetcherLoader( compound: string, type: string ) {
 
     const response = await fetch(
-        `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/SDF?record_type=2d`
+        `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/SDF?record_type=${ type } }`
     );
     console.log('SDF2D', response);
     const data = await response.blob();

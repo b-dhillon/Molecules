@@ -4,23 +4,25 @@ import Title from './Title';
 
 export default function Home(props: any ){
 
-  // destructuring props
-  const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
+  const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, PAGE, setPAGE } = props;
 
   const tagline = true;
 
   return (
     <div className="home-wrapper" >
-      < Logo page={ page } />
+
+      < Logo PAGE={ PAGE } />
+
       { tagline ?  < Title /> : null}
+
       < SearchBar 
-        data={ data } 
-        page={ page }  
-        setPage={ setPage } 
-        searchedString={ searchedString } 
-        setSearchedString={ setSearchedString } 
-        tagline={ tagline } 
+      __DATA__={ __DATA__ } 
+      SEARCH_INPUT={ SEARCH_INPUT } 
+      PAGE={ PAGE }  
+      setPAGE={ setPAGE } 
+      setSEARCH_INPUT={ setSEARCH_INPUT }  
       />
+
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Styles from '../styles/SearchBar.module.css';
 export default function SearchBar( props: any ) {
 
   // destructuring props
-  const { data, searchedString, setSearchedString, setDescription, setPage, page } = props;
+  const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, PAGE, setPAGE } = props;
 
 
   function handleSearchFocus() {
@@ -38,24 +38,17 @@ export default function SearchBar( props: any ) {
   }
 
   async function onSubmit(e: Event | any) {
-    console.log('SUBMIT');
     e.preventDefault();
-    props.setPage("SearchPage");
+    console.log( "Searching: ", SEARCH_INPUT.trim() );
+    setSEARCH_INPUT( SEARCH_INPUT.trim() ); // is this needed?
+    setPAGE("SearchPage");
+
+    const SearchResults = await Search( SEARCH_INPUT );
+    console.log( "Search() finished" );
+    console.log( "Search Results:", SearchResults );
+  };
 
 
-
-    // Turning search off momentarily
-    /*
-    Search( props.searchedString );
-    const data = await Describe( props.searchedString );
-    console.log(data);
-    const description: string = data.choices[0].text.trim();
-    console.log('SEARCHED STRING: ', props.searchedString);
-    props.setDescription( () => description );
-    */
-
-    // useData( props.searchedString )
-  }
 
   const homePageSearchWrapper = {
     width: '100%',
@@ -80,9 +73,9 @@ export default function SearchBar( props: any ) {
   
   return (
     // <div className={ `${tagline ?  Styles.searchWrapper : Styles.searchWrapperNoTagline}` } >
-    <div className={ Styles.searchWrapper } style={ page === "HomePage" ? homePageSearchWrapper : searchPageSearchWrapper }>
+    <div className={ Styles.searchWrapper } style={ PAGE === "HomePage" ? homePageSearchWrapper : searchPageSearchWrapper }>
 
-      <div className={ Styles.searchContainer } style={ page === "HomePage" ? homePageSearchBarContainer : searchPageSearchBarContainer  }>
+      <div className={ Styles.searchContainer } style={ PAGE === "HomePage" ? homePageSearchBarContainer : searchPageSearchBarContainer  }>
 
         <i className="fa fa-search searchIcon" style={{ margin: '25px' }}></i>
 
@@ -93,10 +86,11 @@ export default function SearchBar( props: any ) {
             type="text" 
             // placeholder="What molecule would you like to learn about?" 
             placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "My Molecules" } 
+            
             onChange={ (e) => {
-              props.setSearchedString(e.target.value)
-              console.log(props.searchedString);
-              } }
+              setSEARCH_INPUT( e.target.value )
+            }}
+
             // onFocus={ handleSearchFocus } 
             // onBlur={ handleSearchBlur } 
             autoComplete="off" 
@@ -108,7 +102,7 @@ export default function SearchBar( props: any ) {
 
       </div>
 
-      { page === "HomePage" ? <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> : null }
+      { PAGE === "HomePage" ? <button className={ Styles.button1 } onClick={ (e) => onSubmit(e) }>Search</button> : null }
 
     </div>
   )

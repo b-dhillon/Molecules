@@ -1,15 +1,25 @@
+import Describe from "./Describe";
 import PropertyFetcher from "./PropertyFetcher";
 import Structure2DFetcherLoader from "./Structure2DFetcherLoader";
 
-export default async function Search( SEARCH_INPUT: string, data: any ) {
+export default async function Search( SEARCH_INPUT: string ) {
   
   const properties = await PropertyFetcher( SEARCH_INPUT );
-  const moleculeFile2D = await Structure2DFetcherLoader( SEARCH_INPUT );
-  
-  return [ properties, moleculeFile2D ];
+  const moleculeFile2D = await Structure2DFetcherLoader( SEARCH_INPUT, "2d" );
+  const moleculeFile3D = await Structure2DFetcherLoader( SEARCH_INPUT, "3d" );
+
+  const descriptionResponse = await Describe( SEARCH_INPUT );
+  const description: string = descriptionResponse.choices[0].text.trim();
+
+  return Promise.all( [ properties, moleculeFile2D, moleculeFile3D, description ] );
+  // console.log( "description" , description);
+  // setDescription( () => description );
 };
 
-
+/*
+  Search( props.searchedString );
+  // useData( props.searchedString )
+*/
 
 
 
@@ -161,4 +171,4 @@ if( cachedCompound ) {
         // DisplayTable(chemical_property_data);
       });
   }
-/*
+*/

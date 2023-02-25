@@ -2,7 +2,7 @@ import logo from '../img/logo.png';
 
 function Logo( props: any ) {
 
-    const { page } = props;
+    const { PAGE } = props;
 
 
     const homeStyles = {
@@ -57,8 +57,8 @@ function Logo( props: any ) {
 
 
     return (
-        <div style={ page === "HomePage" ? homeStyles.logoWrapper : searchStyles.logoWrapper }>
-            <img style={ page === "HomePage" ? homeStyles.logo : searchStyles.logo } src={logo}/>
+        <div style={ PAGE === "HomePage" ? homeStyles.logoWrapper : searchStyles.logoWrapper }>
+            <img style={ PAGE === "HomePage" ? homeStyles.logo : searchStyles.logo } src={logo}/>
         </div>
     )
 

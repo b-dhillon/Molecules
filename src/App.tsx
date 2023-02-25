@@ -7,47 +7,34 @@ import Structure3DFetcher from './components/Structure3DFetcher';
 import DATA from './data';
 // To-do:
 /*
-- Get the SDF file displayed in console -- need to figure out async behavior of the FileReader.
 
+- Get all Search Results working - structure, properties, and description:
 
 
 
 - Get Chemical Properties laid out properly and find better way to call sequentially
 
+- Fix setSearchedString bug where if you delete a letter from search the app crashes
 
 
-
-  - Fix setSearchedString bug where if you delete a letter from search the app crashes
-  - Hook up the NCBI API
-
-  - Set up data passing and finish writing data structure, at least a first draft, 
-  - Refactor global CSS styles.
+- Set up data passing and finish writing data structure, at least a first draft, 
+- Refactor global CSS styles.
 */
 
 interface Data {
   // compounds: Compound[]
 };
 
-// write a function that will consume the promise and return the data of Structure2DFetcher
-// function Structure2DFetcher( searchedString: string ) {
-//   const data = Structure2DFetcher( searchedString );
-//   return data;
-// }
-
-
-
 
 function App(): JSX.Element {
 
-
-
-  // const structure3D = Structure3DFetcher("ATP");
-
   const [ SEARCH_INPUT, setSEARCH_INPUT ] = useState("");
-  const [ __DATA__, set__DATA__ ] = useState< Data >( DATA );
+  const [ __DATA__ ] = useState< Data >( DATA );
+  const [ PAGE, setPAGE ] = useState( "HomePage" );  
 
 
-  const [ searchedString, setSearchedString ] = useState("");
+
+  // const [ searchedString, setSearchedString ] = useState("");
   const [ data, setData ] = useState<any>( DATA );
 
 
@@ -55,35 +42,31 @@ function App(): JSX.Element {
   const [ loading, setLoading ] = useState(false);
 
 
-
-
-
-
-  const [ page, setPage ] = useState( "HomePage" );
-  // const [ firstSearch, setFirstSearch ] = useState(true);
-  
-
   return (
-    page === "HomePage" 
+    PAGE === "HomePage" 
     ? 
     < HomePage 
-      data={ data }
-      page={ page }
-      searchedString={ searchedString }
-      setPage={ setPage }
-      setSearchedString={ setSearchedString }
-      setDescription={ setDescription }
+    __DATA__={ __DATA__ }
+    SEARCH_INPUT={ SEARCH_INPUT }
+    setSEARCH_INPUT={ setSEARCH_INPUT }
+    PAGE={ PAGE }
+    setPAGE={ setPAGE }
     />
+    // searchedString={ searchedString }
+    // setSearchedString={ setSearchedString }
+    // setDescription={ setDescription }
     :
     < SearchPage 
-      data={ data } 
-      page={ page }
-      searchedString={ searchedString }
-      setPage={ setPage }
-      setSearchedString={ setSearchedString }
-      setDescription={ setDescription }
-      setLoading={ setLoading }
+    __DATA__={ __DATA__ }
+    SEARCH_INPUT={ SEARCH_INPUT }
+    setSEARCH_INPUT={ setSEARCH_INPUT }
+    PAGE={ PAGE }
+    setPAGE={ setPAGE }
     />
+    // searchedString={ searchedString }
+    // setSearchedString={ setSearchedString }
+    // setDescription={ setDescription }
+    // setLoading={ setLoading }
   );
 };
 
