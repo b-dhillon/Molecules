@@ -144,30 +144,36 @@ const data: Data = {
             description: "",
         },
     ]
-}
+};
 
-export default data
+export default data;
 
 interface Data {
     // compounds: Compound[]
-}
+};
 
 interface Compound {
-    title: string
-    description: string
-    molecular_formula: {}
-    molecular_weight: {}
-    molecular_complexity: {}
-    charge: {}
-    covalent_bonds: {}
-    rotatable_bonds: {}
-    geometric_centers: {}
-    chirality_centers: {}
-    stereo_centers: {}
-    chiral_isomers: {}
-    conformers: {}
-    hydrogen_bond_acceptors: {}
-    hydrogen_bond_donors: {}
-    iupac_name: {}
-    cid: {}
-}
+    properties: Properties,
+    description: string,
+    // structure2D: SDF2D,
+    // structure3D: SDF3D,
+};
+
+interface Properties {
+    Title: string,
+    MolecularFormula: string,
+    MolecularWeight: number,
+    MolecularComplexity: number,
+    Charge: number,
+    RotatableBonds: number,
+    GeometricCenters: number,
+    ChiralityCenters: number,
+    StereoCenters: number,
+    ChiralIsomers: number,
+    Conformers: number,
+    HydrogenBondAcceptors: number,
+    HydrogenBondDonors: number,
+    IUPACName: string,
+    CID: number,
+    // CovalentBonds: number,
+};

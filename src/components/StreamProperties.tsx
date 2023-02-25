@@ -69,6 +69,7 @@ function StreamProperties( props: any ) {
                 <div id="property-key3" ></div>
                 <div id="property-key4" ></div>
                 <div id="property-key5" ></div>
+                
             </div>
 
             <div id="property-values" >

@@ -1,15 +1,16 @@
 import { Suspense, useState } from 'react';
 import HomePage from './components/HomePage';
+import PropertyFetcher from './components/PropertyFetcher';
 import SearchPage from './components/SearchPage';
-import Data from './data';
-
+import DATA from './data';
 // To-do:
 /*
+  - 1st : Make API call to NCBI and get all the chemical property data you need. Turn it into JSON? 
   - Get Chemical Properties laid out properly and find better way to call sequentially
 
 
 
-  
+
   - Fix setSearchedString bug where if you delete a letter from search the app crashes
   - Hook up the NCBI API
 
@@ -17,13 +18,29 @@ import Data from './data';
   - Refactor global CSS styles.
 */
 
-
+interface Data {
+  // compounds: Compound[]
+};
 function App(): JSX.Element {
 
+  PropertyFetcher("ATP");
+
+  const [ SEARCH_INPUT, setSEARCH_INPUT ] = useState("");
+  const [ __DATA__, set__DATA__ ] = useState< Data >( DATA );
+
+
   const [ searchedString, setSearchedString ] = useState("");
+  const [ data, setData ] = useState<any>( DATA );
+
+
   const [ description, setDescription ] = useState("");
   const [ loading, setLoading ] = useState(false);
-  const [ data, setData ] = useState<any>( Data );
+
+
+
+
+
+
   const [ page, setPage ] = useState( "HomePage" );
   // const [ firstSearch, setFirstSearch ] = useState(true);
   
