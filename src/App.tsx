@@ -2,14 +2,11 @@ import { Suspense, useState } from 'react';
 import HomePage from './components/HomePage';
 import PropertyFetcher from './components/PropertyFetcher';
 import SearchPage from './components/SearchPage';
-import Structure2DFetcher from './components/Structure2DFetcherLoader';
+import Structure2DFetcher from './components/StructureFetcherLoader';
 import Structure3DFetcher from './components/Structure3DFetcher';
 import DATA from './data';
 // To-do:
 /*
-
-- Get all Search Results working - structure, properties, and description:
-
 
 
 - Get Chemical Properties laid out properly and find better way to call sequentially

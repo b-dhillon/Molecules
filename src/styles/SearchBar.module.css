@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-#search {
+#SearchBar {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,42 +44,42 @@
     letter-spacing: 2px !important;
 }
 
-#search::-webkit-input-placeholder {color: #ffffff5a;}
-#search::-moz-placeholder {color: #FFFFFF;}
-#search:-ms-input-placeholder {color: #FFFFFF;}
-#search:-moz-placeholder {color: #FFFFFF;}
-#search::-moz-selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
-#search::selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
+#SearchBar::-webkit-input-placeholder {color: #ffffff5a;}
+#SearchBar::-moz-placeholder {color: #FFFFFF;}
+#SearchBar:-ms-input-placeholder {color: #FFFFFF;}
+#SearchBar:-moz-placeholder {color: #FFFFFF;}
+#SearchBar::-moz-selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
+#SearchBar::selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
 
-#search:focus {
+#SearchBar:focus {
     border: 1px solid rgb(61, 106, 255) !important;
     box-shadow: 10px 10px 20px #080808;
 }
 
-#search:hover {
+#SearchBar:hover {
     box-shadow: 10px 10px 20px #080808;
 }
-#search:active {
+#SearchBar:active {
     transform: scale(0.97) !important;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgb(61, 106, 255);
 };
-#search::selection {
+#SearchBar::selection {
     background: white !important;
 }
 
-/* .searchInput {
+/* .searchBarInput {
     border: 1px solid white;
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     letter-spacing: 2px !important;
 } */
 
-/* .searchInput:active {
+/* .searchBarInput:active {
     transform: scale(0.95) !important;
     border: 1px solid rgb(61, 106, 255);
 } */
 
-.searchInput::selection {
+.searchBarInput::selection {
     background: #DB5461 !important;
 }
 

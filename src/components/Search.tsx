@@ -1,13 +1,15 @@
 import Describe from "./Describe";
 import PropertyFetcher from "./PropertyFetcher";
-import Structure2DFetcherLoader from "./Structure2DFetcherLoader";
+import StructureFetcherLoader from "./StructureFetcherLoader";
 
 export default async function Search( SEARCH_INPUT: string ) {
   
   const properties = await PropertyFetcher( SEARCH_INPUT );
-  const moleculeFile2D = await Structure2DFetcherLoader( SEARCH_INPUT, "2d" );
-  const moleculeFile3D = await Structure2DFetcherLoader( SEARCH_INPUT, "3d" );
+  const moleculeFile2D = await StructureFetcherLoader( SEARCH_INPUT, "2d" );
+  const moleculeFile3D = await StructureFetcherLoader( SEARCH_INPUT, "3d" );
 
+
+  // descriptionResponse.choices[0] is returning undefined -- likely because I turned off the API Key.
   const descriptionResponse = await Describe( SEARCH_INPUT );
   const description: string = descriptionResponse.choices[0].text.trim();
 

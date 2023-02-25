@@ -1,18 +1,18 @@
-async function Structure2DFetcherLoader( compound: string, type: string ) {
+async function StructureFetcherLoader( compound: string, type: string ) {
 
     const response = await fetch(
-        `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/SDF?record_type=${ type } }`
+        `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/SDF?record_type=${type}`
     );
     console.log('SDF2D', response);
     const data = await response.blob();
-    const molecule = await Structure2DLoader( data )
+    const molecule = await StructureLoader( data )
 
     return molecule;
 }; 
 
-export default Structure2DFetcherLoader
+export default StructureFetcherLoader
 
-async function Structure2DLoader( blob: Blob ): Promise<any> {
+async function StructureLoader( blob: Blob ): Promise<any> {
     return new Promise( (resolve, reject) => {
 
         let fileReader = new FileReader();

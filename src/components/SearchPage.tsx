@@ -5,13 +5,13 @@ import SearchBar from './SearchBar';
 import Styles from '../styles/SearchPage.module.css';
 import Stream from './Stream';
 import PropertyFetcher from './PropertyFetcher';
-import Structure2DFetcher from './Structure2DFetcherLoader';
+import Structure2DFetcher from './StructureFetcherLoader';
 import Search from './Search';
 
 
 export default function SearchPage( props: any ): JSX.Element {
 
-    const { data, SEARCH_INPUT, setSEARCH_INPUT, setDescription, setPage, page } = props;
+    const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, setPAGE, PAGE } = props;
     const wrapperBorders = false;
 
 
@@ -28,9 +28,9 @@ export default function SearchPage( props: any ): JSX.Element {
         <div id="SearchPage" style={ searchPageWrapper as React.CSSProperties }>
 
             < Header 
-                page={ page }  
-                data={ data } 
-                setPage={ setPage } 
+                PAGE={ PAGE }  
+                data={ __DATA__ } 
+                setPAGE={ setPAGE } 
                 SEARCH_INPUT={ SEARCH_INPUT }
                 setSEARCH_INPUT={ setSEARCH_INPUT }
 
@@ -40,7 +40,7 @@ export default function SearchPage( props: any ): JSX.Element {
             />
             
 	        < Body 
-                data={ data }
+                __DATA__={ __DATA__ }
                 SEARCH_INPUT={ SEARCH_INPUT }
                 wrapperBorders={ wrapperBorders } 
             />
@@ -53,7 +53,7 @@ export default function SearchPage( props: any ): JSX.Element {
 
 function Body( props: any ): JSX.Element {
 
-    const { wrapperBorders, data, searchedString } = props;
+    const { __DATA__, wrapperBorders, SEARCH_INPUT } = props;
 
     const bodyWrapper = {
         width: '100%',
@@ -87,7 +87,7 @@ function Body( props: any ): JSX.Element {
         <div id="search-body" style={ bodyWrapper } >
 
             < div id="left-side" style={ leftSideWrapper as React.CSSProperties } >
-                < AI_Description wrapperBorders={ wrapperBorders } data={ data } searchedString={ searchedString } />
+                < AI_Description wrapperBorders={ wrapperBorders } __DATA__={ __DATA__ } SEARCH_INPUT={ SEARCH_INPUT } />
                 < Chemical_Properties  wrapperBorders={ wrapperBorders } />
             </ div >
 
@@ -103,9 +103,9 @@ function AI_Description( props: any ): JSX.Element {
 
     const ref: any = useRef();
     
-    const { wrapperBorders, data, searchedString } = props;
+    const { wrapperBorders, __DATA__, SEARCH_INPUT } = props;
 
-    const sampleDescription: string = data.compounds.find( ( compound: any ) => compound.title === searchedString ).description; 
+    const sampleDescription: string = __DATA__.compounds.find( ( compound: any ) => compound.title === SEARCH_INPUT ).description; 
 
 
 
@@ -369,7 +369,7 @@ function Molecular_Structures( props: any ): JSX.Element {
 
 function Header( props: any ): JSX.Element {
 
-    const { data, SEARCH_INPUT, setSEARCH_INPUT, setDescription, setPage, page, wrapperBorders } = props;
+    const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, setPAGE, PAGE, wrapperBorders } = props;
 
     const headerWrapper = {
         width: '100%',
@@ -387,13 +387,13 @@ function Header( props: any ): JSX.Element {
     return (
         < div style={ headerWrapper } id="header" >
             <div style={ divider } >
-                < Logo page={ props.page } />
+                < Logo PAGE={ PAGE } />
                 < SearchBar 
-                    data={ data } 
+                    __DATA__={ __DATA__ }
                     SEARCH_INPUT={ SEARCH_INPUT }
                     setSEARCH_INPUT={ setSEARCH_INPUT }
-                    page={ page }  
-                    setPage={ setPage } 
+                    PAGE={ PAGE }  
+                    setPAGE={ setPAGE } 
                     
                     // searchedString={ searchedString } 
                     // setSearchedString={ setSearchedString } 

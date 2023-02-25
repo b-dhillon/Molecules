@@ -75,15 +75,15 @@ export default function SearchBar( props: any ) {
 
         <form className="search-form" onSubmit={ (e) => onSubmit(e) } >
           <input 
-          className={ Styles.searchInput }
-          id={ Styles.search }
+          id={ Styles.SearchBar }
+          className={ Styles.searchBarInput }
           type="text" 
-          placeholder={ props.page === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "My Molecules" } 
+          placeholder={ PAGE === "HomePage" ? "Try Dopamine, Adrenaline, Vitamin C, ATP, Crystal Meth etc..." : "My Molecules" } 
           onChange={ (e) => {
             setSEARCH_INPUT( e.target.value )
           }}
           autoComplete="off" 
-          value={ props.searchedString }
+          value={ SEARCH_INPUT }
           // placeholder="What molecule would you like to learn about?" 
           // onFocus={ handleSearchFocus } 
           // onBlur={ handleSearchBlur } 
