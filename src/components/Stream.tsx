@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 function Stream( props: any ) {
 
-  // destructure props
+  const { streamState, setStreamState, passedStyles, caller, passedText } = props;
 
-  const [ text, setText ] = useState<string>( props.text ); 
+  const [ text, setText ] = useState<string>( passedText ); 
   const [ displayText, setDisplayText ] = useState("");
 
   const textStyle = {
@@ -13,7 +13,7 @@ function Stream( props: any ) {
     padding: "0px",
     margin: "0px",
     fontSize: "1.2rem",
-    ...props.style,
+    ...passedStyles,
   };
 
   useEffect(() => {
@@ -24,8 +24,6 @@ function Stream( props: any ) {
     const interval = setInterval(() => {
 
       setDisplayText( (prevText: any ) => {
-        // console.log('prevText: ', prevText, "i", i, 'text[i]: ', text[i]);
-        // console.log(text[i]);
         const newText = prevText + text[i];
         i++;
         return newText;
@@ -33,12 +31,17 @@ function Stream( props: any ) {
 
       if ( i === text.length - 1 ) {
         clearInterval( interval );
+        console.log(`streamed finished for ${caller}`);
+        console.log(`setting stream state to false for ${caller}`);
+        setStreamState( false );
       }
     }, 20);
   
+
     return () => clearInterval( interval );
 
   }, [text] );
+
 
   return < p style={ textStyle } > { displayText } </p>;
 }
