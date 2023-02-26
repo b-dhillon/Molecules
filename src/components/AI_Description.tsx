@@ -8,7 +8,7 @@ export default function AI_Description( props: any ): JSX.Element {
     
     const { __DATA__, SEARCH_INPUT, streamState, setStreamState } = props;
 
-    // wtf is this for -- for loading the spinner until OpenAI API returns data
+    // for rendering the spinner until OpenAI API returns data
     const [ API_DATA, setAPI_DATA ] = useState<any>( null );
 
     const wrapperBorders = false;
@@ -41,7 +41,7 @@ export default function AI_Description( props: any ): JSX.Element {
     return (
         <div id="description" style={ descriptionWrapper } >
             { 
-                    API_DATA 
+                    API_DATA && !streamState.AI_Description
                     ? 
                     < Stream 
                         caller={"AI_Description"}

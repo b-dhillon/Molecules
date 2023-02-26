@@ -1,5 +1,5 @@
 import Search from "./Search";
-import Describe from "./Describe";
+import Describe from "./DescriptionFetcher";
 import Styles from '../styles/SearchBar.module.css';
 
 export default function SearchBar( props: any ) {

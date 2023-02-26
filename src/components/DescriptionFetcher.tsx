@@ -1,29 +1,44 @@
-
-async function Describe( searchedString: string ) {
+async function DescriptionFetcher( searchedString: string ) {
   
   const prompt = `Give a long organic chemistry description of the chemical compound ${searchedString}`;
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
-  // const apiKey = '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'
-  const apiKey = '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'
 
-  const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-            'prompt': prompt,
-            'max_tokens': 2000,
-            'temperature': 0.2,
-        })
-    });
+  const apiConfig = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      'prompt': prompt,
+      'max_tokens': 2000,
+      'temperature': 0.2,
+    })
+  }
 
+  const response = await fetch( apiUrl, apiConfig );
   const data = await response.json();
+
   return data;
 }
 
-export default Describe;
+export default DescriptionFetcher;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Commented out code:
