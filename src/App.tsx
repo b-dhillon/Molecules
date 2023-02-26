@@ -10,10 +10,31 @@ import DATA from './data';
 
 
 - Get Chemical Properties laid out properly and find better way to call sequentially
+  - Why isn't "/n working ?" it works on one but not the other? -- needed to wrap <p> in <pre> to preserve the /n and whitespace
+  - Potentially switch to Tables
+    - Call stream on columns 1a, 2a, and 3a first.
+    - Then call stream on columns 1b, 2b, and 3b second.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 - Fix setSearchedString bug where if you delete a letter from search the app crashes
-
-
 - Set up data passing and finish writing data structure, at least a first draft, 
 - Refactor global CSS styles.
 */
@@ -28,12 +49,6 @@ function App(): JSX.Element {
   const [ SEARCH_INPUT, setSEARCH_INPUT ] = useState("");
   const [ __DATA__ ] = useState< Data >( DATA );
   const [ PAGE, setPAGE ] = useState( "HomePage" );  
-
-
-
-  // const [ searchedString, setSearchedString ] = useState("");
-  const [ data, setData ] = useState<any>( DATA );
-
 
   const [ description, setDescription ] = useState("");
   const [ loading, setLoading ] = useState(false);

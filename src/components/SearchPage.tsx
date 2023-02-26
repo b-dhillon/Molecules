@@ -147,77 +147,82 @@ function Chemical_Properties( props: any): JSX.Element {
 
     // const { wrapperBorders } = props;
     const wrapperBorders = false;
+    const [ showColumnA, setShowColumnA ] = useState(false);
+    const [ showColumnB, setShowColumnB ] = useState(false);
+    /*
+    const [ showColumn1_2, setShowColumn1_2 ] = useState(false);
+    const [ showColumn1_2_3, setShowColumn1_2_3 ] = useState(false);
 
+    const [ showColumn2, setShowColumn2 ] = useState(false);
+    const [ showColumn2_2, setShowColumn2_2 ] = useState(false);
+    const [ showColumn2_2_3, setShowColumn2_2_3 ] = useState(false);
 
-
-
-
-
-    const [ showColumn1, setShowColumn1 ] = useState(false);
-    // const [ showColumn1_2, setShowColumn1_2 ] = useState(false);
-    // const [ showColumn1_2_3, setShowColumn1_2_3 ] = useState(false);
-
-    // const [ showColumn2, setShowColumn2 ] = useState(false);
-    // const [ showColumn2_2, setShowColumn2_2 ] = useState(false);
-    // const [ showColumn2_2_3, setShowColumn2_2_3 ] = useState(false);
-
-    // const [ showColumn3, setShowColumn3 ] = useState(false);
-    // const [ showColumn3_2, setShowColumn3_2 ] = useState(false);
-    // const [ showColumn3_2_3, setShowColumn3_2_3 ] = useState(false);
+    const [ showColumn3, setShowColumn3 ] = useState(false);
+    const [ showColumn3_2, setShowColumn3_2 ] = useState(false);
+    const [ showColumn3_2_3, setShowColumn3_2_3 ] = useState(false);
+    */
 
 
     const start = 2000;
 
     useEffect(() => {
 
-        const timeout1 = setTimeout(() => {
-          setShowColumn1(true);
+        const timeoutA = setTimeout(() => {
+          setShowColumnA(true);
         }, start);
-        // const timeout1_2 = setTimeout(() => {
-        //   setShowColumn1_2(true);
-        // }, start + 200 );
-        // const timeout1_2_3 = setTimeout(() => {
-        //   setShowColumn1_2_3(true);
-        // }, start + 200 );
 
-        // const timeout2 = setTimeout(() => {
-        //     setShowColumn2(true);
-        // }, start + 700 );
+        const timeoutB = setTimeout(() => {
+            setShowColumnB(true);
+          }, start + 1000 );
 
-        // const timeout2_2 = setTimeout(() => {
-        //     setShowColumn2_2(true);
-        // }, start + 800 );
+        /*
+        const timeout1_2 = setTimeout(() => {
+          setShowColumn1_2(true);
+        }, start + 200 );
+        const timeout1_2_3 = setTimeout(() => {
+          setShowColumn1_2_3(true);
+        }, start + 200 );
 
-        // const timeout2_2_3 = setTimeout(() => {
-        //     setShowColumn2_2_3(true);
-        // }, start + 900 );
+        const timeout2 = setTimeout(() => {
+            setShowColumn2(true);
+        }, start + 700 );
 
-        // const timeout3 = setTimeout(() => {
-        //     setShowColumn3(true);
-        // }, start + 900 );
+        const timeout2_2 = setTimeout(() => {
+            setShowColumn2_2(true);
+        }, start + 800 );
 
-        // const timeout3_2 = setTimeout(() => {
-        //     setShowColumn3_2(true);
-        // }, start + 1000 );
+        const timeout2_2_3 = setTimeout(() => {
+            setShowColumn2_2_3(true);
+        }, start + 900 );
 
-        // const timeout3_2_3 = setTimeout(() => {
-        //     setShowColumn3_2_3(true);
-        // }, start + 1100 );
+        const timeout3 = setTimeout(() => {
+            setShowColumn3(true);
+        }, start + 900 );
+
+        const timeout3_2 = setTimeout(() => {
+            setShowColumn3_2(true);
+        }, start + 1000 );
+
+        const timeout3_2_3 = setTimeout(() => {
+            setShowColumn3_2_3(true);
+        }, start + 1100 );
+        */
 
         return () => {
+          clearTimeout(timeoutA);
+          clearTimeout(timeoutB);
+          /*
+              clearTimeout(timeout1_2);
+              clearTimeout(timeout1_2_3);
 
-          clearTimeout(timeout1);
-        //   clearTimeout(timeout1_2);
-        //   clearTimeout(timeout1_2_3);
+              clearTimeout(timeout2);
+              clearTimeout(timeout2_2);
+              clearTimeout(timeout2_2_3);
 
-        //   clearTimeout(timeout2);
-        //   clearTimeout(timeout2_2);
-        //   clearTimeout(timeout2_2_3);
-
-        //   clearTimeout(timeout3);
-        //   clearTimeout(timeout3_2);
-        //   clearTimeout(timeout3_2_3);
-
+              clearTimeout(timeout3);
+              clearTimeout(timeout3_2);
+              clearTimeout(timeout3_2_3);
+            */
         };
 
     }, []);
@@ -233,22 +238,42 @@ function Chemical_Properties( props: any): JSX.Element {
         padding: "80px 0px",
     };
 
-    const column = {
-        width: "33.33%",
+    const propertyColumnA = {
+        border: "1px solid white",
+        width: "16.67%",
         height: "100%",
-        border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
         display: "flex",
         flexDirection: "column",
+        textAlign: "right",
+
+        // border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
         // alignItems: "center",
     };
 
+    const propertyColumnB = {
+        border: "1px solid green",
+        width: "16.67%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        textAlign: "left",
+
+        // border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+        // alignItems: "center",
+    };
+
+    
+
     const textStyle = {
         margin: "10px 0px",
-        textAlign: "right"
+        fontSize: "1rem"
+
     }
 
     // const properties1 = "Molecular Formula: C6H12O6 \n Molecular Weight: 180.16 g/mol \n Molecular Complexity: 3.0";
-    const properties1 = `Molecular Formula:\nMolecular Weight:\nMolecular Complexity:`;
+    const propertiesA = `Molecular Formula:\nMolecular Weight:\nMolecular Complexity:`;
+    const propertiesB = `C6H12O6\n234 g/mol\n42`;
+
     
     const properties1_2 = "Molecular Weight: 180.16 g/mol"
     const properties1_2_3 = "Molecular Complexity: 3.0"
@@ -265,19 +290,37 @@ function Chemical_Properties( props: any): JSX.Element {
     return (
         < div id="properties" style={ propertiesWrapper } >
 
-            < div id="property-column1" style={ column as React.CSSProperties } >
-                { showColumn1 && < Stream text={ properties1 } style={ textStyle } /> }
-                {/* { showColumn1_2 && < Stream text={ properties1_2 } style={ textStyle } /> }
-                { showColumn1_2_3 && < Stream text={ properties1_2_3 } style={ textStyle } /> } */}
+            < div id="property-column1a" style={ propertyColumnA as React.CSSProperties } >
+                { showColumnA && <pre>< Stream text={ propertiesA } style={ textStyle } /></pre>  }
+                {/* { showColumn1_2 && < Stream text={ properties1_2 } style={ textStyle } /> */}
+                {/* { showColumn1_2_3 && < Stream text={ properties1_2_3 } style={ textStyle } /> } */}
             </ div >
 
-            < div id="property-column2" style={ column as React.CSSProperties } >
-                {/* { showColumn2 && < Stream text={ properties2 } style={ textStyle } /> } */}
-                {/* { showColumn2_2 && < Stream text={ properties2_2 } style={ textStyle } /> }
-                { showColumn2_2_3 && < Stream text={ properties2_2_3 } style={ textStyle } /> }             */}
+            < div id="property-column1b" style={ propertyColumnB as React.CSSProperties } >
+                { showColumnB && <pre>< Stream text={ propertiesB } style={ textStyle } /></pre> }
+
+                {/* { showColumn2 && < Stream text={ properties2 } style={ textStyle } /> }         */}
+                {/* { showColumn2_2 && < Stream text={ properties2_2 } style={ textStyle } /> }     */}
+                {/* { showColumn2_2_3 && < Stream text={ properties2_2_3 } style={ textStyle } /> } */}
             </ div >
 
-            < div id="property-column3" style={ column as React.CSSProperties } >
+            < div id="property-column2a" style={ propertyColumnA as React.CSSProperties } >
+                { showColumnA && < Stream text={ propertiesA } style={ textStyle } /> }
+
+            </ div >
+            
+            < div id="property-column2b" style={ propertyColumnB as React.CSSProperties } >
+                { showColumnB && < Stream text={ propertiesB } style={ textStyle } /> }
+            </ div >
+
+            < div id="property-column3a" style={ propertyColumnA as React.CSSProperties } >
+                { showColumnA && < Stream text={ propertiesA } style={ textStyle } /> }
+
+            </ div >
+
+            < div id="property-column3b" style={ propertyColumnB as React.CSSProperties } >
+                { showColumnB && < Stream text={ propertiesB } style={ textStyle } /> }
+
                 {/* { showColumn3 && < Stream text={ properties3 } style={ textStyle } /> } */}
                 {/* { showColumn3_2 && < Stream text={ properties3_2 } style={ textStyle } /> }
                 { showColumn3_2_3 && < Stream text={ properties3_2_3 }style={ textStyle } /> }             */}

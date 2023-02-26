@@ -3,7 +3,7 @@ async function StructureFetcherLoader( compound: string, type: string ) {
     const response = await fetch(
         `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/SDF?record_type=${type}`
     );
-    console.log('SDF2D', response);
+    console.log(`SDF${type}`, response);
     const data = await response.blob();
     const molecule = await StructureLoader( data )
 

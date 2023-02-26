@@ -26,20 +26,7 @@ function Stream( props: any ) {
       setDisplayText( (prevText: any ) => {
         // console.log('prevText: ', prevText, "i", i, 'text[i]: ', text[i]);
         // console.log(text[i]);
-
-
         const newText = prevText + text[i];
-
-        if( text[i] + text[ i+ 1 ] === "\n" ) {
-          console.log('newline');
-          return newText + "\n";
-        }
-
-
-
-
-
-
         i++;
         return newText;
       });
@@ -47,7 +34,7 @@ function Stream( props: any ) {
       if ( i === text.length - 1 ) {
         clearInterval( interval );
       }
-    }, 8);
+    }, 20);
   
     return () => clearInterval( interval );
 

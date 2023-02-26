@@ -3,12 +3,14 @@ async function Describe( searchedString: string ) {
   
   const prompt = `Give a long organic chemistry description of the chemical compound ${searchedString}`;
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
+  // const apiKey = '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'
+  const apiKey = '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'
 
   const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
             'prompt': prompt,
