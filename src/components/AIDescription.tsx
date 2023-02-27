@@ -7,9 +7,9 @@ export default function AIDescription( props: any ): JSX.Element {
 
     const { __DATA__, streaming, setStreaming, SearchResults } = props;
 
-    if( !streaming ) setStreaming( true );
+    // if( !streaming[0] ) setStreaming( true );
 
-    const [ loadedDescription, _ ] = useState<any>( SearchResults.description ); // rendering the spinner until OpenAI API returns data
+    const [ loadedDescription, _ ] = useState<any>( SearchResults[0].description ); // rendering the spinner until OpenAI API returns data
     const [ descriptionStreamed, setDescriptionStreamed ] = useState( false );
 
     const wrapperBorders = false;
@@ -30,21 +30,21 @@ export default function AIDescription( props: any ): JSX.Element {
         fontSize: "1.2rem",
     };
 
-    if( streaming ) {
+    if( streaming[0] ) {
         return (
             <div id="description" style={ descriptionWrapper } >
                 < Stream 
                     caller={ "AIDescription" }
-                    text={ loadedDescription }
+                    passedText={ loadedDescription }
                     streaming={ streaming }
-                    setStreamState={ setStreaming }
+                    setStreaming={ setStreaming }
                     setDescriptionStreamed={ setDescriptionStreamed }
                 /> 
             </div>
         );
     }
 
-    if( !streaming && descriptionStreamed ) {
+    if( !streaming[0] && descriptionStreamed ) {
         return (
             <div id="description" style={ descriptionWrapper } >
                 <p style={ textStyle }>{ loadedDescription }</p>

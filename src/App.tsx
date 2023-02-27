@@ -7,14 +7,10 @@ import Structure3DFetcher from './components/Structure3DFetcher';
 import DATA from './data';
 // To-do:
 /*
-- Setup and digram how data handling will work after API call returns from Search()
-  - Get data piped to Body() components
-  - Set up loading spinner until data is returned
 
-  // Here:
-  - Set up stream scheduler 
-    - Right now we have streamState that is stored by SearchPage
-      - StreamState is set to false by default. This causes is to run. 
+- Fix stream scheduler, ChemicalProperties is starting its stream before it should. 
+
+
 
 
 
@@ -27,10 +23,6 @@ import DATA from './data';
   - Potentially switch to Tables
     - Call stream on columns 1a, 2a, and 3a first.
     - Then call stream on columns 1b, 2b, and 3b second.
-
-
-
-
 
 - Fix setSearchedString bug where if you delete a letter from search the app crashes
 - Set up data passing and finish writing data structure, at least a first draft, 
@@ -52,26 +44,33 @@ function App(): JSX.Element {
   const [ loading, setLoading ] = useState(false);
 
 
+  const [ SearchResults, setSearchResults ] = useState( [] );
+
+
+
   return (
     PAGE === "HomePage" 
     ? 
     < HomePage 
-    __DATA__={ __DATA__ }
-    SEARCH_INPUT={ SEARCH_INPUT }
-    setSEARCH_INPUT={ setSEARCH_INPUT }
-    PAGE={ PAGE }
-    setPAGE={ setPAGE }
+      __DATA__={ __DATA__ }
+      SEARCH_INPUT={ SEARCH_INPUT }
+      setSEARCH_INPUT={ setSEARCH_INPUT }
+      PAGE={ PAGE }
+      setPAGE={ setPAGE }
+      setSearchResults={ setSearchResults }
     />
     // searchedString={ searchedString }
     // setSearchedString={ setSearchedString }
     // setDescription={ setDescription }
     :
     < SearchPage 
-    __DATA__={ __DATA__ }
-    SEARCH_INPUT={ SEARCH_INPUT }
-    setSEARCH_INPUT={ setSEARCH_INPUT }
-    PAGE={ PAGE }
-    setPAGE={ setPAGE }
+      __DATA__={ __DATA__ }
+      SEARCH_INPUT={ SEARCH_INPUT }
+      setSEARCH_INPUT={ setSEARCH_INPUT }
+      PAGE={ PAGE }
+      setPAGE={ setPAGE }
+      SearchResults={ SearchResults }
+      setSearchResults={ setSearchResults }
     />
     // searchedString={ searchedString }
     // setSearchedString={ setSearchedString }

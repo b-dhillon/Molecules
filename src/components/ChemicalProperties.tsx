@@ -134,7 +134,8 @@ export default function Chemical_Properties( props: any): JSX.Element {
 
     const caller = "ChemicalProperties"
 
-    if( streaming ) {
+    if( streaming[1] ) {
+        console.log("CHEMICAL PROPERTIES STREAMING");
         return (
 
             < div id="properties" style={ inlineStyles.propertiesWrapper } >
@@ -148,7 +149,7 @@ export default function Chemical_Properties( props: any): JSX.Element {
                         <pre>
                             < Stream 
                                 caller={ caller }
-                                text={ propertiesA }
+                                passedText={ propertiesA }
                                 style={ textStyle }
                                 streaming = { streaming }
                                 setStreaming = { setStreaming }
@@ -165,7 +166,7 @@ export default function Chemical_Properties( props: any): JSX.Element {
                         &&
                         <pre>
                             < Stream
-                                text={ propertiesB }
+                                passedText={ propertiesB }
                                 style={ textStyle }
                                 streaming = { streaming }
                                 setStreaming = { setStreaming }
@@ -183,7 +184,7 @@ export default function Chemical_Properties( props: any): JSX.Element {
                         &&
                         <pre>
                             < Stream
-                                text={ propertiesA }
+                                passedText={ propertiesA }
                                 style={ textStyle }
                                 streaming = { streaming }
                                 setStreaming = { setStreaming }
@@ -202,7 +203,7 @@ export default function Chemical_Properties( props: any): JSX.Element {
                         &&
                         <pre>
                             < Stream
-                                text={ propertiesB }
+                                passedText={ propertiesB }
                                 style={ textStyle }
                                 streaming = { streaming }
                                 setStreaming = { setStreaming }
@@ -219,7 +220,7 @@ export default function Chemical_Properties( props: any): JSX.Element {
                         &&
                         <pre>
                             < Stream
-                                text={ propertiesA }
+                                passedText={ propertiesA }
                                 style={ textStyle }
                                 streaming = { streaming }
                                 setStreaming = { setStreaming }
@@ -237,7 +238,7 @@ export default function Chemical_Properties( props: any): JSX.Element {
                         &&
                         <pre>
                             < Stream
-                                text={ propertiesB }
+                                passedText={ propertiesB }
                                 style={ textStyle }
                                 streaming = { streaming }
                                 setStreaming = { setStreaming }

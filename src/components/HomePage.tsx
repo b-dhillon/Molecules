@@ -16,11 +16,12 @@ export default function Home(props: any ){
       { tagline ?  < Title /> : null}
 
       < SearchBar 
-      __DATA__={ __DATA__ } 
-      SEARCH_INPUT={ SEARCH_INPUT } 
-      PAGE={ PAGE }  
-      setPAGE={ setPAGE } 
-      setSEARCH_INPUT={ setSEARCH_INPUT }  
+        __DATA__={ __DATA__ } 
+        SEARCH_INPUT={ SEARCH_INPUT } 
+        PAGE={ PAGE }  
+        setPAGE={ setPAGE } 
+        setSEARCH_INPUT={ setSEARCH_INPUT }  
+        setSearchResults={ props.setSearchResults }
       />
 
     </div>

@@ -45,6 +45,7 @@ function Stream( props: any ) {
           setStreaming( [ 0, 0, 1 ] )
           props.setPropertiesStreamed( true )
         };
+        
         if( caller === "Structures" ) {
           setStreaming( [ 0, 0, 0 ] )
           props.setStructuresStreamed( true )

@@ -17,7 +17,6 @@ export default function SearchPage( props: any ): JSX.Element {
         setPAGE, 
     } = props;
 
-    const [ SearchResults, setSearchResults ] = useState( [] );
 
 
     const wrapperBorders = false;
@@ -38,13 +37,13 @@ export default function SearchPage( props: any ): JSX.Element {
                 setPAGE={ setPAGE } 
                 SEARCH_INPUT={ SEARCH_INPUT }
                 setSEARCH_INPUT={ setSEARCH_INPUT }
-                setSearchResults={ setSearchResults }
+                setSearchResults={ props.setSearchResults }
             />
             
 	        < Body 
                 __DATA__={ __DATA__ }
                 SEARCH_INPUT={ SEARCH_INPUT }
-                SearchResults={ SearchResults }
+                SearchResults={ props.SearchResults }
             />
 
         </div>
@@ -88,7 +87,7 @@ function Head( props: any ): JSX.Element {
                     PAGE={ PAGE }  
                     setPAGE={ setPAGE } 
                     setSEARCH_INPUT={ setSEARCH_INPUT }
-                    setSearchResults={ setSearchResults }
+                    setSearchResults={ props.setSearchResults }
                 /> 
             </div>
         </ div >
