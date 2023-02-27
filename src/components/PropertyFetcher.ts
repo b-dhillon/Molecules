@@ -24,8 +24,8 @@ async function PropertyFetcher( compound: string ) {
         cid: number
     };
 
-    const properties: Properties = data.PropertyTable.Properties[0];
-    // console.log( 'properties', properties );
+    const properties = data.PropertyTable.Properties[0];
+    console.log( 'properties', properties );
 
     // Return the values
     return properties;

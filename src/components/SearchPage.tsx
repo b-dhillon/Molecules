@@ -1,16 +1,26 @@
 import { useState } from 'react';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
-import Chemical_Properties from './ChemicalProperties';
-import AI_Description from './AI_Description';
+import ChemicalProperties from './ChemicalProperties';
 import Molecular_Structures from './Molecular_Structures';
+import LoadingElement from './LoadingElement';
+import AIDescription from './AIDescription';
 
 
 export default function SearchPage( props: any ): JSX.Element {
 
-    const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, setPAGE, PAGE } = props;
-    const wrapperBorders = false;
+    const { 
+        __DATA__, 
+        SEARCH_INPUT, 
+        PAGE,
+        setSEARCH_INPUT, 
+        setPAGE, 
+    } = props;
 
+    const [ SearchResults, setSearchResults ] = useState( [] );
+
+
+    const wrapperBorders = false;
     const searchPageWrapper = {
         width: '100%',
         height: "100%",
@@ -18,21 +28,23 @@ export default function SearchPage( props: any ): JSX.Element {
         flexDirection: "column",
         border: `${ wrapperBorders ? "2px solid green" : "none" } `,
     }
-
+    
     return (
         <div id="SearchPage" style={ searchPageWrapper as React.CSSProperties }>
 
-            < Header 
+            < Head
                 PAGE={ PAGE }  
                 data={ __DATA__ } 
                 setPAGE={ setPAGE } 
                 SEARCH_INPUT={ SEARCH_INPUT }
                 setSEARCH_INPUT={ setSEARCH_INPUT }
+                setSearchResults={ setSearchResults }
             />
             
 	        < Body 
                 __DATA__={ __DATA__ }
                 SEARCH_INPUT={ SEARCH_INPUT }
+                SearchResults={ SearchResults }
             />
 
         </div>
@@ -42,9 +54,16 @@ export default function SearchPage( props: any ): JSX.Element {
 
 
 
-function Header( props: any ): JSX.Element {
+function Head( props: any ): JSX.Element {
 
-    const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, setPAGE, PAGE, wrapperBorders } = props;
+    const { 
+        __DATA__, 
+        SEARCH_INPUT, 
+        PAGE, 
+        setSEARCH_INPUT, 
+        setPAGE, 
+        setSearchResults 
+    } = props;
 
     const headerWrapper = {
         width: '100%',
@@ -66,9 +85,10 @@ function Header( props: any ): JSX.Element {
                 < SearchBar 
                     __DATA__={ __DATA__ }
                     SEARCH_INPUT={ SEARCH_INPUT }
-                    setSEARCH_INPUT={ setSEARCH_INPUT }
                     PAGE={ PAGE }  
                     setPAGE={ setPAGE } 
+                    setSEARCH_INPUT={ setSEARCH_INPUT }
+                    setSearchResults={ setSearchResults }
                 /> 
             </div>
         </ div >
@@ -80,67 +100,89 @@ function Header( props: any ): JSX.Element {
 
 function Body( props: any ): JSX.Element {
 
-    const { __DATA__, SEARCH_INPUT } = props;
+    const { __DATA__, SEARCH_INPUT, SearchResults } = props;
 
     const wrapperBorders = false;
 
-    const [ streamState, setStreamState ] = useState( { AI_Description: false, Chemical_Properties: false, Molecular_Structures: false } );
+    // const [ streaming, setStreaming ] = useState( { AI_Description: true, Chemical_Properties: false, Molecular_Structures: false } );
+    const [ streaming, setStreaming ] = useState( [ 1, 0, 0 ] );
 
-    const bodyWrapper = {
-        width: '100%',
-        display: "flex",
-        borderBottom: '2px solid black',
-        padding: '5px 70px 20px 70px',
-        border: `${ wrapperBorders ? "2px solid red" : "none" }`
+    const inlineStyles = {
+        bodyWrapper: {
+            width: '100%',
+            display: "flex",
+            borderBottom: '2px solid black',
+            padding: '5px 70px 20px 70px',
+            border: `${ wrapperBorders ? "2px solid red" : "none" }`
+        },
+        leftSideWrapper: {
+            width: "72%",
+            height: "100%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+            flexDirection: "column-reverse"
+        },
+        rightSideWrapper: {
+            width: "28%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+            height: "800px",
+            padding: "0px 30px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            borderLeft: '2px solid gray',
+        },
     };
-
-    const leftSideWrapper = {
-        width: "72%",
-        height: "100%",
-        margin: "0 auto",
-        border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-        flexDirection: "column-reverse"
-    };
-
-    const rightSideWrapper = {
-        width: "28%",
-        margin: "0 auto",
-        border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-        height: "800px",
-        padding: "0px 30px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        borderLeft: '2px solid gray',
-    };
-
+    
     return (
-        <div id="search-body" style={ bodyWrapper } >
+        <div id="search-body" style={ inlineStyles.bodyWrapper } >
 
-            < div id="left-side" style={ leftSideWrapper as React.CSSProperties } >
+            < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
+
+                { 
+                    SearchResults.length
+                    ?
+                    <>
+                        < AIDescription 
+                            __DATA__ = { __DATA__ } 
+                            streaming = { streaming }
+                            setStreaming = { setStreaming }
+                            SearchResults = { SearchResults }
+                        />
+                        < ChemicalProperties 
+                            __DATA__ = { __DATA__ } 
+                            streaming = { streaming }
+                            setStreaming = { setStreaming }
+                            SearchResults = { SearchResults }
+                        />
+                    </>
+                    :
+                    < LoadingElement />
+                }
+
+            </ div >
+
+            {/* 
+            < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
 
                 {
-                    
+                    SearchResults.length
+                    ?
+                    <>
+                        < Molecular_Structures 
+                            __DATA__ = { __DATA__ } 
+                            streaming = { streaming }
+                            setStreaming = { setStreaming }
+                            SearchResults = { SearchResults }
+                        />
+                    </>
+                    :
+                    ""
                 }
-                < AI_Description 
-                    __DATA__ = { __DATA__ } 
-                    SEARCH_INPUT = { SEARCH_INPUT } 
-                    streamState = { streamState }
-                    setStreamState = { setStreamState }
-                />
 
-                < Chemical_Properties 
-                    streamState = { streamState }
-                    setStreamState = { setStreamState }
-                />
-            </ div >
-
-            < div id="right-side" style={ rightSideWrapper as React.CSSProperties } >
-                < Molecular_Structures 
-                    streamState = { streamState }
-                    setStreamState = { setStreamState }
-                />
-            </ div >
+            </ div > 
+            */}
         	
         </div>
     )

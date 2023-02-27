@@ -6,11 +6,18 @@ export default function Molecular_Structures( props: any ): JSX.Element {
     const { streamState, setStreamState } = props;
 
     const wrapperBorders = false;
+    const [ structuresStreamed, setStructuresStreamed ] = useState( false );
+
+
+
+
 
     const [ show2DTitle, setShow2DTitle ] = useState(false);
     const [ show3DTitle, setShow3DTitle ] = useState(false);
     const [ show2DCanvas, setShow2DCanvas ] = useState(false);
     const [ show3DCanvas, setShow3DCanvas ] = useState(false);
+
+
 
     const start = 13000;
 
@@ -74,7 +81,7 @@ export default function Molecular_Structures( props: any ): JSX.Element {
             </ div >
 
             < div id="display3D-wrapper" style={canvasWrapper} >
-                { show3DTitle && < Stream text={ "Computed Molecular Geometry:" } style={ titleStyle } /> }
+                { show3DTitle && < Stream text={ "Computed Molecular Geometry:" } style={ titleStyle } setStructuresStreaned={ setStructuresStreamed }/> }
                 { show3DCanvas && <div id="display3D" ></div> }
             </ div >
 

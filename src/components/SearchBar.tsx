@@ -4,7 +4,7 @@ import Styles from '../styles/SearchBar.module.css';
 
 export default function SearchBar( props: any ) {
 
-  const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, PAGE, setPAGE } = props;
+  const { __DATA__, SEARCH_INPUT, setSEARCH_INPUT, PAGE, setPAGE, setSearchResults } = props;
 
   const inlineStyles = {
     homePageSearchBarWrapper: {
@@ -62,6 +62,7 @@ export default function SearchBar( props: any ) {
     setPAGE("SearchPage");
 
     const SearchResults = await Search( SEARCH_INPUT );
+    setSearchResults( SearchResults );
     console.log( "Search() finished" );
     console.log( "Search Results:", SearchResults );
   };

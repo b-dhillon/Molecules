@@ -3,13 +3,20 @@ import Stream from "./Stream";
 
 export default function Chemical_Properties( props: any): JSX.Element {
 
-    const { __DATA__, streamState, setStreamState } = props;
+    const { __DATA__, streaming, setStreaming, SearchResults } = props;
+
+    const [ loadedDescription, _ ] = useState<any>( SearchResults.description ); 
+
 
     const start = 2000;
 
     const wrapperBorders = true;
     const [ showColumnA, setShowColumnA ] = useState(false);
     const [ showColumnB, setShowColumnB ] = useState(false);
+
+    const [ propertiesStreamed, setPropertiesStreamed ] = useState( false );
+
+
     /*
     const [ showColumn1_2, setShowColumn1_2 ] = useState(false);
     const [ showColumn1_2_3, setShowColumn1_2_3 ] = useState(false);
@@ -125,117 +132,171 @@ export default function Chemical_Properties( props: any): JSX.Element {
     const propertiesA = `Molecular Formula:\nMolecular Weight:\nMolecular Complexity:`;
     const propertiesB = `C6H12O6\n234 g/mol\n42`;
 
-    return (
+    const caller = "ChemicalProperties"
 
-        < div id="properties" style={ inlineStyles.propertiesWrapper } >
+    if( streaming ) {
+        return (
 
-            {/* below should be re-factored, can be done in two lines, columnA and columnB repeat */}
-            < div id="property-column1a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
+            < div id="properties" style={ inlineStyles.propertiesWrapper } >
+    
+                {/* below should be re-factored, can be done in two lines, columnA and columnB repeat */}
+                < div id="property-column1a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
+    
+                    { 
+                        showColumnA
+                        && 
+                        <pre>
+                            < Stream 
+                                caller={ caller }
+                                text={ propertiesA }
+                                style={ textStyle }
+                                streaming = { streaming }
+                                setStreaming = { setStreaming }
+                            />
+                        </pre>  
+                    }
+    
+                </ div >
+    
+                < div id="property-column1b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
+    
+                    {
+                        showColumnB
+                        &&
+                        <pre>
+                            < Stream
+                                text={ propertiesB }
+                                style={ textStyle }
+                                streaming = { streaming }
+                                setStreaming = { setStreaming }
+                            />
+                        </pre>
+                    }
+    
+    
+                </ div >
+    
+                < div id="property-column2a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
+    
+                    {
+                        showColumnA
+                        &&
+                        <pre>
+                            < Stream
+                                text={ propertiesA }
+                                style={ textStyle }
+                                streaming = { streaming }
+                                setStreaming = { setStreaming }
+                            />
+                        </pre>
+    
+                    }
+    
+    
+                </ div >
+                
+                < div id="property-column2b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
+    
+                    {
+                        showColumnB
+                        &&
+                        <pre>
+                            < Stream
+                                text={ propertiesB }
+                                style={ textStyle }
+                                streaming = { streaming }
+                                setStreaming = { setStreaming }
+                            />
+                        </pre>
+                    }
+    
+                </ div >
+    
+                < div id="property-column3a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
+    
+                    {
+                        showColumnA
+                        &&
+                        <pre>
+                            < Stream
+                                text={ propertiesA }
+                                style={ textStyle }
+                                streaming = { streaming }
+                                setStreaming = { setStreaming }
+                            />
+                        </pre>
+    
+                    }
+    
+                </ div >
+    
+                < div id="property-column3b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
+    
+                    {
+                        showColumnB
+                        &&
+                        <pre>
+                            < Stream
+                                text={ propertiesB }
+                                style={ textStyle }
+                                streaming = { streaming }
+                                setStreaming = { setStreaming }
+                                setPropertiesStreamed = { setPropertiesStreamed }
+                            />
+                        </pre>
+                    }
+    
+                </ div >
+    
+            </ div >
+        );
+    };
 
-                { 
-                    showColumnA
-                    && 
+    if( !streaming && propertiesStreamed ) {
+        return (
+
+            < div id="properties" style={ inlineStyles.propertiesWrapper } >
+    
+                {/* below should be re-factored, can be done in two lines, columnA and columnB repeat */}
+                < div id="property-column1a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
                     <pre>
-                        < Stream 
-                            text={ propertiesA }
-                            style={ textStyle }
-                            streamState = { streamState }
-                            setStreamState = { setStreamState }
-                        />
+                        <p style={ textStyle }>{ propertiesA }</p>
                     </pre>  
-                }
-
-            </ div >
-
-            < div id="property-column1b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
-
-                {
-                    showColumnB
-                    &&
+                </ div >
+    
+                < div id="property-column1b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
                     <pre>
-                        < Stream
-                            text={ propertiesB }
-                            style={ textStyle }
-                            streamState = { streamState }
-                            setStreamState = { setStreamState }
-                        />
+                        <p style={ textStyle }>{ propertiesB }</p>
                     </pre>
-                }
-
-
-            </ div >
-
-            < div id="property-column2a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
-
-                {
-                    showColumnA
-                    &&
+                </ div >
+    
+                < div id="property-column2a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
                     <pre>
-                        < Stream
-                            text={ propertiesA }
-                            style={ textStyle }
-                            streamState = { streamState }
-                            setStreamState = { setStreamState }
-                        />
-                    </pre>
-
-                }
-
-
-            </ div >
-            
-            < div id="property-column2b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
-
-                {
-                    showColumnB
-                    &&
+                        <p style={ textStyle }>{ propertiesA }</p>
+                    </pre>    
+                </ div >
+                
+                < div id="property-column2b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
                     <pre>
-                        < Stream
-                            text={ propertiesB }
-                            style={ textStyle }
-                            streamState = { streamState }
-                            setStreamState = { setStreamState }
-                        />
+                        <p style={ textStyle }>{ propertiesB }</p>
                     </pre>
-                }
-
-            </ div >
-
-            < div id="property-column3a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
-
-                {
-                    showColumnA
-                    &&
+                </ div >
+    
+                < div id="property-column3a" style={ inlineStyles.propertyColumnA as React.CSSProperties } >
                     <pre>
-                        < Stream
-                            text={ propertiesA }
-                            style={ textStyle }
-                            streamState = { streamState }
-                            setStreamState = { setStreamState }
-                        />
+                        <p style={ textStyle }>{ propertiesA }</p>
                     </pre>
-
-                }
-
-            </ div >
-
-            < div id="property-column3b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
-
-                {
-                    showColumnB
-                    &&
+                </ div >
+    
+                < div id="property-column3b" style={ inlineStyles.propertyColumnB as React.CSSProperties } >
                     <pre>
-                        < Stream
-                            text={ propertiesB }
-                            style={ textStyle }
-                            streamState = { streamState }
-                            setStreamState = { setStreamState }
-                        />
+                        <p style={ textStyle }>{ propertiesB }</p>
                     </pre>
-                }
-
+                </ div >
+    
             </ div >
+        );
+    }
 
-        </ div >
-    );
+    else return <></>
 };

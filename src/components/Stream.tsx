@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function Stream( props: any ) {
 
-  const { streamState, setStreamState, passedStyles, caller, passedText } = props;
+  const { streaming, setStreaming, passedStyles, caller, passedText } = props;
 
   const [ text, setText ] = useState<string>( passedText ); 
   const [ displayText, setDisplayText ] = useState("");
@@ -21,7 +21,7 @@ function Stream( props: any ) {
 
     let i = 0;
 
-    const interval = setInterval(() => {
+    const interval = setInterval( () => {
 
       setDisplayText( (prevText: any ) => {
         const newText = prevText + text[i];
@@ -30,11 +30,28 @@ function Stream( props: any ) {
       });
 
       if ( i === text.length - 1 ) {
+
         clearInterval( interval );
+
         console.log(`streamed finished for ${caller}`);
-        console.log(`setting stream state to false for ${caller}`);
-        setStreamState( false );
-      }
+        console.log(`setting stream state for ${caller}`);
+
+        if( caller === "AIDescription" ) {
+          setStreaming( [ 0, 1, 0 ] )
+          props.setDescriptionStreamed( true )
+        };
+
+        if( caller === "ChemicalProperties" ) {
+          setStreaming( [ 0, 0, 1 ] )
+          props.setPropertiesStreamed( true )
+        };
+        if( caller === "Structures" ) {
+          setStreaming( [ 0, 0, 0 ] )
+          props.setStructuresStreamed( true )
+        } ;
+      
+      };
+
     }, 20);
   
 
@@ -43,7 +60,7 @@ function Stream( props: any ) {
   }, [text] );
 
 
-  return < p style={ textStyle } > { displayText } </p>;
+  return < p style={ textStyle } >{ displayText }</p>;
 }
 
 export default Stream;

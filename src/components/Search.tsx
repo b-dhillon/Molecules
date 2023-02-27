@@ -4,15 +4,15 @@ import StructureFetcherLoader from "./StructureFetcherLoader";
 
 export default async function Search( SEARCH_INPUT: string ) {
   
-  const properties = await PropertyFetcher( SEARCH_INPUT );
+  const _properties = await PropertyFetcher( SEARCH_INPUT );
   const moleculeFile2D = await StructureFetcherLoader( SEARCH_INPUT, "2d" );
   const moleculeFile3D = await StructureFetcherLoader( SEARCH_INPUT, "3d" );
 
   const descriptionResponse = await DescriptionFetcher( SEARCH_INPUT );
   console.log(descriptionResponse);
-  const description: string = descriptionResponse.choices[0].text.trim();
+  const _description: string = descriptionResponse.choices[0].text.trim();
 
-  return Promise.all( [ properties, moleculeFile2D, moleculeFile3D, description ] );
+  return Promise.all( [{ properties: _properties, m: moleculeFile2D, molecule3D: moleculeFile3D, description: _description }] );
   // setDescription( () => description );
 };
 

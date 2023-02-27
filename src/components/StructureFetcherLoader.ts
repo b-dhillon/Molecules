@@ -21,7 +21,7 @@ async function StructureLoader( blob: Blob ): Promise<any> {
 
         function LoadMolecule() {
             const molecule = fileReader.result;
-            console.log('MOLECULE FILE:', molecule);
+            // console.log('MOLECULE FILE:', molecule);
             resolve( molecule );
         }
     });
