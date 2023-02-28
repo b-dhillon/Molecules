@@ -6,6 +6,8 @@ import Molecular_Structures from './Molecular_Structures';
 import LoadingElement from './LoadingElement';
 import AIDescription from './AIDescription';
 
+import Stream2 from './Stream2';
+
 
 export default function SearchPage( props: any ): JSX.Element {
 
@@ -31,7 +33,7 @@ export default function SearchPage( props: any ): JSX.Element {
     return (
         <div id="SearchPage" style={ searchPageWrapper as React.CSSProperties }>
 
-            < Head
+            < SearchPageHead
                 PAGE={ PAGE }  
                 data={ __DATA__ } 
                 setPAGE={ setPAGE } 
@@ -40,7 +42,7 @@ export default function SearchPage( props: any ): JSX.Element {
                 setSearchResults={ props.setSearchResults }
             />
             
-	        < Body 
+	        < SearchPageBody 
                 __DATA__={ __DATA__ }
                 SEARCH_INPUT={ SEARCH_INPUT }
                 SearchResults={ props.SearchResults }
@@ -53,7 +55,7 @@ export default function SearchPage( props: any ): JSX.Element {
 
 
 
-function Head( props: any ): JSX.Element {
+function SearchPageHead( props: any ): JSX.Element {
 
     const { 
         __DATA__, 
@@ -97,9 +99,83 @@ function Head( props: any ): JSX.Element {
 
 
 
-function Body( props: any ): JSX.Element {
+function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
+
+    if( SearchResults.length ) {
+        console.log( "SearchResults piped to SearchPageBody() successfully:", SearchResults )
+
+        return (
+            < Stream2 />
+        );
+
+        // Render search page here now that we have results. 
+        // Call StreamScheduler to render Description, Chemical Properties, and Molecular Structures in that order
+
+
+        /* 
+            StreamScheduler( schedule: "Description" );
+            StreamScheduler( schedule: "Properties" );
+            StreamScheduler( schedule: "Structures" );
+
+            or
+
+            await Stream2( stream: "Description" );
+                - Find dom node with id===Description and update innerHTML in a loop iterating over SearchResults.description
+                - After loop ends, have Stream return a promise that resolves.
+            await Stream( stream: "Properties"  );
+                - Find dom node with id===Properties and update innerHTML in a loop iterating over SearchResults.properties
+                - Dont worry about execution order or table formatting, just get all the properties to stream/render on to page for any molecule you search for first. 
+            await Stream( stream: "Structures"  );
+
+            console.log( "All streams have been rendered" );
+
+        */
+    }
+    else {
+        console.log( "SearchResults have not been recieved by SearchPageBody(), rendering loading element" )
+        return (
+            < LoadingElement />
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const wrapperBorders = false;
 
@@ -133,13 +209,16 @@ function Body( props: any ): JSX.Element {
             borderLeft: '2px solid gray',
         },
     };
+
+
+
     
     return (
         <div id="search-body" style={ inlineStyles.bodyWrapper } >
 
             < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
-                { 
+                {/* { 
                     SearchResults.length
                     ?
                     <>
@@ -158,12 +237,12 @@ function Body( props: any ): JSX.Element {
                     </>
                     :
                     < LoadingElement />
-                }
+                } */}
 
             </ div >
 
-            {/* 
             < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
+            {/* 
 
                 {
                     SearchResults.length
@@ -180,12 +259,31 @@ function Body( props: any ): JSX.Element {
                     ""
                 }
 
-            </ div > 
             */}
+            </ div > 
         	
         </div>
     )
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

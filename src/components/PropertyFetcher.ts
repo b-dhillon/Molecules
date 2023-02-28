@@ -1,7 +1,7 @@
 async function PropertyFetcher( compound: string ) {
     
     const response = await fetch(
-        `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/property/Title,MolecularFormula,MolecularWeight,Complexity,Charge,RotatableBondCount,AtomStereoCount,BondStereoCount,HBondDonorCount,HBondAcceptorCount,ConformerCount3D,IUPACName/JSON`
+      `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${ compound }/property/Title,MolecularFormula,MolecularWeight,Complexity,Charge,RotatableBondCount,AtomStereoCount,BondStereoCount,HBondDonorCount,HBondAcceptorCount,ConformerCount3D,IUPACName/JSON`
     )
 
     // Get the data back from the response
@@ -12,7 +12,7 @@ async function PropertyFetcher( compound: string ) {
         Title: string
         MolecularFormula: string
         MolecularWeight: number
-        CovalentComplexity: number
+        Complexity: number
         Charge: number
         RotatableBondCount: number
         AtomStereoCount: number
@@ -25,10 +25,28 @@ async function PropertyFetcher( compound: string ) {
     };
 
     const properties = data.PropertyTable.Properties[0];
-    console.log( 'properties', properties );
+
+    const propertiesFormatted = {
+        "Name": properties.Title,
+        "Systematic_Name": properties.IUPACName,
+        "Molecular_Formula": properties.MolecularFormula,
+        "Molecular_Weight": properties.MolecularWeight,
+        "Molecular_Complexity": properties.Complexity,
+
+        "Charge": properties.Charge,
+        "Rotatable_Bond_Count": properties.RotatableBondCount,
+        "Chiral_Center_Count": properties.AtomStereoCount,
+        "Geometric_Center_Count": properties.BondStereoCount,
+        "H-Bond_Donor_Count": properties.HBondDonorCount,
+        "H-Bond_Acceptor_Count": properties.HBondAcceptorCount,
+        "Conformer_Count_3D": properties.ConformerCount3D,
+        // "CID": properties.cid
+    }
+
+    console.log( 'formatted properties', propertiesFormatted );
 
     // Return the values
-    return properties;
+    return propertiesFormatted;
 };
 
 export default PropertyFetcher

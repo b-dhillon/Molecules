@@ -3,10 +3,8 @@ import { useState, useEffect } from "react";
 function Stream( props: any ) {
 
   const { streaming, setStreaming, passedStyles, caller, passedText } = props;
-
-  const [ text, setText ] = useState<string>( passedText ); 
+  const [ text, _ ] = useState<string>( passedText ); 
   const [ displayText, setDisplayText ] = useState("");
-
   const textStyle = {
     color: "white",
     fontFamily: "Poppins-Regular",
@@ -15,6 +13,8 @@ function Stream( props: any ) {
     fontSize: "1.2rem",
     ...passedStyles,
   };
+
+
 
   useEffect(() => {
     console.log('streamed called with', text );
@@ -34,7 +34,6 @@ function Stream( props: any ) {
         clearInterval( interval );
 
         console.log(`streamed finished for ${caller}`);
-        console.log(`setting stream state for ${caller}`);
 
         if( caller === "AIDescription" ) {
           setStreaming( [ 0, 1, 0 ] )
@@ -45,11 +44,19 @@ function Stream( props: any ) {
           setStreaming( [ 0, 0, 1 ] )
           props.setPropertiesStreamed( true )
         };
-        
+
         if( caller === "Structures" ) {
           setStreaming( [ 0, 0, 0 ] )
           props.setStructuresStreamed( true )
         } ;
+
+
+        // return new Promise ( (resolve, reject) => {
+        //   setTimeout( () => {
+        //     setDisplayText( "" );
+        //     resolve("done");
+        //   }, 2000 );
+        // });
       
       };
 

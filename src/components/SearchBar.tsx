@@ -64,7 +64,7 @@ export default function SearchBar( props: any ) {
     const SearchResults = await Search( SEARCH_INPUT );
     props.setSearchResults( SearchResults );
     console.log( "Search() finished" );
-    console.log( "Search Results:", SearchResults );
+    console.log( "Search Results:", ...SearchResults );
   };
   
   return (

@@ -1,8 +1,7 @@
-async function DescriptionFetcher( searchedString: string ) {
+async function DescriptionFetcher( SEARCH_INPUT: string ) {
   
-  const prompt = `Give a long organic chemistry description of the chemical compound ${searchedString}`;
+  const prompt = `Give a long organic chemistry description of the chemical compound ${SEARCH_INPUT}`;
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
-
 
   const apiConfig = {
     method: 'POST',

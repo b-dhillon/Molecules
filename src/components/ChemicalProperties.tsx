@@ -14,6 +14,9 @@ export default function Chemical_Properties( props: any): JSX.Element {
     const [ showColumnA, setShowColumnA ] = useState(false);
     const [ showColumnB, setShowColumnB ] = useState(false);
 
+    // const [ showColumnA, setShowColumnA ] = useState([0, 0, 0]);
+    // const [ showColumnB, setShowColumnB ] = useState([0, 0, 0]);
+
     const [ propertiesStreamed, setPropertiesStreamed ] = useState( false );
 
 
