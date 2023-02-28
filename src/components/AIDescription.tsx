@@ -30,19 +30,19 @@ export default function AIDescription( props: any ): JSX.Element {
         fontSize: "1.2rem",
     };
 
-    if( streaming[0] ) {
-        return (
-            <div id="description" style={ descriptionWrapper } >
-                < Stream 
-                    caller={ "AIDescription" }
-                    passedText={ loadedDescription }
-                    streaming={ streaming }
-                    setStreaming={ setStreaming }
-                    setDescriptionStreamed={ setDescriptionStreamed }
-                /> 
-            </div>
-        );
-    }
+    // if( streaming[0] ) {
+    //     return (
+    //         <div id="description" style={ descriptionWrapper } >
+    //             < Stream 
+    //                 caller={ "AIDescription" }
+    //                 passedText={ loadedDescription }
+    //                 streaming={ streaming }
+    //                 setStreaming={ setStreaming }
+    //                 setDescriptionStreamed={ setDescriptionStreamed }
+    //             /> 
+    //         </div>
+    //     );
+    // }
 
     if( !streaming[0] && descriptionStreamed ) {
         return (

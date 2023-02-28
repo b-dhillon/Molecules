@@ -52,7 +52,6 @@ export default function SearchPage( props: any ): JSX.Element {
 };
 
 
-
 function SearchPageHead( props: any ): JSX.Element {
 
     const { 
@@ -99,21 +98,93 @@ function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
 
+    const wrapperBorders = true;
+
     const domNodes: any = {
         description: useRef(),
         properties: useRef(),
-        structures: useRef(),
+        structure2d: useRef(),
+        structure3d: useRef(),
     };
 
-    const SearchPageBodyInlineStyles = {
+    const inlineStyles = {
+        // bodyWrapper: {
+        //     width: '100%',
+        //     display: "flex",
+        //     flexDirection: "column",
+        //     justifyContent: "space-between",
+        //     // padding: '0px 70px 0px 70px',
+        // },
+
         bodyWrapper: {
             width: '100%',
             display: "flex",
+            borderBottom: '2px solid black',
+            padding: '5px 70px 20px 70px',
+            border: `${ wrapperBorders ? "2px solid red" : "none" }`
+        },
+
+        leftSideWrapper: {
+            width: "72%",
+            height: "100%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+            flexDirection: "column-reverse"
+        },
+
+        rightSideWrapper: {
+            width: "28%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+            height: "800px",
+            padding: "0px 30px",
+            display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
-            // padding: '0px 70px 0px 70px',
+            alignItems: "center",
+            borderLeft: '2px solid gray',
+        },
+        descriptionWrapper: {
+            height: "auto",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            display: "flex",
+            padding: "10px 120px 0px 0px",
+        },
+        descriptionText: {
+            color: "white",
+            fontFamily: "Poppins-Regular",
+            padding: "0px",
+            margin: "0px",
+            fontSize: "1.2rem",
+        },
+        propertiesWrapper: {
+            height: "50%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            display: "flex",
+            padding: "80px 0px",
+        },
+        canvasWrapper: {
+            maxWidth: "300px"
+        },
+
+        structureWrapper: {
+            height: "100%",
+            // margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+        },
+
+        structuresTitle: {
+            textAlign: "center",
+            margin: "0px 15px 15px 15px",
+            padding: "0px 0px 15px 0px",
+            fontSize: "1.3rem",
         },
     };
+
 
 
     useEffect( () => {
@@ -125,39 +196,61 @@ function SearchPageBody( props: any ): JSX.Element {
 
 
     return (
-        SearchResults.length 
-        ?
-        < div id="Stream2-TestBody" style={ SearchPageBodyInlineStyles.bodyWrapper as React.CSSProperties } >
+        < div id="search-body" style={ inlineStyles.bodyWrapper } >
 
-            <div ref={ domNodes.description } >
-            </div>
+            < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
-            <div ref={ domNodes.properties } >
-            </div>
+                < div id="description" style={ inlineStyles.descriptionWrapper } >
+                    < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
+                </ div >
 
-            <div ref={ domNodes.structures } >
-            </div>
+                < div id="properties" style={ inlineStyles.propertiesWrapper } >
+                    < p ref={ domNodes.properties } ></ p >
+                </ div >
 
-        </ div >
-        :
-        < LoadingElement />
-    );
+            </ div >
+
+            < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
+
+                < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
+
+                    < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
+
+                        < p ref={ domNodes.structure2d } style={ inlineStyles.structuresTitle as React.CSSProperties }></ p >
+                        < div id="display2D" ></ div >
+
+                    </ div >
+
+                    < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
+
+                        < p ref={ domNodes.structure3d } style={ inlineStyles.structuresTitle as React.CSSProperties }></ p >
+                        < div id="display3D" ></ div >
+
+                    </ div >
+
+                </ div >
+
+            </ div > 
+        	
+        </div>
+    )
+
+
+
 };
 
 async function StreamResults( _SearchResults: any, domNodes: any ) {
 
-    // Streaming Description
-    await Stream( _SearchResults.description, domNodes.description );
-
+    await Stream( _SearchResults.description, domNodes.description ); // Streaming Description
 
     // Streaming Properties
     const [ propertyNames, propertyValues ] = PropertyFormatter( _SearchResults.properties );
     await Stream( propertyNames,  domNodes.properties );
     await Stream( propertyValues,  domNodes.properties );
 
-
     // Streaming Structures
-    await Stream( "STRUCTURES... STRUCTURES... STRUCTURES...",  domNodes.structures );
+    await Stream( "STRUCTURE 2d",  domNodes.structure2d );
+    await Stream( "STRUCTURE 3d",  domNodes.structure3d );
 };
 
 
@@ -165,15 +258,9 @@ async function StreamResults( _SearchResults: any, domNodes: any ) {
 
 function PropertyFormatter( properties: any ) {
 
-    const propertyNames = Object.keys( properties )
-                                .toString()
-                                // replace all underscores with spaces
-                                .replace( /_/g, " " );
-       
-                                
+    const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
+
     console.log( "Formatted Property Names: ", propertyNames );
-
-
 
     const propertyValues = Object.values( properties ).toString();
 
@@ -186,6 +273,50 @@ function PropertyFormatter( properties: any ) {
 
 
 
+{/* { 
+    SearchResults.length
+    ?
+    <>
+        < AIDescription 
+            __DATA__ = { __DATA__ } 
+            streaming = { streaming }
+            setStreaming = { setStreaming }
+            SearchResults = { SearchResults }
+        />
+        < ChemicalProperties 
+            __DATA__ = { __DATA__ } 
+            streaming = { streaming }
+            setStreaming = { setStreaming }
+            SearchResults = { SearchResults }
+        />
+    </>
+    :
+    < LoadingElement />
+} */}
+
+
+
+
+/*
+return (
+    SearchResults.length 
+    ?
+    < div id="Stream2-TestBody" style={ SearchPageBodyInlineStyles.bodyWrapper as React.CSSProperties } >
+
+        <div ref={ domNodes.description } >
+        </div>
+
+        <div ref={ domNodes.properties } >
+        </div>
+
+        <div ref={ domNodes.structures } >
+        </div>
+
+    </ div >
+    :
+    < LoadingElement />
+);
+*/
 
 
 
@@ -194,115 +325,13 @@ function PropertyFormatter( properties: any ) {
 
 
 
-
-
-
-
-
-
-        // Render search page here now that we have results. 
-        // Call StreamScheduler to render Description, Chemical Properties, and Molecular Structures in that order
-
-
-        /* 
-            StreamScheduler( schedule: "Description" );
-            StreamScheduler( schedule: "Properties" );
-            StreamScheduler( schedule: "Structures" );
-
-            or
-
-            await Stream2( stream: "Description" );
-                - Find dom node with id===Description and update innerHTML in a loop iterating over SearchResults.description
-                - After loop ends, have Stream return a promise that resolves.
-            await Stream( stream: "Properties"  );
-                - Find dom node with id===Properties and update innerHTML in a loop iterating over SearchResults.properties
-                - Dont worry about execution order or table formatting, just get all the properties to stream/render on to page for any molecule you search for first. 
-            await Stream( stream: "Structures"  );
-
-            console.log( "All streams have been rendered" );
-
-        */
-    // }
-    // else {
-    //     console.log( "SearchResults have not been recieved by SearchPageBody(), rendering loading element" )
-    //     return (
-    //         < LoadingElement />
-    //     );
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     const wrapperBorders = false;
 
 //     // const [ streaming, setStreaming ] = useState( { AI_Description: true, Chemical_Properties: false, Molecular_Structures: false } );
 //     const [ streaming, setStreaming ] = useState( [ 1, 0, 0 ] );
 
-//     const inlineStyles = {
-//         bodyWrapper: {
-//             width: '100%',
-//             display: "flex",
-//             borderBottom: '2px solid black',
-//             padding: '5px 70px 20px 70px',
-//             border: `${ wrapperBorders ? "2px solid red" : "none" }`
-//         },
-//         leftSideWrapper: {
-//             width: "72%",
-//             height: "100%",
-//             margin: "0 auto",
-//             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-//             flexDirection: "column-reverse"
-//         },
-//         rightSideWrapper: {
-//             width: "28%",
-//             margin: "0 auto",
-//             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-//             height: "800px",
-//             padding: "0px 30px",
-//             display: "flex",
-//             flexDirection: "column",
-//             alignItems: "center",
-//             borderLeft: '2px solid gray',
-//         },
-//     };
 
 
 
-    
 //     return (
 //         <div id="search-body" style={ inlineStyles.bodyWrapper } >
 

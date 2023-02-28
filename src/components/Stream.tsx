@@ -1,3 +1,4 @@
+// Takes a string and a ref to a DOM element -- iterates over string and appends each character to the DOM element using a recursive interval call.
 export default async function Stream2( text: string, domNode: any ) {
 
     return new Promise( (resolve, _) => {
@@ -21,27 +22,6 @@ export default async function Stream2( text: string, domNode: any ) {
     });
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -93,61 +73,6 @@ export default async function Stream2( text: string, domNode: any ) {
 };
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// takes a string and a ref to a DOM element -- iterates over string and appends each character to the DOM element in an interval.
-
-
 
 /*
 export default async function Stream2( text: string, domNode: any ) {
@@ -200,30 +125,4 @@ export default async function Stream2( text: string, domNode: any ) {
         resolve("done");
     });
 };
-
-
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // useEffect( () => testStreamer(), [] );
-    
-
-
-    // return ( 
-    //     <div id="TEST" ref={ref} style={ { color: "white !important" } }>
-
-    //     </div>
-    // )

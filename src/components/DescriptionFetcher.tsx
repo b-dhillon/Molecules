@@ -4,6 +4,7 @@ async function DescriptionFetcher( SEARCH_INPUT: string ) {
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
 
 
+
   const apiConfig = {
     method: 'POST',
     headers: {
