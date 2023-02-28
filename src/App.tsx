@@ -8,11 +8,11 @@ import DATA from './data';
 // To-do:
 /*
 
-- Refactor ChemicalProperties
-  - Too many Stream calls...i'd like to only call it once and for it to know exactly how to proceed.
-    - Potentially switch to Tables
-      - Call stream on columns 1a, 2a, and 3a first.
-      - Then call stream on columns 1b, 2b, and 3b second.
+- Get old HTML DOM layout of SearchPageBody plugged back in with the new SearchPage and Streaming setup.
+
+- Potentially switch Properties to Tables
+  - Call stream on columns 1a, 2a, and 3a first.
+  - Then call stream on columns 1b, 2b, and 3b second.
 
 - Fix setSearchedString bug where if you delete a letter from search the app crashes
 - Set up data passing and finish writing data structure, at least a first draft, 

@@ -1,131 +1,229 @@
-import { useState, useEffect } from "react";
+export default async function Stream2( text: string, domNode: any ) {
 
-function Stream( props: any ) {
+    return new Promise( (resolve, _) => {
 
-  const { streaming, setStreaming, passedStyles, caller, passedText } = props;
-  const [ text, _ ] = useState<string>( passedText ); 
-  const [ displayText, setDisplayText ] = useState("");
-  const textStyle = {
-    color: "white",
-    fontFamily: "Poppins-Regular",
-    padding: "0px",
-    margin: "0px",
-    fontSize: "1.2rem",
-    ...passedStyles,
-  };
+        let i = 0;
+        const appendCharacter = setInterval( () => {
+            
+            domNode.current.textContent += text[i];
+            i++;
 
+            if( i === text.length ) {
 
+                console.log("DONE APPENDING");
+                resolve("done");
+                clearInterval( appendCharacter );
 
-  useEffect(() => {
-    console.log('streamed called with', text );
+            };
 
-    let i = 0;
+        }, 15 );
 
-    const interval = setInterval( () => {
+    });
 
-      setDisplayText( (prevText: any ) => {
-        const newText = prevText + text[i];
-        i++;
-        return newText;
-      });
-
-      if ( i === text.length - 1 ) {
-
-        clearInterval( interval );
-
-        console.log(`streamed finished for ${caller}`);
-
-        if( caller === "AIDescription" ) {
-          setStreaming( [ 0, 1, 0 ] )
-          props.setDescriptionStreamed( true )
-        };
-
-        if( caller === "ChemicalProperties" ) {
-          setStreaming( [ 0, 0, 1 ] )
-          props.setPropertiesStreamed( true )
-        };
-
-        if( caller === "Structures" ) {
-          setStreaming( [ 0, 0, 0 ] )
-          props.setStructuresStreamed( true )
-        } ;
-
-
-        // return new Promise ( (resolve, reject) => {
-        //   setTimeout( () => {
-        //     setDisplayText( "" );
-        //     resolve("done");
-        //   }, 2000 );
-        // });
-      
-      };
-
-    }, 20);
-  
-
-    return () => clearInterval( interval );
-
-  }, [text] );
-
-
-  return < p style={ textStyle } >{ displayText }</p>;
-}
-
-export default Stream;
-
-
-// Old implementation with useRef()
-/*
-function TypeWriter( props: any ) {
-  console.log('TypeWriter Called');
-
-  const [ description, setDescription ] = useState( props.d ); 
-  // const [ once, setOnce ] = useState( true );
-  let once = true;
-  const ref: any = useRef();
-
-
-  
-  let i = 0;
-
-  const speed = 2000; // The speed/duration of the effect in milliseconds
-  
-  // @ts-ignore
-  const element = document.getElementById("descriptionParagraph")
-
-  console.log('description in call: ', description);
-
-  useEffect( () => {
-    if( description && i < description.length && once ) {
-      console.log('description in useEffect: ', description);
-
-      for ( let i = 0; i < description.length; i++ ) {
-        setTimeout( () => ref.current.innerHTML += description.charAt(i), speed )
-        // ref.current.innerHTML += description[i];
-      };
-      once = false; 
-      // setTimeout( TypeWriter, speed );
-    }
-  }, [] )
-
-  // if( i < description.length && element ) {
-  //   console.log('description inside if block of call: ', description);
-
-  //   // @ts-ignore
-  //   // document.getElementById("descriptionParagraph").innerHTML += text.charAt(i);
-  //   // HTMLElement.innerHTML += text.charAt(i);
-  //   // element.innerHTML += description.charAt(i);
-
-
-
-  //   ref.current.innerHTML += description.charAt(i);
-  //   // ref.current.value += description.charAt(i);
-  //   i++;
-  //   setTimeout( TypeWriter, speed );
-  // }
-
-  return (
-    <p id="descriptionParagraph" ref={ ref }></p>
-  )
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    async function addTextToDomNode( domNode: any ) {
+        console.log('calling addTextToDomNode on: ', domNode);
+
+        let doneAppending = false;
+        let i = 0;
+        const appendCharacter = setInterval( async() => {
+            
+            domNode.current.textContent += text[i];
+            i++;
+
+            if( i === text.length ) {
+
+                console.log("DONE APPENDING");
+
+                doneAppending = true;
+
+
+                return new Promise ( (resolve, _) => {
+                    console.log("DONE APPENDING 2");
+                    resolve("appendCharacter interval done");
+                    // clearInterval( appendCharacter );
+                    // return () => clearInterval( appendCharacter )
+                });
+            };
+        }, 15 );
+
+        await appendCharacter;
+
+        if( doneAppending ) {
+            // console.log("DONE APPENDING");
+            return new Promise ( (resolve, reject) => {
+                    
+                resolve("done streaming");
+                // return () => clearInterval( appendCharacter )
+            });
+        };
+        // return () => clearInterval( appendCharacter );
+    }; 
+    
+    return new Promise( async (resolve, reject) => {
+        const a = await addTextToDomNode( domNode );
+        console.log("a", a); // a is undefined?
+        console.log("DONE ADDING TEXT TO DOM NODE");
+        resolve("done");
+    });
+};
+
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// takes a string and a ref to a DOM element -- iterates over string and appends each character to the DOM element in an interval.
+
+
+
+/*
+export default async function Stream2( text: string, domNode: any ) {
+    console.log('text', text);
+
+
+    async function addTextToDomNode( domNode: any ) {
+        console.log('calling addTextToDomNode on: ', domNode);
+
+        let doneAppending = false;
+        let i = 0;
+        const appendCharacter = setInterval( async() => {
+            
+            domNode.current.textContent += text[i];
+            i++;
+
+            if( i === text.length ) {
+
+                console.log("DONE APPENDING");
+
+                doneAppending = true;
+
+
+                return new Promise ( (resolve, _) => {
+                    console.log("DONE APPENDING 2");
+                    resolve("appendCharacter interval done");
+                    // clearInterval( appendCharacter );
+                    // return () => clearInterval( appendCharacter )
+                });
+            };
+        }, 15 );
+
+        await appendCharacter;
+
+        if( doneAppending ) {
+            // console.log("DONE APPENDING");
+            return new Promise ( (resolve, reject) => {
+                    
+                resolve("done streaming");
+                // return () => clearInterval( appendCharacter )
+            });
+        };
+        // return () => clearInterval( appendCharacter );
+    }; 
+    
+    return new Promise( async (resolve, reject) => {
+        const a = await addTextToDomNode( domNode );
+        console.log("a", a); // a is undefined?
+        console.log("DONE ADDING TEXT TO DOM NODE");
+        resolve("done");
+    });
+};
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // useEffect( () => testStreamer(), [] );
+    
+
+
+    // return ( 
+    //     <div id="TEST" ref={ref} style={ { color: "white !important" } }>
+
+    //     </div>
+    // )

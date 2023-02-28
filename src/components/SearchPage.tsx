@@ -6,7 +6,7 @@ import Molecular_Structures from './Molecular_Structures';
 import LoadingElement from './LoadingElement';
 import AIDescription from './AIDescription';
 
-import Stream2 from './Stream2';
+import Stream from './Stream';
 
 
 export default function SearchPage( props: any ): JSX.Element {
@@ -18,8 +18,6 @@ export default function SearchPage( props: any ): JSX.Element {
         setSEARCH_INPUT, 
         setPAGE, 
     } = props;
-
-
 
     const wrapperBorders = false;
     const searchPageWrapper = {
@@ -101,44 +99,43 @@ function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
 
-    const descriptionRef: any = useRef();
-    const propertiesRef: any = useRef();
-    const structuresRef: any = useRef();
-
-    async function StreamResults( _SearchResults: any ) {
-        await Stream2( _SearchResults.description, descriptionRef );
-        await Stream2( "PROPERTIES... PROPERTIES... PROPERTIES...",  propertiesRef );
-        await Stream2( "STRUCTURES... STRUCTURES... STRUCTURES...",  structuresRef );
+    const domNodes: any = {
+        description: useRef(),
+        properties: useRef(),
+        structures: useRef(),
     };
+
+    const SearchPageBodyInlineStyles = {
+        bodyWrapper: {
+            width: '100%',
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            // padding: '0px 70px 0px 70px',
+        },
+    };
+
 
     useEffect( () => {
         if( SearchResults.length ) {
+            StreamResults( SearchResults[0], domNodes );
             console.log( "Streaming results to page...");
-            StreamResults( SearchResults[0] );
         };
     }, [ SearchResults ] );
-
-
-    const bodyWrapper = {
-        width: '100%',
-        display: "flex",
-        flexDirection: "column",
-        // padding: '0px 70px 0px 70px',
-    };
 
 
     return (
         SearchResults.length 
         ?
-        < div id="Stream2-TestBody" style={ bodyWrapper as React.CSSProperties } >
+        < div id="Stream2-TestBody" style={ SearchPageBodyInlineStyles.bodyWrapper as React.CSSProperties } >
 
-            <div ref={descriptionRef} >
+            <div ref={ domNodes.description } >
             </div>
 
-            <div ref={propertiesRef} >
+            <div ref={ domNodes.properties } >
             </div>
 
-            <div ref={structuresRef} >
+            <div ref={ domNodes.structures } >
             </div>
 
         </ div >
@@ -147,13 +144,41 @@ function SearchPageBody( props: any ): JSX.Element {
     );
 };
 
+async function StreamResults( _SearchResults: any, domNodes: any ) {
+
+    // Streaming Description
+    await Stream( _SearchResults.description, domNodes.description );
+
+
+    // Streaming Properties
+    const [ propertyNames, propertyValues ] = PropertyFormatter( _SearchResults.properties );
+    await Stream( propertyNames,  domNodes.properties );
+    await Stream( propertyValues,  domNodes.properties );
+
+
+    // Streaming Structures
+    await Stream( "STRUCTURES... STRUCTURES... STRUCTURES...",  domNodes.structures );
+};
 
 
 
 
+function PropertyFormatter( properties: any ) {
+
+    const propertyNames = Object.keys( properties )
+                                .toString()
+                                // replace all underscores with spaces
+                                .replace( /_/g, " " );
+       
+                                
+    console.log( "Formatted Property Names: ", propertyNames );
 
 
 
+    const propertyValues = Object.values( properties ).toString();
+
+    return [ propertyNames, propertyValues ];
+}
 
 
 
