@@ -19,6 +19,8 @@ export default function SearchPage( props: any ): JSX.Element {
         setPAGE, 
     } = props;
 
+
+
     const wrapperBorders = false;
     const searchPageWrapper = {
         width: '100%',
@@ -97,6 +99,9 @@ function SearchPageHead( props: any ): JSX.Element {
 function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
+
+    const [ show2dCanvas, setShow2dCanvas ] = useState(false);
+    const [ show3dCanvas, setShow3dCanvas ] = useState(false);
 
     const wrapperBorders = true;
 
@@ -177,7 +182,12 @@ function SearchPageBody( props: any ): JSX.Element {
             alignItems: "center",
         },
 
-        structuresTitle: {
+        propertiesText: {
+            fontFamily: "Poppins-Regular",
+        },
+
+        structuresText: {
+            fontFamily: "Poppins-Regular",
             textAlign: "center",
             margin: "0px 15px 15px 15px",
             padding: "0px 0px 15px 0px",
@@ -186,10 +196,27 @@ function SearchPageBody( props: any ): JSX.Element {
     };
 
 
+    async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
+
+        await Stream( _SearchResults.description, domNodes.description ); // Streaming Description
+    
+        // Streaming Properties
+        const [ propertyNames, propertyValues ] = PropertyFormatter( _SearchResults.properties );
+        await Stream( propertyNames,  domNodes.properties, 50 );
+        await Stream( propertyValues,  domNodes.properties, 50 );
+    
+        // Streaming Structures
+        await Stream( "Chemical Line Structure",  domNodes.structure2d, 75 );
+        setShow2dCanvas(true);
+    
+        await Stream( "Computed Molecular Geometry",  domNodes.structure3d, 75 );
+        setShow3dCanvas(true);
+
+    };
 
     useEffect( () => {
         if( SearchResults.length ) {
-            StreamResults( SearchResults[0], domNodes );
+            StreamSearchResults( SearchResults[0], domNodes );
             console.log( "Streaming results to page...");
         };
     }, [ SearchResults ] );
@@ -200,12 +227,14 @@ function SearchPageBody( props: any ): JSX.Element {
 
             < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
+                { SearchResults.length ? null : < LoadingElement /> }
+
                 < div id="description" style={ inlineStyles.descriptionWrapper } >
                     < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
                 </ div >
 
                 < div id="properties" style={ inlineStyles.propertiesWrapper } >
-                    < p ref={ domNodes.properties } ></ p >
+                    < p ref={ domNodes.properties } style={ inlineStyles.propertiesText } ></ p >
                 </ div >
 
             </ div >
@@ -216,15 +245,15 @@ function SearchPageBody( props: any ): JSX.Element {
 
                     < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
 
-                        < p ref={ domNodes.structure2d } style={ inlineStyles.structuresTitle as React.CSSProperties }></ p >
-                        < div id="display2D" ></ div >
+                        < p ref={ domNodes.structure2d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
+                        { show2dCanvas && <div id="display2D" ></div> }
 
                     </ div >
 
                     < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
 
-                        < p ref={ domNodes.structure3d } style={ inlineStyles.structuresTitle as React.CSSProperties }></ p >
-                        < div id="display3D" ></ div >
+                        < p ref={ domNodes.structure3d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
+                        { show3dCanvas && <div id="display3D" ></div> }
 
                     </ div >
 
@@ -239,19 +268,7 @@ function SearchPageBody( props: any ): JSX.Element {
 
 };
 
-async function StreamResults( _SearchResults: any, domNodes: any ) {
 
-    await Stream( _SearchResults.description, domNodes.description ); // Streaming Description
-
-    // Streaming Properties
-    const [ propertyNames, propertyValues ] = PropertyFormatter( _SearchResults.properties );
-    await Stream( propertyNames,  domNodes.properties );
-    await Stream( propertyValues,  domNodes.properties );
-
-    // Streaming Structures
-    await Stream( "STRUCTURE 2d",  domNodes.structure2d );
-    await Stream( "STRUCTURE 3d",  domNodes.structure3d );
-};
 
 
 

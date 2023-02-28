@@ -5,16 +5,21 @@ import SearchPage from './components/SearchPage';
 import Structure2DFetcher from './components/StructureFetcherLoader';
 import Structure3DFetcher from './components/Structure3DFetcher';
 import DATA from './data';
-// To-do:
+
+
 /*
-
-- Get old HTML DOM layout of SearchPageBody plugged back in with the new SearchPage and Streaming setup.
-
-- Potentially switch Properties to Tables
+TODO:
+// High Priority:
+- Format Properties UI into a table
   - Call stream on columns 1a, 2a, and 3a first.
-  - Then call stream on columns 1b, 2b, and 3b second.
+  - Then call stream on columns 1b, 2b, and 3b nex?
 
+- Get structures piped and rendering
+- Remove borders
 - Fix setSearchedString bug where if you delete a letter from search the app crashes
+
+
+// Low Priority: 
 - Set up data passing and finish writing data structure, at least a first draft, 
 - Refactor global CSS styles.
 */

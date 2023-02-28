@@ -1,5 +1,5 @@
 // Takes a string and a ref to a DOM element -- iterates over string and appends each character to the DOM element using a recursive interval call.
-export default async function Stream2( text: string, domNode: any ) {
+export default async function Stream2( text: string, domNode: any, speed: number = 10 ) {
 
     return new Promise( (resolve, _) => {
 
@@ -17,7 +17,7 @@ export default async function Stream2( text: string, domNode: any ) {
 
             };
 
-        }, 15 );
+        }, speed );
 
     });
 
