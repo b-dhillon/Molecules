@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
 import ChemicalProperties from './ChemicalProperties';
@@ -97,18 +97,83 @@ function SearchPageHead( props: any ): JSX.Element {
 };
 
 
-
-
 function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
 
-    if( SearchResults.length ) {
-        console.log( "SearchResults piped to SearchPageBody() successfully:", SearchResults )
+    const descriptionRef: any = useRef();
+    const propertiesRef: any = useRef();
+    const structuresRef: any = useRef();
 
-        return (
-            < Stream2 />
-        );
+    async function StreamResults( _SearchResults: any ) {
+        await Stream2( _SearchResults.description, descriptionRef );
+        await Stream2( "PROPERTIES... PROPERTIES... PROPERTIES...",  propertiesRef );
+        await Stream2( "STRUCTURES... STRUCTURES... STRUCTURES...",  structuresRef );
+    };
+
+    useEffect( () => {
+        if( SearchResults.length ) {
+            console.log( "Streaming results to page...");
+            StreamResults( SearchResults[0] );
+        };
+    }, [ SearchResults ] );
+
+
+    const bodyWrapper = {
+        width: '100%',
+        display: "flex",
+        flexDirection: "column",
+        // padding: '0px 70px 0px 70px',
+    };
+
+
+    return (
+        SearchResults.length 
+        ?
+        < div id="Stream2-TestBody" style={ bodyWrapper as React.CSSProperties } >
+
+            <div ref={descriptionRef} >
+            </div>
+
+            <div ref={propertiesRef} >
+            </div>
+
+            <div ref={structuresRef} >
+            </div>
+
+        </ div >
+        :
+        < LoadingElement />
+    );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Render search page here now that we have results. 
         // Call StreamScheduler to render Description, Chemical Properties, and Molecular Structures in that order
@@ -132,13 +197,13 @@ function SearchPageBody( props: any ): JSX.Element {
             console.log( "All streams have been rendered" );
 
         */
-    }
-    else {
-        console.log( "SearchResults have not been recieved by SearchPageBody(), rendering loading element" )
-        return (
-            < LoadingElement />
-        );
-    }
+    // }
+    // else {
+    //     console.log( "SearchResults have not been recieved by SearchPageBody(), rendering loading element" )
+    //     return (
+    //         < LoadingElement />
+    //     );
+    // }
 
 
 
@@ -177,94 +242,94 @@ function SearchPageBody( props: any ): JSX.Element {
 
 
 
-    const wrapperBorders = false;
+//     const wrapperBorders = false;
 
-    // const [ streaming, setStreaming ] = useState( { AI_Description: true, Chemical_Properties: false, Molecular_Structures: false } );
-    const [ streaming, setStreaming ] = useState( [ 1, 0, 0 ] );
+//     // const [ streaming, setStreaming ] = useState( { AI_Description: true, Chemical_Properties: false, Molecular_Structures: false } );
+//     const [ streaming, setStreaming ] = useState( [ 1, 0, 0 ] );
 
-    const inlineStyles = {
-        bodyWrapper: {
-            width: '100%',
-            display: "flex",
-            borderBottom: '2px solid black',
-            padding: '5px 70px 20px 70px',
-            border: `${ wrapperBorders ? "2px solid red" : "none" }`
-        },
-        leftSideWrapper: {
-            width: "72%",
-            height: "100%",
-            margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-            flexDirection: "column-reverse"
-        },
-        rightSideWrapper: {
-            width: "28%",
-            margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-            height: "800px",
-            padding: "0px 30px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            borderLeft: '2px solid gray',
-        },
-    };
+//     const inlineStyles = {
+//         bodyWrapper: {
+//             width: '100%',
+//             display: "flex",
+//             borderBottom: '2px solid black',
+//             padding: '5px 70px 20px 70px',
+//             border: `${ wrapperBorders ? "2px solid red" : "none" }`
+//         },
+//         leftSideWrapper: {
+//             width: "72%",
+//             height: "100%",
+//             margin: "0 auto",
+//             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+//             flexDirection: "column-reverse"
+//         },
+//         rightSideWrapper: {
+//             width: "28%",
+//             margin: "0 auto",
+//             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+//             height: "800px",
+//             padding: "0px 30px",
+//             display: "flex",
+//             flexDirection: "column",
+//             alignItems: "center",
+//             borderLeft: '2px solid gray',
+//         },
+//     };
 
 
 
     
-    return (
-        <div id="search-body" style={ inlineStyles.bodyWrapper } >
+//     return (
+//         <div id="search-body" style={ inlineStyles.bodyWrapper } >
 
-            < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
+//             < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
-                {/* { 
-                    SearchResults.length
-                    ?
-                    <>
-                        < AIDescription 
-                            __DATA__ = { __DATA__ } 
-                            streaming = { streaming }
-                            setStreaming = { setStreaming }
-                            SearchResults = { SearchResults }
-                        />
-                        < ChemicalProperties 
-                            __DATA__ = { __DATA__ } 
-                            streaming = { streaming }
-                            setStreaming = { setStreaming }
-                            SearchResults = { SearchResults }
-                        />
-                    </>
-                    :
-                    < LoadingElement />
-                } */}
+//                 {/* { 
+//                     SearchResults.length
+//                     ?
+//                     <>
+//                         < AIDescription 
+//                             __DATA__ = { __DATA__ } 
+//                             streaming = { streaming }
+//                             setStreaming = { setStreaming }
+//                             SearchResults = { SearchResults }
+//                         />
+//                         < ChemicalProperties 
+//                             __DATA__ = { __DATA__ } 
+//                             streaming = { streaming }
+//                             setStreaming = { setStreaming }
+//                             SearchResults = { SearchResults }
+//                         />
+//                     </>
+//                     :
+//                     < LoadingElement />
+//                 } */}
 
-            </ div >
+//             </ div >
 
-            < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
-            {/* 
+//             < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
+//             {/* 
 
-                {
-                    SearchResults.length
-                    ?
-                    <>
-                        < Molecular_Structures 
-                            __DATA__ = { __DATA__ } 
-                            streaming = { streaming }
-                            setStreaming = { setStreaming }
-                            SearchResults = { SearchResults }
-                        />
-                    </>
-                    :
-                    ""
-                }
+//                 {
+//                     SearchResults.length
+//                     ?
+//                     <>
+//                         < Molecular_Structures 
+//                             __DATA__ = { __DATA__ } 
+//                             streaming = { streaming }
+//                             setStreaming = { setStreaming }
+//                             SearchResults = { SearchResults }
+//                         />
+//                     </>
+//                     :
+//                     ""
+//                 }
 
-            */}
-            </ div > 
+//             */}
+//             </ div > 
         	
-        </div>
-    )
-};
+//         </div>
+//     )
+// };
 
 
 
