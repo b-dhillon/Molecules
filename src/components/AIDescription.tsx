@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LoadingElement from "./LoadingElement";
-import Stream from "./_____Stream";
+import Stream from "../trash/_____Stream";
 
 
 export default function AIDescription( props: any ): JSX.Element {

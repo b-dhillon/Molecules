@@ -100,6 +100,7 @@ function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
 
+
     const [ show2dCanvas, setShow2dCanvas ] = useState(false);
     const [ show3dCanvas, setShow3dCanvas ] = useState(false);
 
@@ -107,20 +108,51 @@ function SearchPageBody( props: any ): JSX.Element {
 
     const domNodes: any = {
         description: useRef(),
-        properties: useRef(),
+
+        properties: {
+            names: [
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+            ],
+            values: [
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+                useRef(),
+            ]
+
+        },
+        // properties0: useRef(),
+        // properties1: useRef(),
+        // properties2: useRef(),
+
         structure2d: useRef(),
         structure3d: useRef(),
     };
 
     const inlineStyles = {
-        // bodyWrapper: {
-        //     width: '100%',
-        //     display: "flex",
-        //     flexDirection: "column",
-        //     justifyContent: "space-between",
-        //     // padding: '0px 70px 0px 70px',
-        // },
-
         bodyWrapper: {
             width: '100%',
             display: "flex",
@@ -169,6 +201,23 @@ function SearchPageBody( props: any ): JSX.Element {
             display: "flex",
             padding: "80px 0px",
         },
+        propertiesNamesWrapper: {
+            width: "50%",
+            height: "100%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
+            display: "flex",
+            flexDirection: "column",
+        },
+        propertiesValuesWrapper: {
+            width: "50%",
+            height: "100%",
+            margin: "0 auto",
+            border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
+            display: "flex",
+            flexDirection: "column",
+        },
+
         canvasWrapper: {
             maxWidth: "300px"
         },
@@ -184,6 +233,7 @@ function SearchPageBody( props: any ): JSX.Element {
 
         propertiesText: {
             fontFamily: "Poppins-Regular",
+            border: "1px solid yellow"
         },
 
         structuresText: {
@@ -195,31 +245,40 @@ function SearchPageBody( props: any ): JSX.Element {
         },
     };
 
-
     async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
+        const [ _, propertyValues ] = PropertyFormatter( _SearchResults.properties ); // PropertyFormatter should be moved up the data flow chain 
+        
+        await Stream( _SearchResults.description, domNodes.description );     
 
-        await Stream( _SearchResults.description, domNodes.description ); // Streaming Description
-    
-        // Streaming Properties
-        const [ propertyNames, propertyValues ] = PropertyFormatter( _SearchResults.properties );
-        await Stream( propertyNames,  domNodes.properties, 50 );
-        await Stream( propertyValues,  domNodes.properties, 50 );
-    
-        // Streaming Structures
-        await Stream( "Chemical Line Structure",  domNodes.structure2d, 75 );
-        setShow2dCanvas(true);
-    
-        await Stream( "Computed Molecular Geometry",  domNodes.structure3d, 75 );
-        setShow3dCanvas(true);
 
+        // const propertyNameNodes = [ domNodes.properties0, domNodes.properties1, domNodes.properties2 ];
+
+
+        const propertyNames = [ "Name:", "Systematic Name:", "Molecular Formula:", "Molecular Weight:", "Molecular Complexity", "Number of Rotatable Bonds:", "Number of Chiral Centers:", "Number of Geometric Centers:", "Number of Stereo Centers:", "Number of Chiral Isomers:", "Number of Conformeres:", "Hydrogen Bond Acceptors:", "Hygdrogen Bond Donors:", "Net Charge" ]
+
+        for(let i = 0; i < domNodes.properties.names.length; i++) {
+            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 30 );
+        };
+
+        for(let i = 0; i < domNodes.properties.values.length; i++) {
+
+            // the values wont be linked to the correct names. Values return in a different order from API then the names order you currently have. Will need to add a couple extra lines in the property formatter.
+            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 30 );
+        };
+
+        await Stream( "Chemical Line Structure:",  domNodes.structure2d, 75 ) && setShow2dCanvas(true);
+        await Stream( "Computed Molecular Geometry:",  domNodes.structure3d, 75 ) && setShow3dCanvas(true);
+
+        console.log( "Search results streamed to page.");
     };
 
     useEffect( () => {
         if( SearchResults.length ) {
             StreamSearchResults( SearchResults[0], domNodes );
-            console.log( "Streaming results to page...");
+            console.log( "Data recieved. Streaming results to page...");
         };
     }, [ SearchResults ] );
+
 
 
     return (
@@ -233,8 +292,54 @@ function SearchPageBody( props: any ): JSX.Element {
                     < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
                 </ div >
 
-                < div id="properties" style={ inlineStyles.propertiesWrapper } >
-                    < p ref={ domNodes.properties } style={ inlineStyles.propertiesText } ></ p >
+                < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
+
+
+                    < div id="names" style={ inlineStyles.propertiesNamesWrapper as React.CSSProperties } >
+
+                        < p ref={ domNodes.properties.names[0] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[1] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[2] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[3] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[4] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[5] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[6] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[7] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[8] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[9] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[10] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[11] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[12] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[13] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.names[14] } style={ inlineStyles.propertiesText } ></ p >
+
+                    </ div >
+
+                    < div id="values" style={ inlineStyles.propertiesValuesWrapper as React.CSSProperties } >
+
+                        < p ref={ domNodes.properties.values[0] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[1] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[2] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[3] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[4] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[5] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[6] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[7] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[8] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[9] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[10] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[11] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[12] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[13] } style={ inlineStyles.propertiesText } ></ p >
+                        < p ref={ domNodes.properties.values[14] } style={ inlineStyles.propertiesText } ></ p >
+
+                    </ div >
+
+
+
+
+                    {/* < p ref={ domNodes.properties1 } style={ inlineStyles.propertiesText } ></ p >
+                    < p ref={ domNodes.properties2 } style={ inlineStyles.propertiesText } ></ p > */}
                 </ div >
 
             </ div >
@@ -275,13 +380,21 @@ function SearchPageBody( props: any ): JSX.Element {
 
 function PropertyFormatter( properties: any ) {
 
-    const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
+    // const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
+    const propertyNames = Object.keys( properties )
 
-    console.log( "Formatted Property Names: ", propertyNames );
+    // console.log( "Formatted Property Names:", propertyNames );
 
-    const propertyValues = Object.values( properties ).toString();
+    // const propertyValues = Object.values( properties )
+    console.log( "Properties:", properties);
 
-    return [ propertyNames, propertyValues ];
+
+    // const propertyValues = Object.values( properties );
+    // const strings = propertyValues.map( ( value: any, index: number ) => value.toString() );
+    const propertyValuesAsStrings = Object.values( properties ).map( ( value: any, index: number ) => value.toString() );
+    console.log( "Formatted Property Values:", propertyValuesAsStrings );
+
+    return [ propertyNames, propertyValuesAsStrings ];
 }
 
 

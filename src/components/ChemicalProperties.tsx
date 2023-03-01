@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Stream from "./_____Stream";
+import Stream from "../trash/_____Stream";
 
 export default function Chemical_Properties( props: any): JSX.Element {
 

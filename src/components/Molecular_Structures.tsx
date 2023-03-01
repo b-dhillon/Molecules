@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Stream from "./_____Stream";
+import Stream from "../trash/_____Stream";
 
 export default function Molecular_Structures( props: any ): JSX.Element {
 
