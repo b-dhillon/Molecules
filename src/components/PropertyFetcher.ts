@@ -28,7 +28,7 @@ async function PropertyFetcher( compound: string ) {
 
     const propertiesFormatted = {
         "Name": properties.Title,
-        "Systematic_Name": properties.IUPACName,
+        "SystematicName": properties.IUPACName,
         "Molecular_Formula": properties.MolecularFormula,
         "Molecular_Weight": properties.MolecularWeight,
         "Molecular_Complexity": properties.Complexity,
@@ -42,11 +42,28 @@ async function PropertyFetcher( compound: string ) {
         "Conformer_Count_3D": properties.ConformerCount3D,
         // "CID": properties.cid
     }
+    const propertiesFormatted2 = {
+      "Name": properties.Title,
+      "Systematic Name": properties.IUPACName,
+      "Molecular Formula": properties.MolecularFormula,
+      "Molecular Weight": properties.MolecularWeight,
+      "Molecular Complexity": properties.Complexity,
+      "Charge": properties.Charge,
+      "Rotatable Bond Count": properties.RotatableBondCount,
+      "Chiral Center Count": properties.AtomStereoCount,
+      "Geometric Center Count": properties.BondStereoCount,
+      "Stereocenter Count": properties.AtomStereoCount + properties.BondStereoCount,
+      "Chiral Isomer Count": 2 ** properties.AtomStereoCount,
+      "H-Bond Donor Count": properties.HBondDonorCount,
+      "H-Bond Acceptor Count": properties.HBondAcceptorCount,
+      "3D Conformer Count": properties.ConformerCount3D,
+      // "CID": properties.cid
+  }
 
-    console.log( 'formatted properties', propertiesFormatted );
+    console.log( 'formatted properties2', propertiesFormatted2 );
 
     // Return the values
-    return propertiesFormatted;
+    return propertiesFormatted2;
 };
 
 export default PropertyFetcher

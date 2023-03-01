@@ -8,11 +8,11 @@ export default async function Search( SEARCH_INPUT: string ) {
   const moleculeFile2D = await StructureFetcherLoader( SEARCH_INPUT, "2d" );
   const moleculeFile3D = await StructureFetcherLoader( SEARCH_INPUT, "3d" );
 
-  const descriptionResponse = await DescriptionFetcher( SEARCH_INPUT );
-  console.log(descriptionResponse);
-  const _description: string = descriptionResponse.choices[0].text.trim();
+  const hardCodedDescription = await DescriptionFetcher( SEARCH_INPUT );
+  // const descriptionResponse = await DescriptionFetcher( SEARCH_INPUT );
+  // const _description: string = descriptionResponse.choices[0].text.trim();
 
-  return Promise.all( [{ properties: _properties, m: moleculeFile2D, molecule3D: moleculeFile3D, description: _description }] );
+  return Promise.all( [{ properties: _properties, m: moleculeFile2D, molecule3D: moleculeFile3D, description: hardCodedDescription }] );
   // setDescription( () => description );
 };
 

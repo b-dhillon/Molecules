@@ -246,36 +246,86 @@ function SearchPageBody( props: any ): JSX.Element {
     };
 
     async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
-        const [ _, propertyValues ] = PropertyFormatter( _SearchResults.properties ); // PropertyFormatter should be moved up the data flow chain 
+        // const [ _, propertyValues ] = PropertyFormatter( _SearchResults.properties ); // PropertyFormatter should be moved up the data flow chain 
         
         await Stream( _SearchResults.description, domNodes.description );     
 
+        console.log("PROPERTIES IN STREAM_RESULTS FN", _SearchResults.properties);
+        // console.log("PROPERTIES IN STREAM_RESULTS FN NAMEEE", );
+
+        // _SearchResults.properties["Name"] // these are all the property names, accessing them will give you the value. How do we render with stream?
+        // _SearchResults.properties["Systematic Name"]
+        // _SearchResults.properties["Molecular Formula"]
+        // _SearchResults.properties["Molecular Weight"]
+        // _SearchResults.properties["Molecular Complexity"]
+        // _SearchResults.properties["Rotatable Bond Count"]
+
+        // _SearchResults.properties["Chiral Center Count"]
+        // _SearchResults.properties["Geometric Center Count"]
+        // _SearchResults.properties["Stereocenter Count"]
+        // _SearchResults.properties["Chiral Isomer Count"]
+        // _SearchResults.properties["H-Bond Acceptor Count"]
+        // _SearchResults.properties["H-Bond Donor Count"]
+        // _SearchResults.properties["Charge"]
+        // _SearchResults.properties["3D Conformer Count"]
+
+        const propertyNames = [ 
+            "Name:", 
+            "Systematic Name:", 
+            "Molecular Formula:",
+            "Molecular Weight:", 
+            "Molecular Complexity:", 
+            "Rotatable Bond Count:", 
+            "Number of Chiral Centers:", 
+            "Number of Geometric Centers:",
+            "Number of Stereo Centers:", 
+            "Number of Chiral Isomers:", 
+            "Number of Conformeres:", 
+            "Hydrogen Bond Acceptors:", 
+            "Hygdrogen Bond Donors:", 
+            "Net Charge" 
+        ];
+
+
+        const propertyValues = [
+            _SearchResults.properties["Name"],
+            _SearchResults.properties["Systematic Name"],
+            _SearchResults.properties["Molecular Formula"],
+            _SearchResults.properties["Molecular Weight"],
+            _SearchResults.properties["Molecular Complexity"].toString(),
+            _SearchResults.properties["Rotatable Bond Count"].toString(),
+            _SearchResults.properties["Chiral Center Count"].toString(),
+            _SearchResults.properties["Geometric Center Count"].toString(),
+            _SearchResults.properties["Stereocenter Count"].toString(),
+            _SearchResults.properties["Chiral Isomer Count"].toString(),
+            _SearchResults.properties["3D Conformer Count"].toString(),
+            _SearchResults.properties["H-Bond Acceptor Count"].toString(),
+            _SearchResults.properties["H-Bond Donor Count"].toString(),
+            _SearchResults.properties["Charge"].toString()
+        ]
 
         // const propertyNameNodes = [ domNodes.properties0, domNodes.properties1, domNodes.properties2 ];
 
 
-        const propertyNames = [ "Name:", "Systematic Name:", "Molecular Formula:", "Molecular Weight:", "Molecular Complexity", "Number of Rotatable Bonds:", "Number of Chiral Centers:", "Number of Geometric Centers:", "Number of Stereo Centers:", "Number of Chiral Isomers:", "Number of Conformeres:", "Hydrogen Bond Acceptors:", "Hygdrogen Bond Donors:", "Net Charge" ]
-
         for(let i = 0; i < domNodes.properties.names.length; i++) {
-            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 30 );
+            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 50 );
         };
 
         for(let i = 0; i < domNodes.properties.values.length; i++) {
-
-            // the values wont be linked to the correct names. Values return in a different order from API then the names order you currently have. Will need to add a couple extra lines in the property formatter.
-            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 30 );
+            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 50 );
         };
 
-        await Stream( "Chemical Line Structure:",  domNodes.structure2d, 75 ) && setShow2dCanvas(true);
-        await Stream( "Computed Molecular Geometry:",  domNodes.structure3d, 75 ) && setShow3dCanvas(true);
+        // await Stream( "Chemical Line Structure:",  domNodes.structure2d, 75 ) && setShow2dCanvas(true);
+        // await Stream( "Computed Molecular Geometry:",  domNodes.structure3d, 75 ) && setShow3dCanvas(true);
 
         console.log( "Search results streamed to page.");
     };
 
     useEffect( () => {
         if( SearchResults.length ) {
-            StreamSearchResults( SearchResults[0], domNodes );
             console.log( "Data recieved. Streaming results to page...");
+            console.log( "Properties", SearchResults[0].properties );
+            StreamSearchResults( SearchResults[0], domNodes );
         };
     }, [ SearchResults ] );
 
@@ -311,7 +361,6 @@ function SearchPageBody( props: any ): JSX.Element {
                         < p ref={ domNodes.properties.names[11] } style={ inlineStyles.propertiesText } ></ p >
                         < p ref={ domNodes.properties.names[12] } style={ inlineStyles.propertiesText } ></ p >
                         < p ref={ domNodes.properties.names[13] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[14] } style={ inlineStyles.propertiesText } ></ p >
 
                     </ div >
 
@@ -331,7 +380,6 @@ function SearchPageBody( props: any ): JSX.Element {
                         < p ref={ domNodes.properties.values[11] } style={ inlineStyles.propertiesText } ></ p >
                         < p ref={ domNodes.properties.values[12] } style={ inlineStyles.propertiesText } ></ p >
                         < p ref={ domNodes.properties.values[13] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[14] } style={ inlineStyles.propertiesText } ></ p >
 
                     </ div >
 
@@ -380,12 +428,6 @@ function SearchPageBody( props: any ): JSX.Element {
 
 function PropertyFormatter( properties: any ) {
 
-    // const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
-    const propertyNames = Object.keys( properties )
-
-    // console.log( "Formatted Property Names:", propertyNames );
-
-    // const propertyValues = Object.values( properties )
     console.log( "Properties:", properties);
 
 
@@ -394,8 +436,41 @@ function PropertyFormatter( properties: any ) {
     const propertyValuesAsStrings = Object.values( properties ).map( ( value: any, index: number ) => value.toString() );
     console.log( "Formatted Property Values:", propertyValuesAsStrings );
 
-    return [ propertyNames, propertyValuesAsStrings ];
+    let orderedPropertyValues = [];
+    // for ( let i = 0; i < propertyValuesAsStrings.length; i++ ) {
+
+
+    //     if ( properties[i] === "undefined" ) {
+
+    //     }
+
+    return [ propertyValuesAsStrings ];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
+
+
+
+
+
+
+
 
 
 
