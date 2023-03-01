@@ -7,6 +7,7 @@ import LoadingElement from './LoadingElement';
 import AIDescription from './AIDescription';
 
 import Stream from './Stream';
+import PropertyTables from './PropertyTable';
 
 
 export default function SearchPage( props: any ): JSX.Element {
@@ -125,8 +126,10 @@ function SearchPageBody( props: any ): JSX.Element {
                 useRef(),
                 useRef(),
                 useRef(),
+                useRef(),
             ],
             values: [
+                useRef(),
                 useRef(),
                 useRef(),
                 useRef(),
@@ -250,32 +253,13 @@ function SearchPageBody( props: any ): JSX.Element {
         
         await Stream( _SearchResults.description, domNodes.description );     
 
-        console.log("PROPERTIES IN STREAM_RESULTS FN", _SearchResults.properties);
-        // console.log("PROPERTIES IN STREAM_RESULTS FN NAMEEE", );
-
-        // _SearchResults.properties["Name"] // these are all the property names, accessing them will give you the value. How do we render with stream?
-        // _SearchResults.properties["Systematic Name"]
-        // _SearchResults.properties["Molecular Formula"]
-        // _SearchResults.properties["Molecular Weight"]
-        // _SearchResults.properties["Molecular Complexity"]
-        // _SearchResults.properties["Rotatable Bond Count"]
-
-        // _SearchResults.properties["Chiral Center Count"]
-        // _SearchResults.properties["Geometric Center Count"]
-        // _SearchResults.properties["Stereocenter Count"]
-        // _SearchResults.properties["Chiral Isomer Count"]
-        // _SearchResults.properties["H-Bond Acceptor Count"]
-        // _SearchResults.properties["H-Bond Donor Count"]
-        // _SearchResults.properties["Charge"]
-        // _SearchResults.properties["3D Conformer Count"]
-
         const propertyNames = [ 
             "Name:", 
             "Systematic Name:", 
             "Molecular Formula:",
             "Molecular Weight:", 
             "Molecular Complexity:", 
-            "Rotatable Bond Count:", 
+            "Number of Rotatable Bond:", 
             "Number of Chiral Centers:", 
             "Number of Geometric Centers:",
             "Number of Stereo Centers:", 
@@ -283,15 +267,38 @@ function SearchPageBody( props: any ): JSX.Element {
             "Number of Conformeres:", 
             "Hydrogen Bond Acceptors:", 
             "Hygdrogen Bond Donors:", 
-            "Net Charge" 
+            "Net Charge:",
+            "Dummy Property:"
         ];
 
+        // write a function that will take in a chemical molecular formula string and return a string where the numbers are subscripted
+        // const subscriptedMolecularFormula = SubscriptNumbers( _SearchResults.properties["Molecular Formula"] );
+        function SubscriptNumber( molecularFormula: string ) {
+            const subscriptNumbers: any = {
+                "0": "⁰",
+                "1": "¹",
+                "2": "²",
+                "3": "³",
+                "4": "⁴",
+                "5": "⁵",
+                "6": "⁶",
+                "7": "⁷",
+                "8": "⁸",
+                "9": "⁹",
+            };
+
+            const subscriptedNumber = molecularFormula.split("").map( ( char: string ) => {
+                return subscriptNumbers[ char ];
+            }).join("");
+
+            return subscriptedNumber;
+        }
 
         const propertyValues = [
             _SearchResults.properties["Name"],
             _SearchResults.properties["Systematic Name"],
-            _SearchResults.properties["Molecular Formula"],
-            _SearchResults.properties["Molecular Weight"],
+            _SearchResults.properties["Molecular Formula"], // write a simple formatter here that will turn the numbers into subscripts 
+            _SearchResults.properties["Molecular Weight"] + " g/mol",
             _SearchResults.properties["Molecular Complexity"].toString(),
             _SearchResults.properties["Rotatable Bond Count"].toString(),
             _SearchResults.properties["Chiral Center Count"].toString(),
@@ -301,11 +308,9 @@ function SearchPageBody( props: any ): JSX.Element {
             _SearchResults.properties["3D Conformer Count"].toString(),
             _SearchResults.properties["H-Bond Acceptor Count"].toString(),
             _SearchResults.properties["H-Bond Donor Count"].toString(),
-            _SearchResults.properties["Charge"].toString()
-        ]
-
-        // const propertyNameNodes = [ domNodes.properties0, domNodes.properties1, domNodes.properties2 ];
-
+            _SearchResults.properties["Charge"].toString(),
+            "Dummy Value"
+        ];
 
         for(let i = 0; i < domNodes.properties.names.length; i++) {
             await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 50 );
@@ -343,6 +348,12 @@ function SearchPageBody( props: any ): JSX.Element {
                 </ div >
 
                 < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
+                    < PropertyTables domNodes={ domNodes } />
+                </div>
+
+
+
+                {/* < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
 
 
                     < div id="names" style={ inlineStyles.propertiesNamesWrapper as React.CSSProperties } >
@@ -383,12 +394,7 @@ function SearchPageBody( props: any ): JSX.Element {
 
                     </ div >
 
-
-
-
-                    {/* < p ref={ domNodes.properties1 } style={ inlineStyles.propertiesText } ></ p >
-                    < p ref={ domNodes.properties2 } style={ inlineStyles.propertiesText } ></ p > */}
-                </ div >
+                </ div > */}
 
             </ div >
 

@@ -9,10 +9,6 @@ import DATA from './data';
 
 /*
 TODO:
-// High Priority:
-- Format Properties UI into a table
-  - Call stream on columns 1a, 2a, and 3a first.
-  - Then call stream on columns 1b, 2b, and 3b nex?
 
 - Get structures piped and rendering
 - Remove borders
