@@ -9,7 +9,6 @@ import DATA from './data';
 
 /*
 TODO:
-
 - Get structures piped and rendering
 - Remove borders
 - Fix setSearchedString bug where if you delete a letter from search the app crashes

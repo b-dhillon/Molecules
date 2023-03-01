@@ -6,6 +6,10 @@ import Molecular_Structures from './Molecular_Structures';
 import LoadingElement from './LoadingElement';
 import AIDescription from './AIDescription';
 
+
+
+import MolecularFormulaFormatter from './MolecularFormulaFormatter';
+
 import Stream from './Stream';
 import PropertyTables from './PropertyTable';
 
@@ -112,9 +116,9 @@ function SearchPageBody( props: any ): JSX.Element {
 
         properties: {
             names: [
-                useRef(),
-                useRef(),
-                useRef(),
+                // useRef(),
+                // useRef(),
+                // useRef(),
                 useRef(),
                 useRef(),
                 useRef(),
@@ -129,9 +133,9 @@ function SearchPageBody( props: any ): JSX.Element {
                 useRef(),
             ],
             values: [
-                useRef(),
-                useRef(),
-                useRef(),
+                // useRef(),
+                // useRef(),
+                // useRef(),
                 useRef(),
                 useRef(),
                 useRef(),
@@ -147,9 +151,6 @@ function SearchPageBody( props: any ): JSX.Element {
             ]
 
         },
-        // properties0: useRef(),
-        // properties1: useRef(),
-        // properties2: useRef(),
 
         structure2d: useRef(),
         structure3d: useRef(),
@@ -255,49 +256,29 @@ function SearchPageBody( props: any ): JSX.Element {
 
         const propertyNames = [ 
             "Name:", 
-            "Systematic Name:", 
+            // "Systematic Name:", 
             "Molecular Formula:",
             "Molecular Weight:", 
             "Molecular Complexity:", 
-            "Number of Rotatable Bond:", 
+            "Number of Rotatable Bonds:", 
             "Number of Chiral Centers:", 
             "Number of Geometric Centers:",
-            "Number of Stereo Centers:", 
-            "Number of Chiral Isomers:", 
-            "Number of Conformeres:", 
+            "Number of Stereocenters:", 
+            "Max Number of Chiral Isomers:", 
+            "Max Number of 3D Conformers:", 
             "Hydrogen Bond Acceptors:", 
             "Hygdrogen Bond Donors:", 
-            "Net Charge:",
-            "Dummy Property:"
+            // "Net Charge:",
+            // "Dummy Property:"
         ];
 
-        // write a function that will take in a chemical molecular formula string and return a string where the numbers are subscripted
-        // const subscriptedMolecularFormula = SubscriptNumbers( _SearchResults.properties["Molecular Formula"] );
-        function SubscriptNumber( molecularFormula: string ) {
-            const subscriptNumbers: any = {
-                "0": "⁰",
-                "1": "¹",
-                "2": "²",
-                "3": "³",
-                "4": "⁴",
-                "5": "⁵",
-                "6": "⁶",
-                "7": "⁷",
-                "8": "⁸",
-                "9": "⁹",
-            };
 
-            const subscriptedNumber = molecularFormula.split("").map( ( char: string ) => {
-                return subscriptNumbers[ char ];
-            }).join("");
-
-            return subscriptedNumber;
-        }
-
+        // You could write a property formatter here that converts everything to a string, adds the "g/mol" and all the units and formats the molecular formula...
+        // or you could leave them here...pros and cons of each?
         const propertyValues = [
             _SearchResults.properties["Name"],
-            _SearchResults.properties["Systematic Name"],
-            _SearchResults.properties["Molecular Formula"], // write a simple formatter here that will turn the numbers into subscripts 
+            // _SearchResults.properties["Systematic Name"],
+            MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"] ), 
             _SearchResults.properties["Molecular Weight"] + " g/mol",
             _SearchResults.properties["Molecular Complexity"].toString(),
             _SearchResults.properties["Rotatable Bond Count"].toString(),
@@ -308,8 +289,8 @@ function SearchPageBody( props: any ): JSX.Element {
             _SearchResults.properties["3D Conformer Count"].toString(),
             _SearchResults.properties["H-Bond Acceptor Count"].toString(),
             _SearchResults.properties["H-Bond Donor Count"].toString(),
-            _SearchResults.properties["Charge"].toString(),
-            "Dummy Value"
+            // _SearchResults.properties["Charge"].toString(),
+            // "Dummy Value"
         ];
 
         for(let i = 0; i < domNodes.properties.names.length; i++) {
@@ -443,12 +424,6 @@ function PropertyFormatter( properties: any ) {
     console.log( "Formatted Property Values:", propertyValuesAsStrings );
 
     let orderedPropertyValues = [];
-    // for ( let i = 0; i < propertyValuesAsStrings.length; i++ ) {
-
-
-    //     if ( properties[i] === "undefined" ) {
-
-    //     }
 
     return [ propertyValuesAsStrings ];
 }
@@ -642,7 +617,6 @@ const properties3_2_3 = "Molecular Complexity: 3.0"
 {/*  { showColumn3 && < Stream text={ properties3 } style={ textStyle } /> }         */}
 {/*  { showColumn3_2 && < Stream text={ properties3_2 } style={ textStyle } />       */}
 {/*  { showColumn3_2_3 && < Stream text={ properties3_2_3 }style={ textStyle } /> }  */}
-
 
 
 /*

@@ -83,10 +83,10 @@ export default function PropertyTables( props: any ) {
                         <td ref={ domNodes.properties.values[3] } ></td>
                     </tr>
 
-                    <tr>
+                    {/* <tr>
                         <td ref={ domNodes.properties.names[4] }></td>
                         <td ref={ domNodes.properties.values[4] } ></td>
-                    </tr>
+                    </tr> */}
 
                 </ tbody >
 
@@ -97,7 +97,12 @@ export default function PropertyTables( props: any ) {
                 < tbody >
 
                     <tr>
-                        <td ref={ domNodes.properties.names[5] } ></td>
+                        <td ref={ domNodes.properties.names[4] } ></td>
+                        <td ref={ domNodes.properties.values[4] } ></td>
+                    </tr>
+
+                    <tr>
+                        <td ref={ domNodes.properties.names[5] }></td>
                         <td ref={ domNodes.properties.values[5] } ></td>
                     </tr>
 
@@ -111,15 +116,10 @@ export default function PropertyTables( props: any ) {
                         <td ref={ domNodes.properties.values[7] } ></td>
                     </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[8] }></td>
-                        <td ref={ domNodes.properties.values[8] } ></td>
-                    </tr>
-
-                    <tr>
+                    {/* <tr>
                         <td ref={ domNodes.properties.names[9] }></td>
                         <td ref={ domNodes.properties.values[9] } ></td>
-                    </tr>
+                    </tr> */}
 
                 </ tbody >
 
@@ -130,7 +130,17 @@ export default function PropertyTables( props: any ) {
                 < tbody >
 
                     <tr>
-                        <td ref={ domNodes.properties.names[10] } ></td>
+                        <td ref={ domNodes.properties.names[8] } ></td>
+                        <td ref={ domNodes.properties.values[8] } ></td>
+                    </tr>
+                    
+                    <tr>
+                        <td ref={ domNodes.properties.names[9] }></td>
+                        <td ref={ domNodes.properties.values[9] } ></td>
+                    </tr>
+
+                    <tr>
+                        <td ref={ domNodes.properties.names[10] }></td>
                         <td ref={ domNodes.properties.values[10] } ></td>
                     </tr>
 
@@ -139,20 +149,10 @@ export default function PropertyTables( props: any ) {
                         <td ref={ domNodes.properties.values[11] } ></td>
                     </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[12] }></td>
-                        <td ref={ domNodes.properties.values[12] } ></td>
-                    </tr>
-
-                    <tr>
-                        <td ref={ domNodes.properties.names[13] }></td>
-                        <td ref={ domNodes.properties.values[13] } ></td>
-                    </tr>
-
-                    <tr>
+                    {/* <tr>
                         <td ref={ domNodes.properties.names[14] }></td>
                         <td ref={ domNodes.properties.values[14] } ></td>
-                    </tr>
+                    </tr> */}
 
                 </ tbody >
 
