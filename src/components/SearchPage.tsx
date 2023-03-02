@@ -178,7 +178,7 @@ function SearchPageBody( props: any ): JSX.Element {
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
             height: "800px",
-            padding: "0px 30px",
+            padding: "0px 0px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -199,12 +199,12 @@ function SearchPageBody( props: any ): JSX.Element {
             fontSize: "1.1rem",
         },
         propertiesWrapper: {
-            height: "50%",
+            // height: "50%",
             margin: "0 auto",
             // border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
             justifyContent: "space-between",
-            padding: "80px 120px 0px 0px",
+            padding: "0px 0px 0px 0px",
         },
         propertiesNamesWrapper: {
             width: "50%",
@@ -223,17 +223,25 @@ function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
         },
 
-        canvasWrapper: {
-            maxWidth: "300px"
-        },
+
 
         structureWrapper: {
             height: "100%",
+            padding: "100px 0px",
             // margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
+            // flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-around",
+        },
+
+        canvasWrapper: {
+            display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "center",
+            maxWidth: "300px"
         },
 
         propertiesText: {
@@ -244,9 +252,11 @@ function SearchPageBody( props: any ): JSX.Element {
         structuresText: {
             fontFamily: "Poppins-Regular",
             textAlign: "center",
-            margin: "0px 15px 15px 15px",
-            padding: "0px 0px 15px 0px",
-            fontSize: "1.3rem",
+            // margin: "0px 15px 15px 15px",
+            // padding: "0px 0px 15px 0px",
+            fontSize: "1.2rem",
+            width: "300px",
+            // wrap: "no-wrap",
         },
     };
 
@@ -257,9 +267,8 @@ function SearchPageBody( props: any ): JSX.Element {
     // Should be moved to a separate file:
     async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
 
-        console.log("_SearchResults: ", _SearchResults);
-        
-        await Stream( _SearchResults.description, domNodes.description );     
+    
+        // ShowCanvas3d();
 
         const propertyNames = [ 
             "Name:", 
@@ -306,18 +315,28 @@ function SearchPageBody( props: any ): JSX.Element {
             // "Dummy Value"
         ];
 
+        // if( show2dCanvas ) {
+        //     document.getElementById( "#canvas2d" ).classList.remove( "hidden" );
+        // }
+
+
+
+        await Stream( _SearchResults.description, domNodes.description );     
+        await Stream( "Chemical Line Structure:",  domNodes.structure2d, 50 ) && setShow2dCanvas(true);
+        // ShowCanvas2d();
+        Structure2D( _SearchResults.mol2d, 300 );
+        await Stream( "3D Molecular Geometry:",  domNodes.structure3d, 50 ) && setShow3dCanvas(true);
+        // ShowCanvas3d();
+        Structure3D( _SearchResults.mol3d  , 300 );
+
+
         for(let i = 0; i < domNodes.properties.names.length; i++) {
             await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 30 );
             await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 30 );
 
         };
 
-        await Stream( "Chemical Line Structure:",  domNodes.structure2d, 75 ) && setShow2dCanvas(true);
-        Structure2D( _SearchResults.mol2d, 300 );
-        // ShowCanvas2d();
-        await Stream( "Computed Molecular Geometry:",  domNodes.structure3d, 75 ) && setShow3dCanvas(true);
-        Structure3D( _SearchResults.mol3d  , 300 );
-        // ShowCanvas3d();
+
         console.log( "Search results streamed to page.");
     };
 
@@ -334,10 +353,8 @@ function SearchPageBody( props: any ): JSX.Element {
 
     useEffect( () => {
         if( SearchResults.length ) {
-            console.log( "Data recieved. Streaming results to page...");
-            console.log( "Properties", SearchResults[0].properties );
+            console.log( "Data recieved. Streaming results to page...", SearchResults[0]);
             StreamSearchResults( SearchResults[0], domNodes );
-
         };
     }, [ SearchResults ] );
 
@@ -353,9 +370,26 @@ function SearchPageBody( props: any ): JSX.Element {
                     < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
                 </ div >
 
-                < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
-                    < PropertyTables domNodes={ domNodes } />
-                </div>
+
+                < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
+
+                    < div id="display2D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
+
+                        < p ref={ domNodes.structure2d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
+                        <canvas id="display2D" className="hidden"></canvas>
+
+                    </ div >
+
+                    < div id="display3D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
+
+                        < p ref={ domNodes.structure3d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
+                        <canvas id="display3D" ></canvas>
+                        {/* { show3dCanvas && < Structure3D  mold2d={ SearchResults[0].mol2d } size={300} /> } */}
+
+                    </ div >
+
+                </ div >
+
 
 
 
@@ -406,24 +440,11 @@ function SearchPageBody( props: any ): JSX.Element {
 
             < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
 
-                < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
-                    < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
+                < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
+                    < PropertyTables domNodes={ domNodes } />
+                </div>
 
-                        < p ref={ domNodes.structure2d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        <canvas id="display2D" ></canvas>
-
-                    </ div >
-
-                    < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
-
-                        < p ref={ domNodes.structure3d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        {/* { show3dCanvas && < Structure3D  mold2d={ SearchResults[0].mol2d } size={300} /> } */}
-                        <canvas id="display3D" ></canvas>
-
-                    </ div >
-
-                </ div >
 
             </ div > 
         	

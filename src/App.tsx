@@ -2,12 +2,13 @@ import { useState } from 'react';
 import HomePage from './components/HomePage';
 import SearchPage from './components/SearchPage';
 import DATA from './data';
+import WikipediaScrape from './components/WikipediaScraper';
 
 // TODO:
 /*
-- Get structures piped and rendering.
-- Style table
-- Fix setSearchedString bug where if you delete a letter from search the app crashes.
+- Style table / fiddle with UI
+
+- Write ClearUI() function to reset the UI if another compound is searched.
 - Add cached data for cached descriptions. 
 
 
@@ -22,6 +23,26 @@ function App(): JSX.Element {
   const [ SEARCH_INPUT, setSEARCH_INPUT ] = useState("");
   const [ __DATA__ ] = useState< Data >( DATA );
   const [ SearchResults, setSearchResults ] = useState( [] );
+
+
+  WikipediaScrape("morphine");
+  WikipediaScrape("Crystal Meth");
+  WikipediaScrape("THC");
+  WikipediaScrape("MDMA");
+  WikipediaScrape("LSD");
+  WikipediaScrape("psilocybin");
+  WikipediaScrape("Narcan");
+  WikipediaScrape("Fentanyl");
+  // WikipediaScrape("insulin");
+
+
+
+
+
+
+  // WikipediaScrape('Water').then((summary) => {
+  //   console.log(summary);
+  // });
 
   return (
     PAGE === "HomePage" 

@@ -88,13 +88,11 @@ export default function PropertyTables( props: any ) {
                         <td ref={ domNodes.properties.values[4] } ></td>
                     </tr> */}
 
-                </ tbody >
 
-            </ table >
 
-            < table id="table-2" style={ inlineStyles.table } >
+            {/* < table id="table-2" style={ inlineStyles.table } > */}
                 
-                < tbody >
+                {/* < tbody > */}
 
                     <tr>
                         <td ref={ domNodes.properties.names[4]  }style={ inlineStyles.tableRowOdd as React.CSSProperties }  ></td>
@@ -125,13 +123,13 @@ export default function PropertyTables( props: any ) {
                         <td ref={ domNodes.properties.values[9] } ></td>
                     </tr> */}
 
-                </ tbody >
+                {/* </ tbody > */}
 
-            </ table >
+            {/* </ table > */}
 
-            < table id="table-3" style={ inlineStyles.table } >
+            {/* < table id="table-3" style={ inlineStyles.table } > */}
             
-                < tbody >
+                {/* < tbody > */}
 
                     <tr>
                         <td ref={ domNodes.properties.names[8] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
@@ -162,9 +160,13 @@ export default function PropertyTables( props: any ) {
                         <td ref={ domNodes.properties.values[14] } ></td>
                     </tr> */}
 
+                {/* </ tbody > */}
+
+            {/* </ table > */}
                 </ tbody >
 
             </ table >
+
 
 
         </>

@@ -6,6 +6,7 @@ async function DescriptionFetcher( SEARCH_INPUT: string ) {
 
 
 
+
   const apiConfig = {
     method: 'POST',
     headers: {
