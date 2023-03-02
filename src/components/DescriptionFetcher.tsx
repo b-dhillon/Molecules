@@ -1,36 +1,37 @@
 async function DescriptionFetcher( SEARCH_INPUT: string ) {
   
-  // const prompt = `Give a long organic chemistry description of the chemical compound ${SEARCH_INPUT}`;
-  // const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
+  const prompt = `Give a long organic chemistry description of the chemical compound ${SEARCH_INPUT}`;
+  const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
 
 
 
-  // const apiConfig = {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${apiKey}`
-  //   },
-  //   body: JSON.stringify({
-  //     'prompt': prompt,
-  //     'max_tokens': 2000,
-  //     'temperature': 0.2,
-  //   })
-  // }
 
-  // const response = await fetch( apiUrl, apiConfig );
-  // const data = await response.json();
-
-  function hardCodeData() {
-    return new Promise( (resolve, _) => {
-      // resolve after 2 seconds:
-      setTimeout( () => {
-        resolve("resolved after 2 seconds");
-      }, 2000);
-    });
+  const apiConfig = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      'prompt': prompt,
+      'max_tokens': 2000,
+      'temperature': 0.2,
+    })
   }
 
-  const data = await hardCodeData();
+  const response = await fetch( apiUrl, apiConfig );
+  const data = await response.json();
+
+  // function hardCodeData() {
+  //   return new Promise( (resolve, _) => {
+  //     // resolve after 2 seconds:
+  //     setTimeout( () => {
+  //       resolve("resolved after 2 seconds");
+  //     }, 2000);
+  //   });
+  // }
+  // const data = await hardCodeData();
+  
   return data;
 }
 

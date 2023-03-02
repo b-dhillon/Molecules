@@ -1,9 +1,9 @@
 // @ts-ignore
 import Render from './render.js';
 
-function DisplayLineStructure( moleculeFile2D: any, size2d: number ) {
+function DisplayLineStructure( mol2d: any, size2d: number ) {
 
-  let molecule = Render.readMOL( moleculeFile2D );
+  let molecule = Render.readMOL( mol2d );
 
   let display2D = new Render.TransformCanvas(
     'display2D', // name

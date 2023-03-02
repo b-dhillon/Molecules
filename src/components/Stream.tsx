@@ -11,7 +11,7 @@ export default async function Stream( text: string, domNode: any, speed: number 
 
             if( i === text.length ) {
 
-                console.log("DONE APPENDING");
+                console.log("Done Streaming Text");
                 resolve("done");
                 clearInterval( appendCharacter );
 

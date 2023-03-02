@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
-import ChemicalProperties from './ChemicalProperties';
-import Molecular_Structures from './Molecular_Structures';
 import LoadingElement from './LoadingElement';
-import AIDescription from './AIDescription';
+
+import Structure2D from './Structure2D';
+import Structure3D from './Structure3D';
+// import Molecular_Structures from './Molecular_Structures';
+// import ChemicalProperties from './ChemicalProperties';
+// import AIDescription from './AIDescription';
 
 
 
@@ -23,7 +26,6 @@ export default function SearchPage( props: any ): JSX.Element {
         setSEARCH_INPUT, 
         setPAGE, 
     } = props;
-
 
 
     const wrapperBorders = false;
@@ -104,12 +106,10 @@ function SearchPageHead( props: any ): JSX.Element {
 function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
-
-
     const [ show2dCanvas, setShow2dCanvas ] = useState(false);
     const [ show3dCanvas, setShow3dCanvas ] = useState(false);
 
-    const wrapperBorders = true;
+    const wrapperBorders = false;
 
     const domNodes: any = {
         description: useRef(),
@@ -189,21 +189,22 @@ function SearchPageBody( props: any ): JSX.Element {
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
-            padding: "10px 120px 0px 0px",
+            padding: "0px 120px 0px 0px",
         },
         descriptionText: {
             color: "white",
             fontFamily: "Poppins-Regular",
             padding: "0px",
             margin: "0px",
-            fontSize: "1.2rem",
+            fontSize: "1.1rem",
         },
         propertiesWrapper: {
             height: "50%",
             margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            // border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
-            padding: "80px 0px",
+            justifyContent: "space-between",
+            padding: "80px 120px 0px 0px",
         },
         propertiesNamesWrapper: {
             width: "50%",
@@ -249,8 +250,14 @@ function SearchPageBody( props: any ): JSX.Element {
         },
     };
 
+
+
+
+
+    // Should be moved to a separate file:
     async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
-        // const [ _, propertyValues ] = PropertyFormatter( _SearchResults.properties ); // PropertyFormatter should be moved up the data flow chain 
+
+        console.log("_SearchResults: ", _SearchResults);
         
         await Stream( _SearchResults.description, domNodes.description );     
 
@@ -273,12 +280,18 @@ function SearchPageBody( props: any ): JSX.Element {
         ];
 
 
+
+        const subscriptStyle = {
+            fontSize: "0.8em",
+            fontFamily: "'Arial', sans-serif",
+        }
+
         // You could write a property formatter here that converts everything to a string, adds the "g/mol" and all the units and formats the molecular formula...
         // or you could leave them here...pros and cons of each?
         const propertyValues = [
             _SearchResults.properties["Name"],
             // _SearchResults.properties["Systematic Name"],
-            MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"] ), 
+            MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"], subscriptStyle ), 
             _SearchResults.properties["Molecular Weight"] + " g/mol",
             _SearchResults.properties["Molecular Complexity"].toString(),
             _SearchResults.properties["Rotatable Bond Count"].toString(),
@@ -294,27 +307,39 @@ function SearchPageBody( props: any ): JSX.Element {
         ];
 
         for(let i = 0; i < domNodes.properties.names.length; i++) {
-            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 50 );
+            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 30 );
+            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 30 );
+
         };
 
-        for(let i = 0; i < domNodes.properties.values.length; i++) {
-            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 50 );
-        };
-
-        // await Stream( "Chemical Line Structure:",  domNodes.structure2d, 75 ) && setShow2dCanvas(true);
-        // await Stream( "Computed Molecular Geometry:",  domNodes.structure3d, 75 ) && setShow3dCanvas(true);
-
+        await Stream( "Chemical Line Structure:",  domNodes.structure2d, 75 ) && setShow2dCanvas(true);
+        Structure2D( _SearchResults.mol2d, 300 );
+        // ShowCanvas2d();
+        await Stream( "Computed Molecular Geometry:",  domNodes.structure3d, 75 ) && setShow3dCanvas(true);
+        Structure3D( _SearchResults.mol3d  , 300 );
+        // ShowCanvas3d();
         console.log( "Search results streamed to page.");
     };
+
+
+
+
+
+
+
+
+
+
+
 
     useEffect( () => {
         if( SearchResults.length ) {
             console.log( "Data recieved. Streaming results to page...");
             console.log( "Properties", SearchResults[0].properties );
             StreamSearchResults( SearchResults[0], domNodes );
+
         };
     }, [ SearchResults ] );
-
 
 
     return (
@@ -386,14 +411,15 @@ function SearchPageBody( props: any ): JSX.Element {
                     < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
 
                         < p ref={ domNodes.structure2d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        { show2dCanvas && <div id="display2D" ></div> }
+                        <canvas id="display2D" ></canvas>
 
                     </ div >
 
                     < div id="display2D-wrapper" style={inlineStyles.canvasWrapper} >
 
                         < p ref={ domNodes.structure3d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        { show3dCanvas && <div id="display3D" ></div> }
+                        {/* { show3dCanvas && < Structure3D  mold2d={ SearchResults[0].mol2d } size={300} /> } */}
+                        <canvas id="display3D" ></canvas>
 
                     </ div >
 
@@ -403,9 +429,6 @@ function SearchPageBody( props: any ): JSX.Element {
         	
         </div>
     )
-
-
-
 };
 
 
@@ -444,15 +467,7 @@ function PropertyFormatter( properties: any ) {
 
 
 
-    // const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
-
-
-
-
-
-
-
-
+// const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
 
 
 

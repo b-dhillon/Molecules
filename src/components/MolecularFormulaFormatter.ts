@@ -1,7 +1,8 @@
-export default function MolecularFormulaFormatter( formula: string ): string {
+export default function MolecularFormulaFormatter( formula: string, cssClass: any ): string {
 
 
     const subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"];
+
     let formattedFormula = "";
     let currentElement = "";
     let currentCount = "";
@@ -41,6 +42,7 @@ export default function MolecularFormulaFormatter( formula: string ): string {
     }
     
     return formattedFormula;
+  // return `<span class="${cssClass}">${formattedFormula}</span>`;  
 };
   
 
