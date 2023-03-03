@@ -7,9 +7,9 @@ import WikipediaScrape from './components/WikipediaScrape';
 // TODO:
 /*
 - Style table / fiddle with UI
-    - Create backdrop 3D tables for Description and Properties, just like Strucutres.
-    - Align everything. 
-    - Add Section titles for Description and Properties?
+  - Create backdrop 3D table + title for Properties section:
+  - Restyle Properties table -- colors?
+  - Get titles of structures inside of their box-shadow containers?
 
 
 - Write ClearUI() function to reset the UI if another compound is searched.

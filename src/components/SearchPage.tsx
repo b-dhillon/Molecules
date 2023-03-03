@@ -116,6 +116,8 @@ function SearchPageBody( props: any ): JSX.Element {
         descriptionWrapper: useRef(),
         descriptionTitle: useRef(),
         description: useRef(),
+        display2d: useRef(),
+        display3d: useRef(),
 
         propertiesWrapper: useRef(),
         properties: {
@@ -156,8 +158,8 @@ function SearchPageBody( props: any ): JSX.Element {
 
         },
 
-        structure2d: useRef(),
-        structure3d: useRef(),
+        structure2dTitle: useRef(),
+        structure3dTitle: useRef(),
     };
 
     const inlineStyles = {
@@ -355,24 +357,24 @@ function SearchPageBody( props: any ): JSX.Element {
             // "Dummy Value"
         ];
 
-        
 
-        // Streaming Description:
-        // @ts-ignore
-        domNodes.descriptionWrapper.current.classList.remove( "hidden" );
-        await Stream ( "Description:", domNodes.descriptionTitle, 50 );
-        await Stream( _SearchResults.description, domNodes.description );     
 
 
         // Streaming Structures:
-        await Stream( "Chemical Line Structure:",  domNodes.structure2d, 50 ) && setShow2dCanvas(true);
-        // @ts-ignore
-        show2dCanvas && document.getElementById( "#canvas2d" ).classList.remove( "hidden" );
+        await Stream( "Chemical Line Structure:",  domNodes.structure2dTitle, 50 ) && setShow2dCanvas(true);
+        domNodes.display2d.current.classList.remove( "hidden" );
         Structure2D( _SearchResults.mol2d, 300 );
-        await Stream( "3D Molecular Geometry:",  domNodes.structure3d, 50 ) && setShow3dCanvas(true);
-        // @ts-ignore
-        show2dCanvas && document.getElementById( "#canvas3d" ).classList.remove( "hidden" );
+
+        await Stream( "3D Molecular Geometry:",  domNodes.structure3dTitle, 50 ) && setShow3dCanvas(true);
+        domNodes.display3d.current.classList.remove( "hidden" );
         Structure3D( _SearchResults.mol3d  , 300 );
+
+        
+
+        // Streaming Description:
+        domNodes.descriptionWrapper.current.classList.remove( "hidden" );
+        await Stream ( "Description:", domNodes.descriptionTitle, 50 );
+        await Stream( _SearchResults.description, domNodes.description );     
 
 
 
@@ -403,6 +405,24 @@ function SearchPageBody( props: any ): JSX.Element {
 
                 { SearchResults.length ? null : < LoadingElement /> }
 
+                < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
+
+                    < div id="display2D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
+
+                        < p ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
+                        <canvas ref={ domNodes.display2d }id="display2D" className="hidden"></canvas>
+
+                    </ div >
+
+                    < div id="display3D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
+
+                        < p ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
+                        <canvas ref={ domNodes.display3d } id="display3D" className="hidden"></canvas>
+
+                    </ div >
+
+                </ div >
+
 
                 < div id="description" style={ inlineStyles.descriptionWrapper as React.CSSProperties } className="hidden" ref={ domNodes.descriptionWrapper }>
 
@@ -416,24 +436,7 @@ function SearchPageBody( props: any ): JSX.Element {
                 </ div >
 
 
-                < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
-                    < div id="display2D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
-
-                        < p ref={ domNodes.structure2d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        <canvas id="display2D" className="hidden"></canvas>
-
-                    </ div >
-
-                    < div id="display3D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
-
-                        < p ref={ domNodes.structure3d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        <canvas id="display3D" className="hidden"></canvas>
-                        {/* { show3dCanvas && < Structure3D  mold2d={ SearchResults[0].mol2d } size={300} /> } */}
-
-                    </ div >
-
-                </ div >
 
                 {/* < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
 
