@@ -15,18 +15,10 @@ import MolecularFormulaFormatter from './MolecularFormulaFormatter';
 
 import Stream from './Stream';
 import PropertyTables from './PropertyTable';
+import ResetBody from './ResetBody';
 
 
 export default function SearchPage( props: any ): JSX.Element {
-
-    const { 
-        __DATA__, 
-        SEARCH_INPUT, 
-        PAGE,
-        setSEARCH_INPUT, 
-        setPAGE, 
-    } = props;
-
 
     const wrapperBorders = false;
     const searchPageWrapper = {
@@ -41,18 +33,26 @@ export default function SearchPage( props: any ): JSX.Element {
         <div id="SearchPage" style={ searchPageWrapper as React.CSSProperties }>
 
             < SearchPageHead
-                PAGE={ PAGE }  
-                data={ __DATA__ } 
-                setPAGE={ setPAGE } 
-                SEARCH_INPUT={ SEARCH_INPUT }
-                setSEARCH_INPUT={ setSEARCH_INPUT }
+                PAGE={ props.PAGE }  
+                __DATA__={props.__DATA__ } 
+                SEARCH_INPUT={ props.SEARCH_INPUT }
+                SearchResults={ props.SearchResults }
+                SubmitCount={ props.SubmitCount }
+
+                
+                setSubmitCount={ props.setSubmitCount }
+                setPAGE={ props.setPAGE } 
+                setSEARCH_INPUT={ props.setSEARCH_INPUT }
                 setSearchResults={ props.setSearchResults }
             />
             
 	        < SearchPageBody 
-                __DATA__={ __DATA__ }
-                SEARCH_INPUT={ SEARCH_INPUT }
+                __DATA__={ props.__DATA__ }
+                SEARCH_INPUT={ props.SEARCH_INPUT }
                 SearchResults={ props.SearchResults }
+
+                SubmitCount={ props.SubmitCount }
+                // setSubmitCount={ props.setSubmitCount }
             />
 
         </div>
@@ -80,6 +80,7 @@ function SearchPageHead( props: any ): JSX.Element {
 
     const divider = {
         borderBottom: '2px solid gray',
+        // borderBottom: '2px solid rgb(61, 106, 255)',
         display: "flex",
         width: "100%",
         padding: "0px 0px 28px 0px",
@@ -87,12 +88,17 @@ function SearchPageHead( props: any ): JSX.Element {
 
     return (
         < div style={ headerWrapper } id="header" >
-            <div style={ divider } >
+            <div id="header-body-divider" style={ divider } >
                 < Logo PAGE={ PAGE } />
                 < SearchBar 
                     __DATA__={ __DATA__ }
                     SEARCH_INPUT={ SEARCH_INPUT }
                     PAGE={ PAGE }  
+                    SearchResults={ props.SearchResults }
+                    SubmitCount={ props.SubmitCount }
+
+
+                    setSubmitCount={ props.setSubmitCount }
                     setPAGE={ setPAGE } 
                     setSEARCH_INPUT={ setSEARCH_INPUT }
                     setSearchResults={ props.setSearchResults }
@@ -105,17 +111,15 @@ function SearchPageHead( props: any ): JSX.Element {
 
 function SearchPageBody( props: any ): JSX.Element {
 
-    const { __DATA__, SEARCH_INPUT, SearchResults } = props;
+    // const { __DATA__, SEARCH_INPUT, SearchResults } = props;
     const [ streamed, setStreamed ] = useState(false);
-    const [ show2dCanvas, setShow2dCanvas ] = useState(false);
-    const [ show3dCanvas, setShow3dCanvas ] = useState(false);
 
     const wrapperBorders = false;
 
     const domNodes: any = {
         descriptionWrapper: useRef(),
         descriptionTitle: useRef(),
-        description: useRef(),
+        descriptionText: useRef(),
         display2d: useRef(),
         display3d: useRef(),
 
@@ -217,7 +221,7 @@ function SearchPageBody( props: any ): JSX.Element {
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
         },
 
-        desccriptionTitleWrapper: {
+        descriptionTitleWrapper: {
             width: "100%",
             padding: "0px 20px 0px 20px",
         },
@@ -325,12 +329,27 @@ function SearchPageBody( props: any ): JSX.Element {
 
 
     useEffect( () => {
-        if( SearchResults.length && !streamed ) {
-            console.log( "Data recieved. Streaming results to page...", SearchResults[0]);
-            RenderSearchResults( SearchResults[0], domNodes );
+        console.log( "Submit Count:", props.SubmitCount );
+        if( props.SearchResults.length && props.SubmitCount === 1 && !streamed ) {
+            console.log( "First search. Streaming these results to page:", props.SearchResults[0]);
+            console.log( "Submit Count:", props.SubmitCount);
+            RenderSearchResults( props.SearchResults[0], domNodes );
             setStreamed( true );
         };
-    }, [ SearchResults ] );
+
+        if( props.SearchResults.length && props.SubmitCount > 1 ) {
+            console.log( "2nd+ Search...clearing UI before streaming again" );
+            console.log( "Submit Count:", props.SubmitCount);
+            ResetBody( domNodes );
+            // setStreamed( false );
+
+
+            console.log( "Rendering these results to page:", props.SearchResults[0]);
+
+            RenderSearchResults( props.SearchResults[0], domNodes );
+            // setStreamed( true );
+        };
+    }, [ props.SearchResults ] );
 
 
     return (
@@ -338,7 +357,7 @@ function SearchPageBody( props: any ): JSX.Element {
 
             < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
-                { SearchResults.length ? null : < LoadingElement /> }
+                { props.SearchResults.length ? null : < LoadingElement /> }
 
                 < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
@@ -365,7 +384,7 @@ function SearchPageBody( props: any ): JSX.Element {
                     </ div > */}
                     < div id="description-container" style={ inlineStyles.descriptionContainer }>
                         <h4 id="description-title" style={ inlineStyles.descriptionTitle } ref={ domNodes.descriptionTitle }></h4>
-                        < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
+                        < p style={ inlineStyles.descriptionText } ref={ domNodes.descriptionText } ></ p >
                     </ div >
 
                 </ div >
@@ -480,16 +499,16 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
     async function RenderStructures() {
         await Stream( "Chemical Line Structure:", domNodes.structure2dTitle, 1 ) 
         RemoveHidden(domNodes.display2d.current);
-        RenderStructure2D( _SearchResults.mol2d, 400 );
-        await Stream( "3D Geometry:", domNodes.structure3dTitle, 1 ) 
+        RenderStructure2D( _SearchResults.mol2d, 375 );
+        await Stream( "Computed 3D Geometry:", domNodes.structure3dTitle, 1 ) 
         RemoveHidden(domNodes.display3d.current);
-        RenderStructure3D( _SearchResults.mol3d, 400 );
+        RenderStructure3D( _SearchResults.mol3d, 375 );
     }
     
     async function RenderDescription() {
         RemoveHidden(domNodes.descriptionWrapper.current);
-        await Stream ( "Description:", domNodes.descriptionTitle, 1 );
-        await Stream( _SearchResults.description, domNodes.description );  
+        await Stream ( "Compound Description:", domNodes.descriptionTitle, 1 );
+        await Stream( _SearchResults.description, domNodes.descriptionText );  
     }
     
     async function RenderProperties() {
@@ -511,6 +530,8 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
 
 
 function RemoveHidden( domNode: any ) {
+    // domNode.style.display = "none";
+
     domNode.classList.remove( "hidden" );
 }
 

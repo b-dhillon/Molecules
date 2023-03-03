@@ -19,6 +19,9 @@ export default function Home(props: any ){
         __DATA__={ __DATA__ } 
         SEARCH_INPUT={ SEARCH_INPUT } 
         PAGE={ PAGE }  
+        SearchResults={ props.SearchResults }
+
+        setSubmitCount={ props.setSubmitCount }
         setPAGE={ setPAGE } 
         setSEARCH_INPUT={ setSEARCH_INPUT }  
         setSearchResults={ props.setSearchResults }

@@ -7,12 +7,13 @@ import WikipediaScrape from './components/WikipediaScrape';
 // TODO:
 /*
 - Style table / fiddle with UI
-  - Restyle Properties table
-    - Fix poppins-thin bug
-  - Get titles of structures inside of their box-shadow containers?
+  - Restyle Properties table 
+  - Add more properties for the properties table and create a scrollable table
+  - Place all titles inside of their box-shadow containers? or just the title?
 
 
-- Write ClearUI() function to reset the UI if another compound is searched.
+- Make Description and Properties scrollable
+
 - Add cached data for cached descriptions. 
 
 
@@ -27,6 +28,8 @@ function App(): JSX.Element {
   const [ SEARCH_INPUT, setSEARCH_INPUT ] = useState("");
   const [ __DATA__ ] = useState< Data >( DATA );
   const [ SearchResults, setSearchResults ] = useState( [] );
+
+  const [ SubmitCount, setSubmitCount ] = useState( 0 );
 
 
   // WikipediaScrape("morphine");
@@ -52,20 +55,29 @@ function App(): JSX.Element {
     ? 
     < HomePage 
       __DATA__={ __DATA__ }
-      SEARCH_INPUT={ SEARCH_INPUT }
-      setSEARCH_INPUT={ setSEARCH_INPUT }
       PAGE={ PAGE }
+      SEARCH_INPUT={ SEARCH_INPUT }
+      SearchResults={ SearchResults }
+      SubmitCount={ SubmitCount }
+
+
+
+      setSubmitCount={ setSubmitCount }
+      setSEARCH_INPUT={ setSEARCH_INPUT }
       setPAGE={ setPAGE }
       setSearchResults={ setSearchResults }
     />
     :
     < SearchPage 
       __DATA__={ __DATA__ }
-      SEARCH_INPUT={ SEARCH_INPUT }
-      setSEARCH_INPUT={ setSEARCH_INPUT }
       PAGE={ PAGE }
-      setPAGE={ setPAGE }
+      SEARCH_INPUT={ SEARCH_INPUT }
       SearchResults={ SearchResults }
+      SubmitCount={ SubmitCount }
+
+      setSubmitCount={ setSubmitCount }
+      setSEARCH_INPUT={ setSEARCH_INPUT }
+      setPAGE={ setPAGE }
       setSearchResults={ setSearchResults }
     />
   );

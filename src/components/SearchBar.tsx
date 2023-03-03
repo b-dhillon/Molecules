@@ -1,6 +1,7 @@
 import Search from "./Search";
 import Describe from "./DescriptionFetcher";
 import Styles from '../styles/SearchBar.module.css';
+import ResetBody from "./ResetBody";
 
 export default function SearchBar( props: any ) {
 
@@ -57,14 +58,23 @@ export default function SearchBar( props: any ) {
 
   async function onSubmit(e: Event | any) {
     e.preventDefault();
+
+    // if( SearchResults.length > 0 ) {
+    //   ResetBody(); // need to give it access to domNodes somehow...which are all held in SearchPageBody. 
+    // };
+
+    props.setSubmitCount( ( oldCount: number ) => oldCount + 1 );
+
+
+
     console.log( "Searching: ", SEARCH_INPUT.trim() );
     setSEARCH_INPUT( SEARCH_INPUT.trim() ); // is this needed?
     setPAGE("SearchPage");
 
-    const SearchResults = await Search( SEARCH_INPUT );
-    props.setSearchResults( SearchResults );
+    const _SearchResults = await Search( SEARCH_INPUT );
+    props.setSearchResults( _SearchResults );
     console.log( "Search() finished" );
-    console.log( "Search Results:", ...SearchResults );
+    console.log( "Search Results:", ..._SearchResults );
   };
   
   return (
