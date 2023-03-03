@@ -2,11 +2,15 @@ import { useState } from 'react';
 import HomePage from './components/HomePage';
 import SearchPage from './components/SearchPage';
 import DATA from './data';
-import WikipediaScrape from './components/WikipediaScraper';
+import WikipediaScrape from './components/WikipediaScrape';
 
 // TODO:
 /*
 - Style table / fiddle with UI
+    - Create backdrop 3D tables for Description and Properties, just like Strucutres.
+    - Align everything. 
+    - Add Section titles for Description and Properties?
+
 
 - Write ClearUI() function to reset the UI if another compound is searched.
 - Add cached data for cached descriptions. 
@@ -25,15 +29,14 @@ function App(): JSX.Element {
   const [ SearchResults, setSearchResults ] = useState( [] );
 
 
-  WikipediaScrape("morphine");
-  WikipediaScrape("Crystal Meth");
-  WikipediaScrape("THC");
-  WikipediaScrape("MDMA");
-  WikipediaScrape("LSD");
-  WikipediaScrape("psilocybin");
-  WikipediaScrape("Narcan");
-  WikipediaScrape("Fentanyl");
-  // WikipediaScrape("insulin");
+  // WikipediaScrape("morphine");
+  // WikipediaScrape("Crystal Meth");
+  // WikipediaScrape("THC");
+  // WikipediaScrape("MDMA");
+  // WikipediaScrape("LSD");
+  // WikipediaScrape("psilocybin");
+  // WikipediaScrape("Narcan");
+  // WikipediaScrape("Viagra");
 
 
 

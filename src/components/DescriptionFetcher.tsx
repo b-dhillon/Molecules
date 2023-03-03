@@ -1,12 +1,11 @@
+import WikipediaScrape from './WikipediaScrape';
+
 async function DescriptionFetcher( SEARCH_INPUT: string ) {
   
+  // Da-Vinci Call:
+  /*
   const prompt = `Give a long organic chemistry description of the chemical compound ${SEARCH_INPUT}`;
   const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
-
-
-
-
-
   const apiConfig = {
     method: 'POST',
     headers: {
@@ -22,16 +21,18 @@ async function DescriptionFetcher( SEARCH_INPUT: string ) {
 
   const response = await fetch( apiUrl, apiConfig );
   const data = await response.json();
+  */
 
-  // function hardCodeData() {
-  //   return new Promise( (resolve, _) => {
-  //     // resolve after 2 seconds:
-  //     setTimeout( () => {
-  //       resolve("resolved after 2 seconds");
-  //     }, 2000);
-  //   });
-  // }
-  // const data = await hardCodeData();
+  function hardCodeData() {
+    return new Promise( (resolve, _) => {
+      setTimeout( () => {
+        const string = WikipediaScrape(SEARCH_INPUT);
+        console.log("string: ", string);
+        resolve( string )
+      }, 3000);
+    });
+  }
+  const data = await hardCodeData();
   
   return data;
 }

@@ -106,14 +106,18 @@ function SearchPageHead( props: any ): JSX.Element {
 function SearchPageBody( props: any ): JSX.Element {
 
     const { __DATA__, SEARCH_INPUT, SearchResults } = props;
+    const [ streamed, setStreamed ] = useState(false);
     const [ show2dCanvas, setShow2dCanvas ] = useState(false);
     const [ show3dCanvas, setShow3dCanvas ] = useState(false);
 
     const wrapperBorders = false;
 
     const domNodes: any = {
+        descriptionWrapper: useRef(),
+        descriptionTitle: useRef(),
         description: useRef(),
 
+        propertiesWrapper: useRef(),
         properties: {
             names: [
                 // useRef(),
@@ -157,6 +161,8 @@ function SearchPageBody( props: any ): JSX.Element {
     };
 
     const inlineStyles = {
+
+        // Organizational wrappers
         bodyWrapper: {
             width: '100%',
             display: "flex",
@@ -184,12 +190,41 @@ function SearchPageBody( props: any ): JSX.Element {
             alignItems: "center",
             borderLeft: '2px solid gray',
         },
+
+
+
+    
+        // Description Section
         descriptionWrapper: {
             height: "auto",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
-            padding: "0px 120px 0px 0px",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "15px 50px 50px 0px",
+        },
+        descriptionContainer: {
+            borderRadius: "20px",
+            padding: "20px 30px 30px 30px",
+            // margin: "10px 0px 10px 0px",
+            border: "1px solid black",
+            background: "#141414 !important",
+            boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
+        },
+
+        desccriptionTitleWrapper: {
+            width: "100%",
+            padding: "0px 20px 0px 20px",
+        },
+
+        descriptionTitle: {
+            color: "white",
+            fontFamily: "Poppins-Regular",
+            fontSize: "1.3rem",
+            padding: "0px",
+            margin: "0px 0px 10px 0px",
         },
         descriptionText: {
             color: "white",
@@ -198,6 +233,50 @@ function SearchPageBody( props: any ): JSX.Element {
             margin: "0px",
             fontSize: "1.1rem",
         },
+
+
+
+
+
+
+
+        // Structures Section
+        structureWrapper: {
+            height: "100%",
+            padding: "10px 50px 50px 50px",
+            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            // margin: "0 auto",
+            // flexDirection: "column",
+        },
+        structuresText: {
+            fontFamily: "Poppins-Regular",
+            textAlign: "center",
+            margin: "0px",
+            padding: "0px",
+            fontSize: "1.3rem",
+            width: "300px",
+        },
+
+        canvasWrapper: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            maxWidth: "300px"
+        },
+
+
+
+
+
+
+
+
+
+        // Properties Section:
         propertiesWrapper: {
             // height: "50%",
             margin: "0 auto",
@@ -223,52 +302,21 @@ function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
         },
 
-
-
-        structureWrapper: {
-            height: "100%",
-            padding: "100px 0px",
-            // margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
-            display: "flex",
-            // flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-around",
-        },
-
-        canvasWrapper: {
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            maxWidth: "300px"
-        },
-
         propertiesText: {
             fontFamily: "Poppins-Regular",
             border: "1px solid yellow"
         },
 
-        structuresText: {
-            fontFamily: "Poppins-Regular",
-            textAlign: "center",
-            // margin: "0px 15px 15px 15px",
-            // padding: "0px 0px 15px 0px",
-            fontSize: "1.2rem",
-            width: "300px",
-            // wrap: "no-wrap",
+
+        subscriptStyle: {
+            fontSize: "0.8em",
+            fontFamily: "'Arial', sans-serif",
         },
     };
 
 
-
-
-
-    // Should be moved to a separate file:
+    // Should be moved to a separate file -- problem is then you'll have to pass the setter to it, which can't be done unless it's jsx returning component:
     async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
-
-    
-        // ShowCanvas3d();
 
         const propertyNames = [ 
             "Name:", 
@@ -288,19 +336,11 @@ function SearchPageBody( props: any ): JSX.Element {
             // "Dummy Property:"
         ];
 
-
-
-        const subscriptStyle = {
-            fontSize: "0.8em",
-            fontFamily: "'Arial', sans-serif",
-        }
-
-        // You could write a property formatter here that converts everything to a string, adds the "g/mol" and all the units and formats the molecular formula...
-        // or you could leave them here...pros and cons of each?
+        // You could write a property formatter here that converts everything to a string, adds the "g/mol" and all the units and formats the molecular formula...or you could leave them here...pros and cons of each?
         const propertyValues = [
             _SearchResults.properties["Name"],
             // _SearchResults.properties["Systematic Name"],
-            MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"], subscriptStyle ), 
+            MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"], inlineStyles.subscriptStyle ), 
             _SearchResults.properties["Molecular Weight"] + " g/mol",
             _SearchResults.properties["Molecular Complexity"].toString(),
             _SearchResults.properties["Rotatable Bond Count"].toString(),
@@ -315,46 +355,43 @@ function SearchPageBody( props: any ): JSX.Element {
             // "Dummy Value"
         ];
 
-        // if( show2dCanvas ) {
-        //     document.getElementById( "#canvas2d" ).classList.remove( "hidden" );
-        // }
+        
 
-
-
+        // Streaming Description:
+        // @ts-ignore
+        domNodes.descriptionWrapper.current.classList.remove( "hidden" );
+        await Stream ( "Description:", domNodes.descriptionTitle, 50 );
         await Stream( _SearchResults.description, domNodes.description );     
+
+
+        // Streaming Structures:
         await Stream( "Chemical Line Structure:",  domNodes.structure2d, 50 ) && setShow2dCanvas(true);
-        // ShowCanvas2d();
+        // @ts-ignore
+        show2dCanvas && document.getElementById( "#canvas2d" ).classList.remove( "hidden" );
         Structure2D( _SearchResults.mol2d, 300 );
         await Stream( "3D Molecular Geometry:",  domNodes.structure3d, 50 ) && setShow3dCanvas(true);
-        // ShowCanvas3d();
+        // @ts-ignore
+        show2dCanvas && document.getElementById( "#canvas3d" ).classList.remove( "hidden" );
         Structure3D( _SearchResults.mol3d  , 300 );
 
 
+
+        // Streaming Properties:
+        domNodes.propertiesWrapper.current.classList.remove( "hidden" );
         for(let i = 0; i < domNodes.properties.names.length; i++) {
             await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 30 );
             await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 30 );
-
         };
 
-
-        console.log( "Search results streamed to page.");
+        console.log( "Finished streaming all search results to page.");
     };
 
 
-
-
-
-
-
-
-
-
-
-
     useEffect( () => {
-        if( SearchResults.length ) {
+        if( SearchResults.length && !streamed ) {
             console.log( "Data recieved. Streaming results to page...", SearchResults[0]);
             StreamSearchResults( SearchResults[0], domNodes );
+            setStreamed( true );
         };
     }, [ SearchResults ] );
 
@@ -366,8 +403,16 @@ function SearchPageBody( props: any ): JSX.Element {
 
                 { SearchResults.length ? null : < LoadingElement /> }
 
-                < div id="description" style={ inlineStyles.descriptionWrapper } >
-                    < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
+
+                < div id="description" style={ inlineStyles.descriptionWrapper as React.CSSProperties } className="hidden" ref={ domNodes.descriptionWrapper }>
+
+                    {/* < div id="description-title-wrapper" style={ inlineStyles.desccriptionTitleWrapper } >                    
+                    </ div > */}
+                    < div id="description-container" style={ inlineStyles.descriptionContainer }>
+                        <h4 id="description-title" style={ inlineStyles.descriptionTitle } ref={ domNodes.descriptionTitle }></h4>
+                        < p style={ inlineStyles.descriptionText } ref={ domNodes.description } ></ p >
+                    </ div >
+
                 </ div >
 
 
@@ -383,15 +428,12 @@ function SearchPageBody( props: any ): JSX.Element {
                     < div id="display3D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
                         < p ref={ domNodes.structure3d } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        <canvas id="display3D" ></canvas>
+                        <canvas id="display3D" className="hidden"></canvas>
                         {/* { show3dCanvas && < Structure3D  mold2d={ SearchResults[0].mol2d } size={300} /> } */}
 
                     </ div >
 
                 </ div >
-
-
-
 
                 {/* < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
 
@@ -441,7 +483,7 @@ function SearchPageBody( props: any ): JSX.Element {
             < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
 
 
-                < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
+                < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
                     < PropertyTables domNodes={ domNodes } />
                 </div>
 
@@ -457,10 +499,28 @@ function SearchPageBody( props: any ): JSX.Element {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function PropertyFormatter( properties: any ) {
 
     console.log( "Properties:", properties);
-
 
     // const propertyValues = Object.values( properties );
     // const strings = propertyValues.map( ( value: any, index: number ) => value.toString() );
@@ -476,23 +536,7 @@ function PropertyFormatter( properties: any ) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // const propertyNames = Object.keys( properties ).toString().replace( /_/g, " " ); // replace all underscores with spaces
-
-
-
-
 
 
 {/* { 
