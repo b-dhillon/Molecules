@@ -68,11 +68,12 @@
     background: white !important;
 }
 
-/* .searchBarInput {
-    border: 1px solid white;
+.searchBarInput {
+    font-family: Poppins-Thin;
+    /* border: 1px solid white;
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-    letter-spacing: 2px !important;
-} */
+    letter-spacing: 2px !important; */
+}
 
 /* .searchBarInput:active {
     transform: scale(0.95) !important;
@@ -122,6 +123,7 @@
 
 
 .button1 {
+    font-family: Poppins-Thin;
     margin: 40px 0px;
     position: relative;
     padding: 10px 50px;

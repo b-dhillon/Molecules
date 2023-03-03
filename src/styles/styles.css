@@ -15,7 +15,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Poppins-Thin';
+    /* font-family: 'Poppins-Thin'; */
     overflow: none;
 }
 html,
@@ -48,6 +48,19 @@ body {
 .home-wrapper {
     /* position: relative; */
     margin-top: 100px;
+}
+
+td {
+    border: 1px solid gray !important;
+    border-radius: 2px;
+    padding: 7px 10px 7px 10px;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+tr:nth-child(even) {
+    background-color: gray;
+    color: black;
 }
 
 #description {

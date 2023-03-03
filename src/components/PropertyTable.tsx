@@ -35,21 +35,17 @@ export default function PropertyTables( props: any ) {
         },
         tableData: {
             padding: "10px 12px",
-            border: "1px solid gray",
             borderRadius: "2px",
         },
         tableRow: {
-            padding: "10px 12px",
-            border: "3px solid yellow",
-            // borderRadius: "2px",
+            // padding: "10px 12px",
+            // background: "gray",
         },
         tableRowOdd: {
-            background: "#DB5461",
-            textAlign: "left",
+            // background: "#DB5461",
         },
         tableRowEven: {
-            // background: "white",
-            textAlign: "left",
+            // textAlign: "left",
             // background: "#DB5461",
             // background: "rgb(61, 106, 255)",
         },

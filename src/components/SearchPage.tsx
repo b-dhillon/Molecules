@@ -3,8 +3,8 @@ import Logo from './Logo';
 import SearchBar from './SearchBar';
 import LoadingElement from './LoadingElement';
 
-import Structure2D from './Structure2D';
-import Structure3D from './Structure3D';
+import RenderStructure2D from './Structure2D';
+import RenderStructure3D from './Structure3D';
 // import Molecular_Structures from './Molecular_Structures';
 // import ChemicalProperties from './ChemicalProperties';
 // import AIDescription from './AIDescription';
@@ -120,6 +120,7 @@ function SearchPageBody( props: any ): JSX.Element {
         display3d: useRef(),
 
         propertiesWrapper: useRef(),
+        propertiesTitle: useRef(),
         properties: {
             names: [
                 // useRef(),
@@ -190,7 +191,7 @@ function SearchPageBody( props: any ): JSX.Element {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            borderLeft: '2px solid gray',
+            // borderLeft: '2px solid gray',
         },
 
 
@@ -245,7 +246,7 @@ function SearchPageBody( props: any ): JSX.Element {
         // Structures Section
         structureWrapper: {
             height: "100%",
-            padding: "10px 50px 50px 50px",
+            padding: "10px 50px 0px 50px",
             border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
             alignItems: "center",
@@ -267,14 +268,8 @@ function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            maxWidth: "300px"
+            maxWidth: "400px"
         },
-
-
-
-
-
-
 
 
 
@@ -286,6 +281,23 @@ function SearchPageBody( props: any ): JSX.Element {
             display: "flex",
             justifyContent: "space-between",
             padding: "0px 0px 0px 0px",
+            fontFamily: "Poppins-Regular",
+        },
+        propertiesContainer: {
+            borderRadius: "20px",
+            padding: "20px 30px 30px 30px",
+            // margin: "10px 0px 10px 0px",
+            border: "1px solid black",
+            background: "#141414 !important",
+            boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
+            // height: "800px"
+        },
+        propertiesTitle: {
+            color: "white",
+            fontFamily: "Poppins-Regular",
+            fontSize: "1.3rem",
+            padding: "0px",
+            margin: "0px 0px 10px 0px",
         },
         propertiesNamesWrapper: {
             width: "50%",
@@ -304,95 +316,18 @@ function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
         },
 
-        propertiesText: {
-            fontFamily: "Poppins-Regular",
-            border: "1px solid yellow"
-        },
-
-
         subscriptStyle: {
             fontSize: "0.8em",
-            fontFamily: "'Arial', sans-serif",
+            fontFamily: "Poppins-Regular",
         },
     };
 
-
-    // Should be moved to a separate file -- problem is then you'll have to pass the setter to it, which can't be done unless it's jsx returning component:
-    async function StreamSearchResults( _SearchResults: any, domNodes: any ) {
-
-        const propertyNames = [ 
-            "Name:", 
-            // "Systematic Name:", 
-            "Molecular Formula:",
-            "Molecular Weight:", 
-            "Molecular Complexity:", 
-            "Number of Rotatable Bonds:", 
-            "Number of Chiral Centers:", 
-            "Number of Geometric Centers:",
-            "Number of Stereocenters:", 
-            "Max Number of Chiral Isomers:", 
-            "Max Number of 3D Conformers:", 
-            "Hydrogen Bond Acceptors:", 
-            "Hygdrogen Bond Donors:", 
-            // "Net Charge:",
-            // "Dummy Property:"
-        ];
-
-        // You could write a property formatter here that converts everything to a string, adds the "g/mol" and all the units and formats the molecular formula...or you could leave them here...pros and cons of each?
-        const propertyValues = [
-            _SearchResults.properties["Name"],
-            // _SearchResults.properties["Systematic Name"],
-            MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"], inlineStyles.subscriptStyle ), 
-            _SearchResults.properties["Molecular Weight"] + " g/mol",
-            _SearchResults.properties["Molecular Complexity"].toString(),
-            _SearchResults.properties["Rotatable Bond Count"].toString(),
-            _SearchResults.properties["Chiral Center Count"].toString(),
-            _SearchResults.properties["Geometric Center Count"].toString(),
-            _SearchResults.properties["Stereocenter Count"].toString(),
-            _SearchResults.properties["Chiral Isomer Count"].toString(),
-            _SearchResults.properties["3D Conformer Count"].toString(),
-            _SearchResults.properties["H-Bond Acceptor Count"].toString(),
-            _SearchResults.properties["H-Bond Donor Count"].toString(),
-            // _SearchResults.properties["Charge"].toString(),
-            // "Dummy Value"
-        ];
-
-
-
-
-        // Streaming Structures:
-        await Stream( "Chemical Line Structure:",  domNodes.structure2dTitle, 50 ) && setShow2dCanvas(true);
-        domNodes.display2d.current.classList.remove( "hidden" );
-        Structure2D( _SearchResults.mol2d, 300 );
-
-        await Stream( "3D Molecular Geometry:",  domNodes.structure3dTitle, 50 ) && setShow3dCanvas(true);
-        domNodes.display3d.current.classList.remove( "hidden" );
-        Structure3D( _SearchResults.mol3d  , 300 );
-
-        
-
-        // Streaming Description:
-        domNodes.descriptionWrapper.current.classList.remove( "hidden" );
-        await Stream ( "Description:", domNodes.descriptionTitle, 50 );
-        await Stream( _SearchResults.description, domNodes.description );     
-
-
-
-        // Streaming Properties:
-        domNodes.propertiesWrapper.current.classList.remove( "hidden" );
-        for(let i = 0; i < domNodes.properties.names.length; i++) {
-            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 30 );
-            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 30 );
-        };
-
-        console.log( "Finished streaming all search results to page.");
-    };
 
 
     useEffect( () => {
         if( SearchResults.length && !streamed ) {
             console.log( "Data recieved. Streaming results to page...", SearchResults[0]);
-            StreamSearchResults( SearchResults[0], domNodes );
+            RenderSearchResults( SearchResults[0], domNodes );
             setStreamed( true );
         };
     }, [ SearchResults ] );
@@ -434,8 +369,6 @@ function SearchPageBody( props: any ): JSX.Element {
                     </ div >
 
                 </ div >
-
-
 
 
                 {/* < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
@@ -487,7 +420,15 @@ function SearchPageBody( props: any ): JSX.Element {
 
 
                 < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
-                    < PropertyTables domNodes={ domNodes } />
+
+                    <div id="properties-container" style={ inlineStyles.propertiesContainer } >
+
+                        <h4 id="properties-title" style={ inlineStyles.propertiesTitle } ref={ domNodes.propertiesTitle }></h4>
+
+                        < PropertyTables domNodes={ domNodes } />
+
+                    </div>
+
                 </div>
 
 
@@ -497,8 +438,81 @@ function SearchPageBody( props: any ): JSX.Element {
     )
 };
 
+async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
+
+    const propertyNames = [ 
+        "Name:", 
+        "Molecular Formula:",
+        "Molecular Weight:", 
+        "Molecular Complexity:", 
+        "Number of Rotatable Bonds:", 
+        "Number of Chiral Centers:", 
+        "Number of Geometric Centers:",
+        "Number of Stereocenters:", 
+        "Max Number of Chiral Isomers:", 
+        "Max Number of 3D Conformers:", 
+        "Hydrogen Bond Acceptors:", 
+        "Hygdrogen Bond Donors:", 
+        // "Systematic Name:", 
+        // "Net Charge:",
+        // "Dummy Property:"
+    ];
+
+    // You could write a property formatter here that converts everything to a string, adds the "g/mol" and all the units and formats the molecular formula...or you could leave them here...pros and cons of each?
+    const propertyValues = [
+        _SearchResults.properties["Name"],
+        MolecularFormulaFormatter( _SearchResults.properties["Molecular Formula"] ), 
+        _SearchResults.properties["Molecular Weight"] + " g/mol",
+        _SearchResults.properties["Molecular Complexity"].toString(),
+        _SearchResults.properties["Rotatable Bond Count"].toString(),
+        _SearchResults.properties["Chiral Center Count"].toString(),
+        _SearchResults.properties["Geometric Center Count"].toString(),
+        _SearchResults.properties["Stereocenter Count"].toString(),
+        _SearchResults.properties["Chiral Isomer Count"].toString(),
+        _SearchResults.properties["3D Conformer Count"].toString(),
+        _SearchResults.properties["H-Bond Acceptor Count"].toString(),
+        _SearchResults.properties["H-Bond Donor Count"].toString(),
+        // _SearchResults.properties["Systematic Name"],
+        // _SearchResults.properties["Charge"].toString(),
+        // "Dummy Value"
+    ];
+
+    async function RenderStructures() {
+        await Stream( "Chemical Line Structure:", domNodes.structure2dTitle, 1 ) 
+        RemoveHidden(domNodes.display2d.current);
+        RenderStructure2D( _SearchResults.mol2d, 400 );
+        await Stream( "3D Geometry:", domNodes.structure3dTitle, 1 ) 
+        RemoveHidden(domNodes.display3d.current);
+        RenderStructure3D( _SearchResults.mol3d, 400 );
+    }
+    
+    async function RenderDescription() {
+        RemoveHidden(domNodes.descriptionWrapper.current);
+        await Stream ( "Description:", domNodes.descriptionTitle, 1 );
+        await Stream( _SearchResults.description, domNodes.description );  
+    }
+    
+    async function RenderProperties() {
+        RemoveHidden(domNodes.propertiesWrapper.current);
+        await Stream ( "Chemical Properties:", domNodes.propertiesTitle, 1 );
+        for(let i = 0; i < domNodes.properties.names.length; i++) {
+            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 1 );
+            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 1 );
+        };
+    }
+
+    await RenderStructures();
+    await RenderDescription();
+    await RenderProperties();
+
+    console.log( "Finished streaming all search results to page.");
+};
 
 
+
+function RemoveHidden( domNode: any ) {
+    domNode.classList.remove( "hidden" );
+}
 
 
 

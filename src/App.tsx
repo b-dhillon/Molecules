@@ -7,8 +7,8 @@ import WikipediaScrape from './components/WikipediaScrape';
 // TODO:
 /*
 - Style table / fiddle with UI
-  - Create backdrop 3D table + title for Properties section:
-  - Restyle Properties table -- colors?
+  - Restyle Properties table
+    - Fix poppins-thin bug
   - Get titles of structures inside of their box-shadow containers?
 
 

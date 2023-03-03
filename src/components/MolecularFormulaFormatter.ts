@@ -1,4 +1,4 @@
-export default function MolecularFormulaFormatter( formula: string, cssClass: any ): string {
+export default function MolecularFormulaFormatter( formula: string ): string {
 
 
     const subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"];
