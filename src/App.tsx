@@ -6,19 +6,28 @@ import WikipediaScrape from './components/WikipediaScrape';
 
 // TODO:
 /*
-- Style table / fiddle with UI
+
+- Trigger < LoadingElement /> again after each onSubmit() call.
+
+
+- Tune Up UI:
+  - Make Description and Properties scrollable
   - Restyle Properties table 
   - Add more properties for the properties table and create a scrollable table
   - Place all titles inside of their box-shadow containers? or just the title?
 
 
-- Make Description and Properties scrollable
-
-- Add cached data for cached descriptions. 
 
 
-// Low Priority: 
-- Set up data passing and finish writing data structure, at least a first draft, 
+
+
+- Add AutoComplete to SearchBar.
+- Fine Tune AI Model. 
+- Make mobile version.
+  
+
+// Lower Priority: 
+- Set up cached data passing and finish writing data structure, at least a first draft, 
 - Refactor global CSS styles.
 */
 

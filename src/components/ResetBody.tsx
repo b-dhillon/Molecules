@@ -39,6 +39,4 @@ export default function ResetBody( domNodes: any, ) {
     });
     // hiding property wrapper
     domNodes.propertiesWrapper.current.classList.add( "hidden" );
-
-
 }

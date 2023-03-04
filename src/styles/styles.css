@@ -55,7 +55,7 @@ td {
     border-radius: 2px;
     padding: 4px 10px 4px 10px;
     white-space: nowrap;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     text-overflow: ellipsis;
     font-size: 1.1rem;
 }

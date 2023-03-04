@@ -329,27 +329,27 @@ function SearchPageBody( props: any ): JSX.Element {
 
 
     useEffect( () => {
-        console.log( "Submit Count:", props.SubmitCount );
+
+
         if( props.SearchResults.length && props.SubmitCount === 1 && !streamed ) {
             console.log( "First search. Streaming these results to page:", props.SearchResults[0]);
             console.log( "Submit Count:", props.SubmitCount);
             RenderSearchResults( props.SearchResults[0], domNodes );
             setStreamed( true );
         };
-
-        if( props.SearchResults.length && props.SubmitCount > 1 ) {
-            console.log( "2nd+ Search...clearing UI before streaming again" );
-            console.log( "Submit Count:", props.SubmitCount);
+        
+        if( props.SubmitCount > 1 && streamed) {
+            console.log( "2nd+ submit...clearing UI before streaming again", props.SubmitCount );
             ResetBody( domNodes );
-            // setStreamed( false );
-
-
-            console.log( "Rendering these results to page:", props.SearchResults[0]);
-
-            RenderSearchResults( props.SearchResults[0], domNodes );
-            // setStreamed( true );
+            setStreamed( false );
         };
-    }, [ props.SearchResults ] );
+
+        if( props.SubmitCount > 1 && props.SearchResults.length && !streamed ) {
+            console.log( "Rendering these results to page:", props.SearchResults[0]);
+            RenderSearchResults( props.SearchResults[0], domNodes );
+            setStreamed( true );
+        };
+    }, [ props.SearchResults, props.SubmitCount ] );
 
 
     return (
