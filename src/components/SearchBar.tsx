@@ -56,25 +56,21 @@ export default function SearchBar( props: any ) {
     searchInput.classList.remove('border-searching');
   }
 
-  async function onSubmit(e: Event | any) {
+  async function onSubmit( e: Event | any ) {
     e.preventDefault();
-
-    // if( SearchResults.length > 0 ) {
-    //   ResetBody(); // need to give it access to domNodes somehow...which are all held in SearchPageBody. 
-    // };
-
+    props.setLoading( true ) 
     props.setSubmitCount( ( oldCount: number ) => oldCount + 1 );
 
-
-
-    console.log( "Searching: ", SEARCH_INPUT.trim() );
+    console.log( "Searching for: ", SEARCH_INPUT.trim() );
     setSEARCH_INPUT( SEARCH_INPUT.trim() ); // is this needed?
     setPAGE("SearchPage");
 
     const _SearchResults = await Search( SEARCH_INPUT );
     props.setSearchResults( _SearchResults );
-    console.log( "Search() finished" );
-    console.log( "Search Results:", ..._SearchResults );
+    
+    props.setLoading( false ) 
+
+    console.log( "Search() finished, Search Results:", ..._SearchResults );
   };
   
   return (

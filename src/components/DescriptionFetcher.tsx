@@ -35,16 +35,15 @@ async function DescriptionFetcher( SEARCH_INPUT: string ) {
   const data = await response.json();
   */
 
-  function hardCodeData() {
+  function WikipediaIntro() {
     return new Promise( (resolve, _) => {
       setTimeout( () => {
         const string = WikipediaScrape(SEARCH_INPUT);
-        console.log("string: ", string);
         resolve( string )
-      }, 3000);
+      }, 500);
     });
   }
-  const data = await hardCodeData();
+  const data = await WikipediaIntro();
   
   return data;
 }

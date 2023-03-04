@@ -39,6 +39,9 @@ export default function SearchPage( props: any ): JSX.Element {
                 SearchResults={ props.SearchResults }
                 SubmitCount={ props.SubmitCount }
 
+                setLoading={ props.setLoading }
+
+
                 
                 setSubmitCount={ props.setSubmitCount }
                 setPAGE={ props.setPAGE } 
@@ -50,8 +53,10 @@ export default function SearchPage( props: any ): JSX.Element {
                 __DATA__={ props.__DATA__ }
                 SEARCH_INPUT={ props.SEARCH_INPUT }
                 SearchResults={ props.SearchResults }
-
+                Loading={ props.Loading }
                 SubmitCount={ props.SubmitCount }
+
+                setLoading={ props.setLoading }
                 // setSubmitCount={ props.setSubmitCount }
             />
 
@@ -96,6 +101,10 @@ function SearchPageHead( props: any ): JSX.Element {
                     PAGE={ PAGE }  
                     SearchResults={ props.SearchResults }
                     SubmitCount={ props.SubmitCount }
+                    Loading={ props.Loading }
+
+
+                    setLoading={ props.setLoading }
 
 
                     setSubmitCount={ props.setSubmitCount }
@@ -250,19 +259,19 @@ function SearchPageBody( props: any ): JSX.Element {
         // Structures Section
         structureWrapper: {
             height: "100%",
-            padding: "10px 50px 0px 50px",
+            padding: "10px 50px 0px 0px",
             border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-around",
+            justifyContent: "left",
             // margin: "0 auto",
             // flexDirection: "column",
         },
         structuresText: {
             fontFamily: "Poppins-Regular",
-            textAlign: "center",
+            textAlign: "Left",
             margin: "0px",
-            padding: "0px",
+            padding: "0px 0px 0px 11px",
             fontSize: "1.3rem",
             width: "300px",
         },
@@ -270,9 +279,10 @@ function SearchPageBody( props: any ): JSX.Element {
         canvasWrapper: {
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            // alignItems: "center",
             justifyContent: "center",
-            maxWidth: "400px"
+            maxWidth: "400px",
+            margin: "0px 75px 0px 0px",
         },
 
 
@@ -357,7 +367,7 @@ function SearchPageBody( props: any ): JSX.Element {
 
             < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
-                { props.SearchResults.length ? null : < LoadingElement /> }
+                { props.Loading ? < LoadingElement /> : null }
 
                 < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
@@ -497,17 +507,17 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
     ];
 
     async function RenderStructures() {
-        await Stream( "Chemical Line Structure:", domNodes.structure2dTitle, 1 ) 
+        await Stream( "Line Structure:", domNodes.structure2dTitle, 1 ) 
         RemoveHidden(domNodes.display2d.current);
         RenderStructure2D( _SearchResults.mol2d, 375 );
-        await Stream( "Computed 3D Geometry:", domNodes.structure3dTitle, 1 ) 
+        await Stream( "Molecular Geometry:", domNodes.structure3dTitle, 1 ) 
         RemoveHidden(domNodes.display3d.current);
         RenderStructure3D( _SearchResults.mol3d, 375 );
     }
     
     async function RenderDescription() {
         RemoveHidden(domNodes.descriptionWrapper.current);
-        await Stream ( "Compound Description:", domNodes.descriptionTitle, 1 );
+        await Stream ( _SearchResults.properties["Name"] + ":", domNodes.descriptionTitle, 1 );
         await Stream( _SearchResults.description, domNodes.descriptionText );  
     }
     
