@@ -131,24 +131,24 @@ export default function SearchPageBody( props: any ): JSX.Element {
         descriptionWrapper: {
             // height: "auto",
             margin: "0",
-            border: "2px solid white",
+            border: "4px solid yellow",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "#141414 !important",
             // padding: "15px 120px 50px 0px",
-            // border: `${ wrapperBorders ? "2px solid white" : "none" }`,
         },
         descriptionBox: {
             borderRadius: "20px",
             padding: "20px",
-            border: "1px solid black",
+            border: "4px solid green",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
             maxHeight: "300px",
-            overflow: "scroll",
-            textOverflow: "ellipsis"
-            // margin: "10px 0px 10px 0px",
+            overflow: "auto",
+            textOverflow: "ellipsis",
+            margin: "10px 0px 10px 0px",
         },
 
         descriptionTitleWrapper: {
@@ -195,18 +195,22 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
         propertiesBox: {
             borderRadius: "20px",
-            padding: "20px 30px 30px 30px",
-            // margin: "10px 0px 10px 0px",
+            padding: "20px 0px",
             border: "1px solid black",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
             maxHeight: "500px",
-            overflow: "scroll",
+            overflow: "auto",
+            margin: "0px",
+            display: "flex",
+            justifyContent: "center",
+            // padding: "0px",
+            // margin: "10px 0px 10px 0px",
         },
 
         propertiesTitleWrapper: {
-            width: "100%",
             border: "1px solid white"
+            // width: "100%",
             // padding: "0px 20px 0px 20px",
         },
         propertiesTitleText: {
@@ -243,7 +247,6 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
     useEffect( () => {
 
-
         if( props.SearchResults.length && props.SubmitCount === 1 && !streamed ) {
             console.log( "First search. Streaming these results to page:", props.SearchResults[0]);
             console.log( "Submit Count:", props.SubmitCount);
@@ -262,6 +265,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
             RenderSearchResults( props.SearchResults[0], domNodes );
             setStreamed( true );
         };
+
     }, [ props.SearchResults, props.SubmitCount ] );
 
 
@@ -297,7 +301,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
                         <h4 id="description-title" style={ inlineStyles.descriptionTitleText } ref={ domNodes.descriptionTitle }></h4>
                     </ div >
 
-                    < div id="description-box" style={ inlineStyles.descriptionBox }>
+                    < div id="description-box" style={ inlineStyles.descriptionBox as React.CSSProperties }>
                         < p style={ inlineStyles.descriptionText } ref={ domNodes.descriptionText } ></ p >
                     </ div >
 

@@ -8,13 +8,10 @@ import WikipediaScrape from './components/WikipediaScrape';
 /*
 
 - Tune Up UI:
-  - Make Description and Properties scrollable.
-  - Give the 3D canvas a rotation animation.
-  - Restyle Properties table.
-  - Add more properties for the properties table and create a scrollable table.
-  - Place all titles inside of their box-shadow containers? or just the title?
-  - Refactor CSS styles, especially the SearchBody
-  - Refactor SearchPage and SearchPageHead and SearchPageBody, also split them. 
+
+  - Make SearchProperties table responsive.
+  - Restyle Properties table?
+  - Give the 3D canvas a rotation animation?
 
 --//--
 

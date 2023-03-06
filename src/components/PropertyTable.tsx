@@ -5,29 +5,7 @@ export default function PropertyTables( props: any ) {
 
     const inlineStyles = {
         table: {
-            // fontFamily: "Poppins-Thin !important",
-            // fontWeight: "300 !important",
-            // padding: "0px 10px",
-            // border: "2px solid gray",
-            display: "flex",
 
-        },
-        tableWrapper: {
-            // width: "96%",
-            display: "flex",
-            justifyContent: "center",
-            margin: "0",
-        },
-        tableBackground: {
-            width: "100%",
-            borderRadius: "50px",
-            margin: "35px 0px 60px 0px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "0 10px 20px 10px",
-            background: "#141414",
-            boxShadow: "-9px -9px 9px #080808, 9px 9px 9px #080808",
         },
         tableHeader: {
             fontWeight: "300",
@@ -54,7 +32,7 @@ export default function PropertyTables( props: any ) {
 
 
     return (
-        < table id="table-1" style={ inlineStyles.table } >
+        < table id="properties-table" style={ inlineStyles.table } >
             
             < tbody >
 
