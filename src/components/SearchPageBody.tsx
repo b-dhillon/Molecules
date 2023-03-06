@@ -267,18 +267,17 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                 < div id="structures-wrapper" style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
-                    < div id="display2D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
+                    < div id="structure-wrapper-2d" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
                         < h4 ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
                         <canvas ref={ domNodes.display2d } id="display2d" className="hidden"></canvas>
 
                     </ div >
 
-                    < div id="display3D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
+                    < div id="structure-wrapper-3d" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
                         < h4 ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
                         <canvas ref={ domNodes.display3d } id="display3d" className="hidden"></canvas>
-
 
                     </ div >
 
