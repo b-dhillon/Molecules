@@ -7,22 +7,25 @@ import WikipediaScrape from './components/WikipediaScrape';
 // TODO:
 /*
 
-
 - Tune Up UI:
-  - Make Description and Properties scrollable
-  - Restyle Properties table 
-  - Add more properties for the properties table and create a scrollable table
+  - Make Description and Properties scrollable.
+  - Give the 3D canvas a rotation animation.
+  - Restyle Properties table.
+  - Add more properties for the properties table and create a scrollable table.
   - Place all titles inside of their box-shadow containers? or just the title?
+  - Refactor CSS styles, especially the SearchBody
+  - Refactor SearchPage and SearchPageHead and SearchPageBody, also split them. 
+
 --//--
 
 - Add AutoComplete to SearchBar.
-- Train AI Model. 
+- Train AI Model. Avagadro. 
+  - Add input field --- Ask Avagadro to switch the description container into a chat interface.
 - Make mobile version.
   
 
 // Lower Priority: 
 - Set up cached data passing and finish writing data structure, at least a first draft, 
-- Refactor global CSS styles.
 */
 
 function App(): JSX.Element {

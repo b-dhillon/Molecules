@@ -143,6 +143,10 @@ const data: Data = {
             title: "Vitamin B1",
             description: "",
         },
+        {
+            title: "Morphine",
+            description: "Morphine is a strong opiate that is found naturally in opium, a dark brown resin in poppies. Its chemical structure contains five cyclic rings that take on a T-like three dimensional geometry. Morphine is mainly used as a pain medication, and is also commonly used recreationally, or to make other illicit opioids. It acts directly on the central nervous system to induce analgesia and alter perception and emotional response to pain. Physical and psychological dependence and tolerance may develop with repeated administration.",
+        }
     ]
 };
 

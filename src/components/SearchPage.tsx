@@ -188,7 +188,7 @@ function SearchPageBody( props: any ): JSX.Element {
         },
 
         leftSideWrapper: {
-            width: "72%",
+            width: "60%",
             height: "100%",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
@@ -196,7 +196,7 @@ function SearchPageBody( props: any ): JSX.Element {
         },
 
         rightSideWrapper: {
-            width: "28%",
+            width: "35%",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
             height: "800px",
@@ -219,7 +219,7 @@ function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "15px 50px 50px 0px",
+            padding: "15px 120px 50px 0px",
         },
         descriptionContainer: {
             borderRadius: "20px",
@@ -248,6 +248,7 @@ function SearchPageBody( props: any ): JSX.Element {
             padding: "0px",
             margin: "0px",
             fontSize: "1.1rem",
+            
         },
 
 
@@ -263,7 +264,7 @@ function SearchPageBody( props: any ): JSX.Element {
             border: `${ wrapperBorders ? "2px solid white" : "none" }`,
             display: "flex",
             alignItems: "center",
-            justifyContent: "left",
+            justifyContent: "center",
             // margin: "0 auto",
             // flexDirection: "column",
         },
