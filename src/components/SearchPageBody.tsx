@@ -24,9 +24,6 @@ export default function SearchPageBody( props: any ): JSX.Element {
         propertiesTitle: useRef(),
         properties: {
             names: [
-                // useRef(),
-                // useRef(),
-                // useRef(),
                 useRef(),
                 useRef(),
                 useRef(),
@@ -41,9 +38,6 @@ export default function SearchPageBody( props: any ): JSX.Element {
                 useRef(),
             ],
             values: [
-                // useRef(),
-                // useRef(),
-                // useRef(),
                 useRef(),
                 useRef(),
                 useRef(),
@@ -72,58 +66,98 @@ export default function SearchPageBody( props: any ): JSX.Element {
             display: "flex",
             borderBottom: '2px solid black',
             padding: '5px 70px 20px 70px',
-            border: `${ wrapperBorders ? "2px solid red" : "none" }`
         },
 
         leftSideWrapper: {
-            width: "60%",
+            width: "65%",
             height: "100%",
-            margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
+            margin: "0",
+            border: "3px solid blue",
             flexDirection: "column-reverse"
         },
 
         rightSideWrapper: {
             width: "35%",
-            margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid blue" : "none" }`,
-            height: "800px",
+            height: "100%",
+            margin: "0",
+            border: "3px solid blue",
+
             padding: "0px 0px",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            // borderLeft: '2px solid gray',
+            // alignItems: "center",
         },
+
+
+
+
+
+        // Structures Section
+        structureWrapper: {
+            height: "100%",
+            border: "2px solid white",
+            display: "flex",
+            alignItems: "center",
+            // padding: "10px 50px 0px 0px",
+            // justifyContent: "center",
+            // margin: "0 auto",
+            // flexDirection: "column",
+        },
+        structuresText: {
+            fontFamily: "Poppins-Regular",
+            textAlign: "Left",
+            margin: "0px",
+            padding: "0px 0px 0px 11px",
+            fontSize: "1.3rem",
+            width: "300px",
+            border: "2px solid white",
+        },
+
+        canvasWrapper: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            maxWidth: "400px",
+            border: "2px solid white",
+            // alignItems: "center",
+            // margin: "0px 75px 0px 0px",
+        },
+        
 
 
 
     
         // Description Section
         descriptionWrapper: {
-            height: "auto",
-            margin: "0 auto",
-            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            // height: "auto",
+            margin: "0",
+            border: "2px solid white",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "15px 120px 50px 0px",
+            // padding: "15px 120px 50px 0px",
+            // border: `${ wrapperBorders ? "2px solid white" : "none" }`,
         },
-        descriptionContainer: {
+        descriptionBox: {
             borderRadius: "20px",
-            padding: "20px 30px 30px 30px",
-            // margin: "10px 0px 10px 0px",
+            padding: "20px",
             border: "1px solid black",
-            background: "#141414 !important",
+            background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
+            maxHeight: "300px",
+            overflow: "scroll",
+            textOverflow: "ellipsis"
+            // margin: "10px 0px 10px 0px",
         },
 
         descriptionTitleWrapper: {
             width: "100%",
             padding: "0px 20px 0px 20px",
+            border: "1px solid white",
         },
 
-        descriptionTitle: {
+        descriptionTitleText: {
             color: "white",
             fontFamily: "Poppins-Regular",
             fontSize: "1.3rem",
@@ -145,78 +179,58 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
 
 
-        // Structures Section
-        structureWrapper: {
-            height: "100%",
-            padding: "10px 50px 0px 0px",
-            border: `${ wrapperBorders ? "2px solid white" : "none" }`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            // margin: "0 auto",
-            // flexDirection: "column",
-        },
-        structuresText: {
-            fontFamily: "Poppins-Regular",
-            textAlign: "Left",
-            margin: "0px",
-            padding: "0px 0px 0px 11px",
-            fontSize: "1.3rem",
-            width: "300px",
-        },
-
-        canvasWrapper: {
-            display: "flex",
-            flexDirection: "column",
-            // alignItems: "center",
-            justifyContent: "center",
-            maxWidth: "400px",
-            margin: "0px 75px 0px 0px",
-        },
 
 
 
         // Properties Section:
         propertiesWrapper: {
-            // height: "50%",
-            margin: "0 auto",
-            // border: `${ wrapperBorders ? "2px solid white" : "none" }`,
+            // width: "inherit",
+            margin: "0",
             display: "flex",
-            justifyContent: "space-between",
+            flexDirection: "column",
             padding: "0px 0px 0px 0px",
             fontFamily: "Poppins-Regular",
+            border: "3px solid white",
         },
-        propertiesContainer: {
+
+        propertiesBox: {
             borderRadius: "20px",
             padding: "20px 30px 30px 30px",
             // margin: "10px 0px 10px 0px",
             border: "1px solid black",
-            background: "#141414 !important",
+            background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
-            // height: "800px"
+            maxHeight: "500px",
+            overflow: "scroll",
         },
-        propertiesTitle: {
+
+        propertiesTitleWrapper: {
+            width: "100%",
+            border: "1px solid white"
+            // padding: "0px 20px 0px 20px",
+        },
+        propertiesTitleText: {
             color: "white",
             fontFamily: "Poppins-Regular",
             fontSize: "1.3rem",
             padding: "0px",
-            margin: "0px 0px 10px 0px",
+            margin: "0px 0px 0px 0px",
         },
         propertiesNamesWrapper: {
-            width: "50%",
-            height: "100%",
+            // width: "50%",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
             display: "flex",
             flexDirection: "column",
+            // height: "100%",
         },
         propertiesValuesWrapper: {
-            width: "50%",
-            height: "100%",
+            // width: "50%",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
             display: "flex",
             flexDirection: "column",
+            // height: "100%",
         },
 
         subscriptStyle: {
@@ -252,13 +266,13 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
 
     return (
-        < div id="search-body" style={ inlineStyles.bodyWrapper } >
+        < div id="search-page-body" style={ inlineStyles.bodyWrapper } >
 
-            < div id="left-side" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
+            < div id="left-side-wrapper" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
                 { props.Loading ? < LoadingElement /> : null }
 
-                < div id="structures"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
+                < div id="structures-wrapper"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
                     < div id="display2D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
@@ -277,71 +291,30 @@ export default function SearchPageBody( props: any ): JSX.Element {
                 </ div >
 
 
-                < div id="description" style={ inlineStyles.descriptionWrapper as React.CSSProperties } className="hidden" ref={ domNodes.descriptionWrapper }>
+                < div id="description-wrapper" style={ inlineStyles.descriptionWrapper as React.CSSProperties } className="hidden" ref={ domNodes.descriptionWrapper }>
 
-                    {/* < div id="description-title-wrapper" style={ inlineStyles.desccriptionTitleWrapper } >                    
-                    </ div > */}
-                    < div id="description-container" style={ inlineStyles.descriptionContainer }>
-                        <h4 id="description-title" style={ inlineStyles.descriptionTitle } ref={ domNodes.descriptionTitle }></h4>
+                    < div id="description-title-wrapper" style={ inlineStyles.descriptionTitleWrapper } >                
+                        <h4 id="description-title" style={ inlineStyles.descriptionTitleText } ref={ domNodes.descriptionTitle }></h4>
+                    </ div >
+
+                    < div id="description-box" style={ inlineStyles.descriptionBox }>
                         < p style={ inlineStyles.descriptionText } ref={ domNodes.descriptionText } ></ p >
                     </ div >
 
                 </ div >
 
-
-                {/* < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
-
-
-                    < div id="names" style={ inlineStyles.propertiesNamesWrapper as React.CSSProperties } >
-
-                        < p ref={ domNodes.properties.names[0] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[1] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[2] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[3] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[4] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[5] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[6] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[7] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[8] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[9] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[10] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[11] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[12] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.names[13] } style={ inlineStyles.propertiesText } ></ p >
-
-                    </ div >
-
-                    < div id="values" style={ inlineStyles.propertiesValuesWrapper as React.CSSProperties } >
-
-                        < p ref={ domNodes.properties.values[0] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[1] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[2] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[3] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[4] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[5] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[6] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[7] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[8] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[9] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[10] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[11] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[12] } style={ inlineStyles.propertiesText } ></ p >
-                        < p ref={ domNodes.properties.values[13] } style={ inlineStyles.propertiesText } ></ p >
-
-                    </ div >
-
-                </ div > */}
-
             </ div >
 
-            < div id="right-side" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
+            < div id="right-side-wrapper" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
 
 
-                < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
+                < div id="properties-wrapper" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
 
-                    <div id="properties-container" style={ inlineStyles.propertiesContainer } >
+                    < div id="properties-title-wrapper" style={ inlineStyles.propertiesTitleWrapper } >                
+                        <h4 id="properties-title" style={ inlineStyles.propertiesTitleText } ref={ domNodes.propertiesTitle }></h4>
+                    </ div >
 
-                        <h4 id="properties-title" style={ inlineStyles.propertiesTitle } ref={ domNodes.propertiesTitle }></h4>
+                    <div id="properties-box" style={ inlineStyles.propertiesBox } >
 
                         < PropertyTables domNodes={ domNodes } />
 
@@ -410,7 +383,8 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
     
     async function RenderDescription() {
         RemoveHidden(domNodes.descriptionWrapper.current);
-        await Stream ( _SearchResults.properties["Name"] + ":", domNodes.descriptionTitle, 1 );
+        // await Stream ( _SearchResults.properties["Name"] + ":", domNodes.descriptionTitle, 1 );
+        await Stream ( "Description:", domNodes.descriptionTitle, 1 );
         await Stream( _SearchResults.description, domNodes.descriptionText );  
     }
     
@@ -437,3 +411,57 @@ function RemoveHidden( domNode: any ) {
 
     domNode.classList.remove( "hidden" );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+{/* < div id="properties" style={ inlineStyles.propertiesWrapper as React.CSSProperties } >
+
+
+    < div id="names" style={ inlineStyles.propertiesNamesWrapper as React.CSSProperties } >
+
+        < p ref={ domNodes.properties.names[0] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[1] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[2] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[3] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[4] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[5] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[6] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[7] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[8] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[9] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[10] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[11] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[12] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.names[13] } style={ inlineStyles.propertiesText } ></ p >
+
+    </ div >
+
+    < div id="values" style={ inlineStyles.propertiesValuesWrapper as React.CSSProperties } >
+
+        < p ref={ domNodes.properties.values[0] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[1] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[2] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[3] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[4] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[5] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[6] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[7] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[8] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[9] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[10] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[11] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[12] } style={ inlineStyles.propertiesText } ></ p >
+        < p ref={ domNodes.properties.values[13] } style={ inlineStyles.propertiesText } ></ p >
+
+    </ div >
+
+</ div > */}

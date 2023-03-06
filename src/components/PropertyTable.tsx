@@ -9,12 +9,13 @@ export default function PropertyTables( props: any ) {
             // fontWeight: "300 !important",
             // padding: "0px 10px",
             // border: "2px solid gray",
+            display: "flex",
 
         },
         tableWrapper: {
             // width: "96%",
-            justifyContent: "center",
             display: "flex",
+            justifyContent: "center",
             margin: "0",
         },
         tableBackground: {
@@ -53,118 +54,104 @@ export default function PropertyTables( props: any ) {
 
 
     return (
-        <>
-
-            < table id="table-1" style={ inlineStyles.table } >
+        < table id="table-1" style={ inlineStyles.table } >
             
-                < tbody >
+            < tbody >
 
-                    <tr style={ inlineStyles.tableRow as React.CSSProperties } >
-                        <td ref={ domNodes.properties.names[0] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
-                        <td ref={ domNodes.properties.values[0] } style={ inlineStyles.tableRowEven as React.CSSProperties }></td>
-                    </tr>
+                <tr style={ inlineStyles.tableRow as React.CSSProperties } >
+                    <td ref={ domNodes.properties.names[0] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+                    <td ref={ domNodes.properties.values[0] } style={ inlineStyles.tableRowEven as React.CSSProperties }></td>
+                </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[1] } style={ inlineStyles.tableRowOdd as React.CSSProperties }></td>
-                        <td ref={ domNodes.properties.values[1] } style={ inlineStyles.tableRowEven as React.CSSProperties } ></td>
-                    </tr>
+                <tr>
+                    <td ref={ domNodes.properties.names[1] } style={ inlineStyles.tableRowOdd as React.CSSProperties }></td>
+                    <td ref={ domNodes.properties.values[1] } style={ inlineStyles.tableRowEven as React.CSSProperties } ></td>
+                </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[2] } style={ inlineStyles.tableRowOdd as React.CSSProperties }></td>
-                        <td ref={ domNodes.properties.values[2] } style={ inlineStyles.tableRowEven as React.CSSProperties } ></td>
-                    </tr>
+                <tr>
+                    <td ref={ domNodes.properties.names[2] } style={ inlineStyles.tableRowOdd as React.CSSProperties }></td>
+                    <td ref={ domNodes.properties.values[2] } style={ inlineStyles.tableRowEven as React.CSSProperties } ></td>
+                </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[3] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
-                        <td ref={ domNodes.properties.values[3] } style={ inlineStyles.tableRowEven as React.CSSProperties } ></td>
-                    </tr>
+                <tr>
+                    <td ref={ domNodes.properties.names[3] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+                    <td ref={ domNodes.properties.values[3] } style={ inlineStyles.tableRowEven as React.CSSProperties } ></td>
+                </tr>
 
-                    {/* <tr>
-                        <td ref={ domNodes.properties.names[4] }></td>
-                        <td ref={ domNodes.properties.values[4] } ></td>
-                    </tr> */}
+                {/* <tr>
+                    <td ref={ domNodes.properties.names[4] }></td>
+                    <td ref={ domNodes.properties.values[4] } ></td>
+                </tr> */}
 
 
 
-            {/* < table id="table-2" style={ inlineStyles.table } > */}
-                
-                {/* < tbody > */}
-
-                    <tr>
-                        <td ref={ domNodes.properties.names[4]  }style={ inlineStyles.tableRowOdd as React.CSSProperties }  ></td>
-
-                        <td ref={ domNodes.properties.values[4] } ></td>
-                    </tr>
-
-                    <tr>
-                        <td ref={ domNodes.properties.names[5]  }style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
-
-                        <td ref={ domNodes.properties.values[5] } ></td>
-                    </tr>
-
-                    <tr>
-                        <td ref={ domNodes.properties.names[6]  }style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
-
-                        <td ref={ domNodes.properties.values[6] } ></td>
-                    </tr>
-
-                    <tr>
-                        <td ref={ domNodes.properties.names[7] } style={ inlineStyles.tableRowOdd as React.CSSProperties }></td>
-
-                        <td ref={ domNodes.properties.values[7] } ></td>
-                    </tr>
-
-                    {/* <tr>
-                        <td ref={ domNodes.properties.names[9] }></td>
-                        <td ref={ domNodes.properties.values[9] } ></td>
-                    </tr> */}
-
-                {/* </ tbody > */}
-
-            {/* </ table > */}
-
-            {/* < table id="table-3" style={ inlineStyles.table } > */}
+        {/* < table id="table-2" style={ inlineStyles.table } > */}
             
-                {/* < tbody > */}
+            {/* < tbody > */}
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[8] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+                <tr>
+                    <td ref={ domNodes.properties.names[4]  }style={ inlineStyles.tableRowOdd as React.CSSProperties }  ></td>
 
-                        <td ref={ domNodes.properties.values[8] } ></td>
-                    </tr>
+                    <td ref={ domNodes.properties.values[4] } ></td>
+                </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[9] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+                <tr>
+                    <td ref={ domNodes.properties.names[5]  }style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
 
-                        <td ref={ domNodes.properties.values[9] } ></td>
-                    </tr>
+                    <td ref={ domNodes.properties.values[5] } ></td>
+                </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[10] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+                <tr>
+                    <td ref={ domNodes.properties.names[6]  }style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
 
-                        <td ref={ domNodes.properties.values[10] } ></td>
-                    </tr>
+                    <td ref={ domNodes.properties.values[6] } ></td>
+                </tr>
 
-                    <tr>
-                        <td ref={ domNodes.properties.names[11] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+                <tr>
+                    <td ref={ domNodes.properties.names[7] } style={ inlineStyles.tableRowOdd as React.CSSProperties }></td>
 
-                        <td ref={ domNodes.properties.values[11] } ></td>
-                    </tr>
+                    <td ref={ domNodes.properties.values[7] } ></td>
+                </tr>
 
-                    {/* <tr>
-                        <td ref={ domNodes.properties.names[14] }></td>
-                        <td ref={ domNodes.properties.values[14] } ></td>
-                    </tr> */}
+                {/* <tr>
+                    <td ref={ domNodes.properties.names[9] }></td>
+                    <td ref={ domNodes.properties.values[9] } ></td>
+                </tr> */}
 
-                {/* </ tbody > */}
+            {/* </ tbody > */}
 
-            {/* </ table > */}
-                </ tbody >
+        {/* </ table > */}
 
-            </ table >
+        {/* < table id="table-3" style={ inlineStyles.table } > */}
+        
+            {/* < tbody > */}
 
+                <tr>
+                    <td ref={ domNodes.properties.names[8] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
 
+                    <td ref={ domNodes.properties.values[8] } ></td>
+                </tr>
 
-        </>
+                <tr>
+                    <td ref={ domNodes.properties.names[9] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+
+                    <td ref={ domNodes.properties.values[9] } ></td>
+                </tr>
+
+                <tr>
+                    <td ref={ domNodes.properties.names[10] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+
+                    <td ref={ domNodes.properties.values[10] } ></td>
+                </tr>
+
+                <tr>
+                    <td ref={ domNodes.properties.names[11] } style={ inlineStyles.tableRowOdd as React.CSSProperties } ></td>
+
+                    <td ref={ domNodes.properties.values[11] } ></td>
+                </tr>
+
+            </ tbody >
+
+        </ table >
     )
 }
