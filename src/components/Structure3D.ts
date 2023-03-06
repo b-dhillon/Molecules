@@ -6,7 +6,7 @@ function Structure3D( mol3d: any, size3d: any ) {
 
   // const { mol3d, size3d } = props
 
-  let display3D = new Render.TransformCanvas('display3D', size3d, size3d, true);
+  let display3D = new Render.TransformCanvas('display3d', size3d, size3d, true);
 
   display3D.styles.compass_display = true;
   display3D.styles.atoms_circles_2D = true;
@@ -35,9 +35,6 @@ function Structure3D( mol3d: any, size3d: any ) {
   let molecule = Render.readMOL( mol3d );
   display3D.loadMolecule(molecule);
 
-  // return (
-  //   <canvas id="display3D" style={{ width: size3d, height: size3d }}></canvas>
-  // )
 }
 
 export default Structure3D;

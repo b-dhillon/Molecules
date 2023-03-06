@@ -6,7 +6,7 @@ function DisplayLineStructure( mol2d: any, size2d: number ) {
   let molecule = Render.readMOL( mol2d );
 
   let display2D = new Render.TransformCanvas(
-    'display2D', // name
+    'display2d', // name
     size2d, // width
     size2d, // height
     false // is3D

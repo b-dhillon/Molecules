@@ -98,16 +98,13 @@ export default function SearchPageBody( props: any ): JSX.Element {
             border: "2px solid white",
             display: "flex",
             alignItems: "center",
-            // padding: "10px 50px 0px 0px",
-            // justifyContent: "center",
-            // margin: "0 auto",
-            // flexDirection: "column",
+
         },
-        structuresText: {
+
+        structuresTitle: {
             fontFamily: "Poppins-Regular",
             textAlign: "Left",
             margin: "0px",
-            padding: "0px 0px 0px 11px",
             fontSize: "1.3rem",
             width: "300px",
             border: "2px solid white",
@@ -119,8 +116,6 @@ export default function SearchPageBody( props: any ): JSX.Element {
             justifyContent: "center",
             maxWidth: "400px",
             border: "2px solid white",
-            // alignItems: "center",
-            // margin: "0px 75px 0px 0px",
         },
         
 
@@ -129,20 +124,28 @@ export default function SearchPageBody( props: any ): JSX.Element {
     
         // Description Section
         descriptionWrapper: {
-            // height: "auto",
             margin: "0",
             border: "4px solid yellow",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#141414 !important",
+            // height: "auto",
+            // alignItems: "center",
             // padding: "15px 120px 50px 0px",
         },
+
+        descriptionTitle: {
+            color: "white",
+            fontFamily: "Poppins-Regular",
+            fontSize: "1.3rem",
+            padding: "0px",
+            margin: "0px 0px",
+        },
+
         descriptionBox: {
             borderRadius: "20px",
             padding: "20px",
-            border: "4px solid green",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
             maxHeight: "300px",
@@ -151,26 +154,12 @@ export default function SearchPageBody( props: any ): JSX.Element {
             margin: "10px 0px 10px 0px",
         },
 
-        descriptionTitleWrapper: {
-            width: "100%",
-            padding: "0px 20px 0px 20px",
-            border: "1px solid white",
-        },
-
-        descriptionTitleText: {
-            color: "white",
-            fontFamily: "Poppins-Regular",
-            fontSize: "1.3rem",
-            padding: "0px",
-            margin: "0px 0px 10px 0px",
-        },
-        descriptionText: {
+        descriptionParagraph: {
             color: "white",
             fontFamily: "Poppins-Regular",
             padding: "0px",
             margin: "0px",
             fontSize: "1.1rem",
-            
         },
 
 
@@ -194,14 +183,14 @@ export default function SearchPageBody( props: any ): JSX.Element {
         },
 
         propertiesBox: {
-            borderRadius: "20px",
+            margin: "10px 0px 10px 0px",
             padding: "20px 0px",
+            borderRadius: "20px",
             border: "1px solid black",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
             maxHeight: "500px",
             overflow: "auto",
-            margin: "0px",
             display: "flex",
             justifyContent: "center",
             // padding: "0px",
@@ -276,19 +265,20 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                 { props.Loading ? < LoadingElement /> : null }
 
-                < div id="structures-wrapper"  style={ inlineStyles.structureWrapper as React.CSSProperties }>
+                < div id="structures-wrapper" style={ inlineStyles.structureWrapper as React.CSSProperties }>
 
                     < div id="display2D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
-                        < p ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        <canvas ref={ domNodes.display2d }id="display2D" className="hidden"></canvas>
+                        < h4 ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
+                        <canvas ref={ domNodes.display2d } id="display2d" className="hidden"></canvas>
 
                     </ div >
 
                     < div id="display3D-wrapper" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
-                        < p ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresText as React.CSSProperties }></ p >
-                        <canvas ref={ domNodes.display3d } id="display3D" className="hidden"></canvas>
+                        < h4 ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
+                        <canvas ref={ domNodes.display3d } id="display3d" className="hidden"></canvas>
+
 
                     </ div >
 
@@ -297,12 +287,12 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                 < div id="description-wrapper" style={ inlineStyles.descriptionWrapper as React.CSSProperties } className="hidden" ref={ domNodes.descriptionWrapper }>
 
-                    < div id="description-title-wrapper" style={ inlineStyles.descriptionTitleWrapper } >                
-                        <h4 id="description-title" style={ inlineStyles.descriptionTitleText } ref={ domNodes.descriptionTitle }></h4>
-                    </ div >
+                    {/* < div id="description-title-wrapper" style={ inlineStyles.descriptionTitle } >                 */}
+                    <h4 id="description-title" style={ inlineStyles.descriptionTitle } ref={ domNodes.descriptionTitle }></h4>
+                    {/* </ div > */}
 
                     < div id="description-box" style={ inlineStyles.descriptionBox as React.CSSProperties }>
-                        < p style={ inlineStyles.descriptionText } ref={ domNodes.descriptionText } ></ p >
+                        < p style={ inlineStyles.descriptionParagraph } ref={ domNodes.descriptionText } ></ p >
                     </ div >
 
                 </ div >
