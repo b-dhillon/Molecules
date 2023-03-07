@@ -2,21 +2,21 @@ import { useState } from 'react';
 import HomePage from './components/HomePage';
 import SearchPage from './components/SearchPage';
 import DATA from './data';
-import WikipediaScrape from './components/WikipediaScrape';
 
 // TODO:
 /*
 
 - Tune Up UI:
+  - Make home logo clickable.
 
-  - Position the 3 sections properly. 
-  - Restyle Properties table?
 
 --//--
 
 - Add AutoComplete to SearchBar.
-- Train AI Model. Avagadro. 
-  - Add input field --- Ask Avagadro to switch the description container into a chat interface.
+
+- Train AI Model. Avogadro. 
+  - Add input field ---> Ask Avagadro ---> switches the description container into a chat interface.
+
 - Make mobile version.
   
 
@@ -53,15 +53,9 @@ function App(): JSX.Element {
       SEARCH_INPUT={ SEARCH_INPUT }
       SearchResults={ SearchResults }
       SubmitCount={ SubmitCount }
-
-
       Loading={ Loading }
 
       setLoading={ setLoading }
-      
-
-
-
       setSubmitCount={ setSubmitCount }
       setSEARCH_INPUT={ setSEARCH_INPUT }
       setPAGE={ setPAGE }

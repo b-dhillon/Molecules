@@ -69,36 +69,52 @@ export default function SearchPageBody( props: any ): JSX.Element {
         },
 
         leftSideWrapper: {
+            // border: "3px solid blue",
+
             width: "65%",
             height: "100%",
             margin: "0",
-            border: "3px solid blue",
-            flexDirection: "column-reverse"
+            flexDirection: "column-reverse",
+            padding: "0px 20px"
         },
 
         rightSideWrapper: {
+            // border: "3px solid blue",
+
             width: "35%",
             height: "100%",
             margin: "0",
-            border: "3px solid blue",
-
-            padding: "0px 0px",
+            padding: "0px 20px",
             display: "flex",
             flexDirection: "column",
-            // alignItems: "center",
         },
-
 
 
 
 
         // Structures Section
         structureWrapper: {
+            // border: "2px solid white",
             height: "100%",
-            border: "2px solid white",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-around",
 
+        },
+
+        test: {
+            height: "410px",
+            width: "410px",
+            // margin: "10px 0px 10px 0px",
+            borderRadius: "40px",
+            border: "1px solid black",
+            background: "#141414 !important",
+            boxShadow: "-9px -9px 9px #080808, 9px 9px 9px #202020",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px 0px",
+            margin: "10px 0px"
         },
 
         structuresTitle: {
@@ -106,8 +122,9 @@ export default function SearchPageBody( props: any ): JSX.Element {
             textAlign: "Left",
             margin: "0px",
             fontSize: "1.3rem",
-            width: "300px",
-            border: "2px solid white",
+            // width: "300px",
+            // border: "2px solid white",
+            zIndex: 2,
         },
 
         canvasWrapper: {
@@ -115,17 +132,16 @@ export default function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
             justifyContent: "center",
             maxWidth: "400px",
-            border: "2px solid white",
+            // border: "2px solid white",
         },
         
-
 
 
     
         // Description Section
         descriptionWrapper: {
-            margin: "0",
-            border: "4px solid yellow",
+            // border: "3px solid white",
+            margin: "30px 0px 0px 0px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -145,7 +161,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
         descriptionBox: {
             borderRadius: "20px",
-            padding: "20px",
+            padding: "10px 25px 15px 25px",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
             maxHeight: "300px",
@@ -158,7 +174,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
             color: "white",
             fontFamily: "Poppins-Regular",
             padding: "0px",
-            margin: "0px",
+            margin: "10px 0px 0px 0px",
             fontSize: "1.1rem",
         },
 
@@ -166,25 +182,19 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
 
 
-
-
-
-
-
         // Properties Section:
         propertiesWrapper: {
-            // width: "inherit",
+            // border: "3px solid white",
             margin: "0",
             display: "flex",
             flexDirection: "column",
             padding: "0px 0px 0px 0px",
             fontFamily: "Poppins-Regular",
-            border: "3px solid white",
         },
 
         propertiesBox: {
             margin: "10px 0px 10px 0px",
-            padding: "20px 0px",
+            padding: "20px 30px",
             borderRadius: "20px",
             border: "1px solid black",
             background: "#141414",
@@ -192,38 +202,38 @@ export default function SearchPageBody( props: any ): JSX.Element {
             maxHeight: "500px",
             overflow: "auto",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             // padding: "0px",
             // margin: "10px 0px 10px 0px",
         },
 
         propertiesTitleWrapper: {
-            border: "1px solid white"
+            // border: "1px solid white"
             // width: "100%",
             // padding: "0px 20px 0px 20px",
         },
+        
         propertiesTitleText: {
             color: "white",
             fontFamily: "Poppins-Regular",
             fontSize: "1.3rem",
-            padding: "0px",
-            margin: "0px 0px 0px 0px",
+            padding: "10px 0px",
+            margin: "25px 0px 0px 0px",
         },
+
         propertiesNamesWrapper: {
-            // width: "50%",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
             display: "flex",
             flexDirection: "column",
-            // height: "100%",
         },
+
         propertiesValuesWrapper: {
-            // width: "50%",
             margin: "0 auto",
             border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
             display: "flex",
             flexDirection: "column",
-            // height: "100%",
         },
 
         subscriptStyle: {
@@ -269,15 +279,19 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                     < div id="structure-wrapper-2d" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
-                        < h4 ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
-                        <canvas ref={ domNodes.display2d } id="display2d" className="hidden"></canvas>
+                        <div id="test" style={ inlineStyles.test as React.CSSProperties } >
+                            < h4 ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
+                            <canvas ref={ domNodes.display2d } id="display2d"  ></canvas>
+                        </div>
 
                     </ div >
 
                     < div id="structure-wrapper-3d" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
-                        < h4 ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
-                        <canvas ref={ domNodes.display3d } id="display3d" className="hidden"></canvas>
+                        <div id="test" style={ inlineStyles.test as React.CSSProperties } >
+                            < h4 ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
+                            <canvas ref={ domNodes.display3d } id="display3d" ></canvas>
+                        </div>
 
                     </ div >
 
@@ -287,10 +301,10 @@ export default function SearchPageBody( props: any ): JSX.Element {
                 < div id="description-wrapper" style={ inlineStyles.descriptionWrapper as React.CSSProperties } className="hidden" ref={ domNodes.descriptionWrapper }>
 
                     {/* < div id="description-title-wrapper" style={ inlineStyles.descriptionTitle } >                 */}
-                    <h4 id="description-title" style={ inlineStyles.descriptionTitle } ref={ domNodes.descriptionTitle }></h4>
                     {/* </ div > */}
 
                     < div id="description-box" style={ inlineStyles.descriptionBox as React.CSSProperties }>
+                        <h4 id="description-title" style={ inlineStyles.descriptionTitle } ref={ domNodes.descriptionTitle }></h4>
                         < p style={ inlineStyles.descriptionParagraph } ref={ domNodes.descriptionText } ></ p >
                     </ div >
 
@@ -303,14 +317,13 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                 < div id="properties-wrapper" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
 
-                    < div id="properties-title-wrapper" style={ inlineStyles.propertiesTitleWrapper } >                
-                        <h4 id="properties-title" style={ inlineStyles.propertiesTitleText } ref={ domNodes.propertiesTitle }></h4>
-                    </ div >
 
-                    <div id="properties-box" style={ inlineStyles.propertiesBox } >
 
+                    <div id="properties-box" style={ inlineStyles.propertiesBox as React.CSSProperties } >
+                        {/* < div id="properties-title-wrapper" style={ inlineStyles.propertiesTitleWrapper } >                 */}
+                            <h4 id="properties-title" style={ inlineStyles.propertiesTitleText } ref={ domNodes.propertiesTitle }></h4>
+                        {/* </ div > */}
                         < PropertyTables domNodes={ domNodes } />
-
                     </div>
 
                 </div>
@@ -366,12 +379,12 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
     ];
 
     async function RenderStructures() {
-        await Stream( "Line Structure:", domNodes.structure2dTitle, 1 ) 
-        RemoveHidden(domNodes.display2d.current);
-        RenderStructure2D( _SearchResults.mol2d, 375 );
-        await Stream( "Molecular Geometry:", domNodes.structure3dTitle, 1 ) 
-        RemoveHidden(domNodes.display3d.current);
-        RenderStructure3D( _SearchResults.mol3d, 375 );
+        await Stream( "Line Structure", domNodes.structure2dTitle, 1 ) 
+        // RemoveHidden(domNodes.display2d.current);
+        RenderStructure2D( _SearchResults.mol2d, 350 );
+        await Stream( "Molecular Geometry", domNodes.structure3dTitle, 1 ) 
+        // RemoveHidden(domNodes.display3d.current);
+        RenderStructure3D( _SearchResults.mol3d, 350 );
     }
     
     async function RenderDescription() {
