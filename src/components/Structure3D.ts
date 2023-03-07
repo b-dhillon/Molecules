@@ -6,7 +6,7 @@ function Structure3D( mol3d: any, size3d: any ) {
 
   // const { mol3d, size3d } = props
 
-  let display3D = new Render.TransformCanvas('display3d', size3d, size3d, true);
+  let display3D = new Render.TransformCanvas( 'display3d', size3d, size3d, true );
 
   display3D.styles.compass_display = true;
   display3D.styles.atoms_circles_2D = true;
@@ -15,9 +15,9 @@ function Structure3D( mol3d: any, size3d: any ) {
   display3D.styles.atoms_HBlack_2D = false;
   display3D.styles.bonds_symmetrical_2D = true;
   display3D.styles.backgroundColor = '#141414';
-  
   display3D.styles.atoms_display = true;
   display3D.styles.bonds_splitColor = true;
+
   // display3D.styles.atoms_usePYMOLColors = true;
   // display3D.styles.atoms_displayLabels_3D = true;
   // display3D.styles.bonds_Diameter_3D = 0.8;
@@ -33,7 +33,7 @@ function Structure3D( mol3d: any, size3d: any ) {
   };
 
   let molecule = Render.readMOL( mol3d );
-  display3D.loadMolecule(molecule);
+  display3D.loadMolecule( molecule );
 
 }
 
