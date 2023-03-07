@@ -10,10 +10,7 @@ import WikipediaScrape from './components/WikipediaScrape';
 - Tune Up UI:
 
   - Position the 3 sections properly. 
-
-
   - Restyle Properties table?
-  - Give the 3D canvas a rotation animation?
 
 --//--
 

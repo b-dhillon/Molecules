@@ -1,6 +1,6 @@
 import SearchBar from './SearchBar';
 import Logo from './Logo';
-import Title from './Title';
+import Tagline from './Tagline';
 
 export default function Home(props: any ){
 
@@ -13,7 +13,7 @@ export default function Home(props: any ){
 
       < Logo PAGE={ PAGE } />
 
-      { tagline ?  < Title /> : null}
+      { tagline ?  < Tagline /> : null}
 
       < SearchBar 
         __DATA__={ __DATA__ } 
