@@ -6,6 +6,7 @@ import MolecularFormulaFormatter from './MolecularFormulaFormatter';
 import Stream from './Stream';
 import PropertyTables from './PropertyTable';
 import ResetBody from './ResetBody';
+import AvogadroBar from './AvogadroBar';
 
 export default function SearchPageBody( props: any ): JSX.Element {
 
@@ -80,13 +81,12 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
         rightSideWrapper: {
             // border: "3px solid blue",
-
             width: "35%",
             height: "100%",
-            margin: "0",
+            margin: "auto 0", // centers properties box vertically relative to structures and description
             padding: "0px 20px",
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "column",            
         },
 
 
@@ -190,6 +190,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
             flexDirection: "column",
             padding: "0px 0px 0px 0px",
             fontFamily: "Poppins-Regular",
+            height: "100%",
         },
 
         propertiesBox: {
@@ -199,11 +200,11 @@ export default function SearchPageBody( props: any ): JSX.Element {
             border: "1px solid black",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
-            maxHeight: "500px",
             overflow: "auto",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            // maxHeight: "500px",
             // padding: "0px",
             // margin: "10px 0px 10px 0px",
         },
@@ -218,8 +219,8 @@ export default function SearchPageBody( props: any ): JSX.Element {
             color: "white",
             fontFamily: "Poppins-Regular",
             fontSize: "1.3rem",
-            padding: "10px 0px",
-            margin: "25px 0px 0px 0px",
+            padding: "0px 0px 10px 0px",
+            margin: "0px 0px 0px 0px",
         },
 
         propertiesNamesWrapper: {
@@ -269,7 +270,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
 
     return (
-        < div id="search-page-body" style={ inlineStyles.bodyWrapper } >
+        < div id="body-wrapper" style={ inlineStyles.bodyWrapper } >
 
             < div id="left-side-wrapper" style={ inlineStyles.leftSideWrapper as React.CSSProperties } >
 
@@ -314,10 +315,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
             < div id="right-side-wrapper" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
 
-
                 < div id="properties-wrapper" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
-
-
 
                     <div id="properties-box" style={ inlineStyles.propertiesBox as React.CSSProperties } >
                         {/* < div id="properties-title-wrapper" style={ inlineStyles.propertiesTitleWrapper } >                 */}
@@ -328,6 +326,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                 </div>
 
+                < AvogadroBar />
 
             </ div > 
         	

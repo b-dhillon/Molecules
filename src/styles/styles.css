@@ -64,9 +64,13 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: gray;
-    color: black;
+    background-color:rgb(128,128,128, 0.3)
+    ;
+    /* color: black; */
 }
+
+/* can you give me the color gray is rgba */
+
 
 #header-body-divider {
     
@@ -119,7 +123,7 @@ tr:nth-child(even) {
     box-shadow:  -9px -9px 9px #080808, 9px 9px 9px #202020; */
 
 
-    
+
     /* 10px 10px 10px #080808; */
     /* height: 225px; 
     width: 225px;  */

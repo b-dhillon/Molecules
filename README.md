@@ -31,7 +31,7 @@ Instructions:
     ``` 
 3. Once you're in the project directory, boot up a development server from the terminal with the following command:
     ```bash
-    live server
+    npm run dev
     ``` 
 4. Happy hacking!
 

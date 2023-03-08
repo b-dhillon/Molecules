@@ -6,8 +6,10 @@ import DATA from './data';
 // TODO:
 /*
 
-- Tune Up UI:
+- Tune UI:
+  - Make table bigger? Or reposition? Height should equal height of description + structures
   - Make home logo clickable.
+  - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties
 
 
 --//--
