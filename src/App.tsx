@@ -7,8 +7,12 @@ import DATA from './data';
 /*
 
 UI:
-  - Make home logo clickable.
-  - Add a fixed width to the table so that it only scrolls vertically.
+
+- Keep tuning 3D model
+  - Make colors more vibrant -- should match 2d structure colors
+  - Zoom out a bit or make 3D model smaller.
+
+
   - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties
 --//--
 

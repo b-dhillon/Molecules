@@ -13,19 +13,19 @@ function DisplayLineStructure( mol2d: any, size2d: number ) {
     false // is3D
     );
     
-  console.log( "Transformer Canvas Styles", display2D.styles );
   display2D.styles.atoms_HBlack_2D = false;
 
   display2D.styles.atoms_color = 'white';
   display2D.styles.bonds_color = 'white';
-  display2D.styles.atoms_font_size_2D = 16;
   display2D.styles.atoms_displayTerminalCarbonLabels_2D = true;
   display2D.styles.backgroundColor = '#141414';
 
   display2D.styles.bonds_colorGradient = true;
 
-  display2D.styles.bonds_hashWidth_2D = 2;
 
+  // render sizing of line structure
+  display2D.styles.atoms_font_size_2D = 16;
+  display2D.styles.bonds_hashWidth_2D = 2;
   display2D.styles.bonds_width_2D = 1.75;
 
 
