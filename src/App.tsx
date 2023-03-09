@@ -7,7 +7,6 @@ import DATA from './data';
 /*
 
 - Tune UI:
-  - Make table bigger? Or reposition? Height should equal height of description + structures
   - Make home logo clickable.
   - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties
 
@@ -15,13 +14,15 @@ import DATA from './data';
 --//--
 
 - Add AutoComplete to SearchBar.
+  - Binary search for list of compound names and their synonyms?
+    - React Select library does this for us. 
+  - Or should we use Machine Learning reccomendations using an Embeddings API?
 
 - Train AI Model. Avogadro. 
   - Add input field ---> Ask Avagadro ---> switches the description container into a chat interface.
 
-- Make mobile version.
+- Make mobile friendly.
   
-
 // Lower Priority: 
 - Set up cached data passing and finish writing data structure, at least a first draft, 
 */

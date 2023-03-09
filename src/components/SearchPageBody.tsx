@@ -6,7 +6,7 @@ import MolecularFormulaFormatter from './MolecularFormulaFormatter';
 import Stream from './Stream';
 import PropertyTables from './PropertyTable';
 import ResetBody from './ResetBody';
-import AvogadroBar from './AvogadroBar';
+// import AvogadroBar from './AvogadroBar';
 
 export default function SearchPageBody( props: any ): JSX.Element {
 
@@ -15,9 +15,12 @@ export default function SearchPageBody( props: any ): JSX.Element {
     const wrapperBorders = false;
 
     const domNodes: any = {
+
         descriptionWrapper: useRef(),
         descriptionTitle: useRef(),
         descriptionText: useRef(),
+        lineStructureBox: useRef(),
+        molecularGeometryBox: useRef(),
         display2d: useRef(),
         display3d: useRef(),
 
@@ -65,8 +68,8 @@ export default function SearchPageBody( props: any ): JSX.Element {
         bodyWrapper: {
             width: '100%',
             display: "flex",
-            borderBottom: '2px solid black',
             padding: '5px 70px 20px 70px',
+            // borderBottom: '2px solid black',
         },
 
         leftSideWrapper: {
@@ -102,7 +105,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
         },
 
-        test: {
+        structureBox: {
             height: "410px",
             width: "410px",
             // margin: "10px 0px 10px 0px",
@@ -161,7 +164,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
         descriptionBox: {
             borderRadius: "20px",
-            padding: "10px 25px 15px 25px",
+            padding: "15px 25px 25px 25px",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
             maxHeight: "300px",
@@ -280,18 +283,18 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
                     < div id="structure-wrapper-2d" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
-                        <div id="test" style={ inlineStyles.test as React.CSSProperties } >
+                        <div id="line-structure-box" ref={ domNodes.lineStructureBox } className="hidden" style={ inlineStyles.structureBox as React.CSSProperties } >
                             < h4 ref={ domNodes.structure2dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
-                            <canvas ref={ domNodes.display2d } id="display2d"  ></canvas>
+                            <canvas ref={ domNodes.display2d } id="display2d"></canvas>
                         </div>
 
                     </ div >
 
                     < div id="structure-wrapper-3d" style={ inlineStyles.canvasWrapper as React.CSSProperties } >
 
-                        <div id="test" style={ inlineStyles.test as React.CSSProperties } >
+                        <div id="molecular-geometry-box" ref={ domNodes.molecularGeometryBox } className="hidden" style={ inlineStyles.structureBox as React.CSSProperties } >
                             < h4 ref={ domNodes.structure3dTitle } style={ inlineStyles.structuresTitle as React.CSSProperties }></ h4 >
-                            <canvas ref={ domNodes.display3d } id="display3d" ></canvas>
+                            <canvas ref={ domNodes.display3d } id="display3d"   ></canvas>
                         </div>
 
                     </ div >
@@ -325,8 +328,6 @@ export default function SearchPageBody( props: any ): JSX.Element {
                     </div>
 
                 </div>
-
-                < AvogadroBar />
 
             </ div > 
         	
@@ -378,18 +379,20 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
     ];
 
     async function RenderStructures() {
-        await Stream( "Line Structure", domNodes.structure2dTitle, 1 ) 
-        // RemoveHidden(domNodes.display2d.current);
+        RemoveHidden(domNodes.lineStructureBox.current);
+        await Stream( "Line Structure:", domNodes.structure2dTitle, 40 ) 
         RenderStructure2D( _SearchResults.mol2d, 350 );
-        await Stream( "Molecular Geometry", domNodes.structure3dTitle, 1 ) 
-        // RemoveHidden(domNodes.display3d.current);
+
+
+        RemoveHidden(domNodes.molecularGeometryBox.current);
+        await Stream( "Molecular Geometry:", domNodes.structure3dTitle, 40 ) 
         RenderStructure3D( _SearchResults.mol3d, 350 );
     }
     
     async function RenderDescription() {
         RemoveHidden(domNodes.descriptionWrapper.current);
         // await Stream ( _SearchResults.properties["Name"] + ":", domNodes.descriptionTitle, 1 );
-        await Stream ( "Description:", domNodes.descriptionTitle, 1 );
+        await Stream ( "Description:", domNodes.descriptionTitle, 0.5 );
         await Stream( _SearchResults.description, domNodes.descriptionText );  
     }
     
@@ -412,8 +415,6 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
 
 
 function RemoveHidden( domNode: any ) {
-    // domNode.style.display = "none";
-
     domNode.classList.remove( "hidden" );
 }
 
