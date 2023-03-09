@@ -12,7 +12,7 @@ function LoadingElement(): JSX.Element {
     return (
         <div id="loading-wrapper" style={ loadingPageWrapper as React.CSSProperties } >
             <div className={ Styles.loading }>
-                <span>Thinking...</span>
+                <span>Searching...</span>
             </div>
         </div>
     );

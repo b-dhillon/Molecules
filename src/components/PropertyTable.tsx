@@ -3,19 +3,25 @@ export default function PropertyTables( props: any ) {
 
     const { domNodes } = props;
 
+
+    const tableBodyStyle = {
+        overflowX: "hidden",
+    };
+
+
     return (
         < table id="properties-table" >
             
             < tbody >
-
+ 
                 <tr>
                     <td ref={ domNodes.properties.names[0] } ></td>
-                    <td ref={ domNodes.properties.values[0] }></td>
+                    <td ref={ domNodes.properties.values[0] } className="scrollable-cell" ></td>
                 </tr>
 
                 <tr>
                     <td ref={ domNodes.properties.names[1] }></td>
-                    <td ref={ domNodes.properties.values[1] }></td>
+                    <td ref={ domNodes.properties.values[1] } className="scrollable-cell"></td>
                 </tr>
 
                 <tr>

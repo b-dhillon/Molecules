@@ -1,37 +1,36 @@
 export default function MolecularFormulaFormatter( formula: string ): string {
 
+  const subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"];
 
-    const subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"];
-
-    let formattedFormula = "";
-    let currentElement = "";
-    let currentCount = "";
+  let formattedFormula = "";
+  let currentElement = "";
+  let currentCount = "";
     
-    // iterating over the entire formula string
-    for (let i = 0; i < formula.length; i++) {
-      const char = formula.charAt(i);
-      
-      if (/[A-Z]/.test(char)) { // uppercase letter represents a new element
-        if ( currentElement !== "" ) {
-          formattedFormula += currentElement;
-          if ( currentCount !== "" ) {
-            for ( let j = 0; j < currentCount.length; j++ ) {
-              formattedFormula += subscripts[ parseInt( currentCount.charAt( j ) ) ];
-            }
+  // iterating over the entire formula string
+  for (let i = 0; i < formula.length; i++) {
+    const char = formula.charAt(i);
+    
+    if (/[A-Z]/.test(char)) { // uppercase letter represents a new element
+      if ( currentElement !== "" ) {
+        formattedFormula += currentElement;
+        if ( currentCount !== "" ) {
+          for ( let j = 0; j < currentCount.length; j++ ) {
+            formattedFormula += subscripts[ parseInt( currentCount.charAt( j ) ) ];
           }
         }
-        currentElement = char;
-        currentCount = "";
-      } 
-
-      else if (/[a-z]/.test(char)) { // lowercase letter is part of current element
-        currentElement += char;
       }
+      currentElement = char;
+      currentCount = "";
+    } 
 
-      else if (/\d/.test(char)) { // digit represents a count
-        currentCount += char;
-      }
-    };
+    else if (/[a-z]/.test(char)) { // lowercase letter is part of current element
+      currentElement += char;
+    }
+
+    else if (/\d/.test(char)) { // digit represents a count
+      currentCount += char;
+    }
+  };
 
     // handle last element
     formattedFormula += currentElement;

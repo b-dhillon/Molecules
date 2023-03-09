@@ -3,6 +3,12 @@
     font-family: 'Poppins-Thin';
     src: url('../fonts/Poppins/Poppins-Thin.ttf');
 }
+
+@font-face {
+    font-family: 'Poppins-Light';
+    src: url('../fonts/Poppins/Poppins-Light.ttf');
+}
+
 @font-face {
     font-family: 'Poppins-Regular';
     src: url('../fonts/Poppins/Poppins-Regular.ttf');
@@ -15,28 +21,28 @@
 
 * {
     box-sizing: border-box;
-    /* font-family: 'Poppins-Thin'; */
     overflow: none;
+    /* font-family: 'Poppins-Thin'; */
 }
 
 html,
 body {
     width: 100%;
-    /* height: 100%; */
     margin: 0;
     overflow: none;
     background: #141414 ;
+    /* height: 100%; */
 }
 
 #root {
     width: 100%;
-    /* height: 100%; */
     padding: 0;
-    /* background: #259872; */
-    /* background: #e0e0e0; */
     background: #141414;
     color: white;
     overflow: none;
+    /* height: 100%; */
+    /* background: #259872; */
+    /* background: #e0e0e0; */
 }
 
 .hidden {
@@ -48,39 +54,31 @@ body {
     margin-top: 100px;
 }
 
-#table {
-    margin: 0px !important;
+.scrollable-cell {
+    overflow: auto !important;
+    max-width: 100px;
 }
-
 
 td {
     border: 1px solid gray !important;
     border-radius: 2px;
     padding: 4px 10px 4px 10px;
     white-space: nowrap;
-    /* overflow-x: scroll; */
-    text-overflow: ellipsis;
     font-size: 1.1rem;
+    /* overflow-x: hidden; */
+    /* text-overflow: ellipsis; */
+}
+
+td:nth-child(even) {
+    width: 50% !important;
 }
 
 tr:nth-child(even) {
-    background-color:rgb(128,128,128, 0.3)
-    ;
-    /* color: black; */
+    background-color:rgb(128,128,128, 0.3);
 }
 
-/* can you give me the color gray is rgba */
-
-
-#header-body-divider {
-    
-}
-
-#description {
-    
-}
-
-
+#header-body-divider {}
+#description {}
 
 .main--wrapper {
     width: 100%; 
@@ -95,10 +93,10 @@ tr:nth-child(even) {
 
 
 #display3d {
-    /* margin: 10px 0px 10px 0px; */
     height: 350px; 
     width: 350px; 
-
+    
+    /* margin: 10px 0px 10px 0px; */
     /* border-radius: 40px;
     border: 1px solid black;
     background: #141414 !important;

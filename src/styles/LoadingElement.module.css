@@ -9,7 +9,7 @@
 }
   
 .loading span::before {
-    content: "Thinking...";
+    content: "Searching...";
     position: absolute;
     top: 0;
     left: 0;
@@ -18,8 +18,8 @@
     border-right: 2px solid white;
     overflow: hidden;
     color: white;
-    animation: type 2.5s linear 1,
-                blink 1.5s linear infinite;
+    animation: type 0.5s linear 1,
+                blink 1s linear infinite;
     animation-fill-mode: forwards;
 }
 

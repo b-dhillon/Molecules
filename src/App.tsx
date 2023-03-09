@@ -6,20 +6,24 @@ import DATA from './data';
 // TODO:
 /*
 
-- Tune UI:
+UI:
+  - Make structures larger
   - Make home logo clickable.
+  - Add a fixed width to the table so that it only scrolls vertically.
   - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties
-
-
 --//--
 
-- Add AutoComplete to SearchBar.
+AutoComplete | AutoSuggest
   - Binary search for list of compound names and their synonyms?
     - React Select library does this for us. 
   - Or should we use Machine Learning reccomendations using an Embeddings API?
+--//--
 
-- Train AI Model. Avogadro. 
+
+Avogadro
   - Add input field ---> Ask Avagadro ---> switches the description container into a chat interface.
+
+--//--
 
 - Make mobile friendly.
   
@@ -36,15 +40,6 @@ function App(): JSX.Element {
   const [ SubmitCount, setSubmitCount ] = useState( 0 );
 
   const [ Loading, setLoading ] = useState( false );
-
-  // WikipediaScrape("morphine");
-  // WikipediaScrape("Crystal Meth");
-  // WikipediaScrape("THC");
-  // WikipediaScrape("MDMA");
-  // WikipediaScrape("LSD");
-  // WikipediaScrape("psilocybin");
-  // WikipediaScrape("Narcan");
-  // WikipediaScrape("Viagra");
 
 
   return (

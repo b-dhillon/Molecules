@@ -175,7 +175,8 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
         descriptionParagraph: {
             color: "white",
-            fontFamily: "Poppins-Regular",
+            fontFamily: "Poppins-Light",
+            fontWeight: "400",
             padding: "0px",
             margin: "10px 0px 0px 0px",
             fontSize: "1.1rem",
@@ -203,7 +204,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
             border: "1px solid black",
             background: "#141414",
             boxShadow:  "-9px -9px 9px #080808, 9px 9px 9px #202020",
-            overflow: "auto",
+            // overflow: "auto",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -238,6 +239,7 @@ export default function SearchPageBody( props: any ): JSX.Element {
             border: `${ wrapperBorders ? "2px solid brown" : "none" }`,
             display: "flex",
             flexDirection: "column",
+            overflow: "none",
         },
 
         subscriptStyle: {
@@ -380,28 +382,28 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
 
     async function RenderStructures() {
         RemoveHidden(domNodes.lineStructureBox.current);
-        await Stream( "Line Structure:", domNodes.structure2dTitle, 40 ) 
+        await Stream( "Line Structure:", domNodes.structure2dTitle, "single", 10 ) 
         RenderStructure2D( _SearchResults.mol2d, 350 );
 
 
         RemoveHidden(domNodes.molecularGeometryBox.current);
-        await Stream( "Molecular Geometry:", domNodes.structure3dTitle, 40 ) 
+        await Stream( "Molecular Geometry:", domNodes.structure3dTitle, "single", 10 ) 
         RenderStructure3D( _SearchResults.mol3d, 350 );
     }
     
     async function RenderDescription() {
         RemoveHidden(domNodes.descriptionWrapper.current);
         // await Stream ( _SearchResults.properties["Name"] + ":", domNodes.descriptionTitle, 1 );
-        await Stream ( "Description:", domNodes.descriptionTitle, 0.5 );
-        await Stream( _SearchResults.description, domNodes.descriptionText );  
+        await Stream ( "Description:", domNodes.descriptionTitle, "single", 10 );
+        await Stream( _SearchResults.description, domNodes.descriptionText, "quintuple", 70 );  
     }
     
     async function RenderProperties() {
         RemoveHidden(domNodes.propertiesWrapper.current);
-        await Stream ( "Chemical Properties:", domNodes.propertiesTitle, 1 );
+        await Stream ( "Chemical Properties:", domNodes.propertiesTitle, "single", 1 );
         for(let i = 0; i < domNodes.properties.names.length; i++) {
-            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], 1 );
-            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], 1 );
+            await Stream( propertyNames[ i ],  domNodes.properties.names[ i ], "single", 1 );
+            await Stream( propertyValues[ i ],  domNodes.properties.values[ i ], "single", 1 );
         };
     }
 

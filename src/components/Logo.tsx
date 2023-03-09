@@ -4,6 +4,8 @@ function Logo( props: any ) {
 
     const { PAGE } = props;
 
+    console.log( props.setPAGE );
+
 
     const homePage = {
         logoWrapper: {
@@ -11,7 +13,7 @@ function Logo( props: any ) {
             justifyContent: 'center', 
             flexGrow: '1', 
             width: '100% !important',
-            border: '1px sold red',
+            // border: '1px solid red',
         },
 
         logo: {
@@ -32,19 +34,21 @@ function Logo( props: any ) {
     const searchPage = {
         logoWrapper: {
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
         },
+
         logo: {
             maxWidth: '50px',
             height: 'auto',
+            cursor: 'pointer',
         }
     }
 
 
 
     return (
-        <div style={ PAGE === "HomePage" ? homePage.logoWrapper : searchPage.logoWrapper }>
-            <img style={ PAGE === "HomePage" ? homePage.logo : searchPage.logo } src={logo}/>
+        <div style={ PAGE === "HomePage" ? homePage.logoWrapper : searchPage.logoWrapper } >
+            <img style={ PAGE === "HomePage" ? homePage.logo : searchPage.logo } src={logo} onClick={ PAGE === "HomePage" ? ()=>null : () => props.setPAGE("HomePage") } />
         </div>
     )
 

@@ -12,6 +12,8 @@ export default function SearchPage( props: any ): JSX.Element {
         flexDirection: "column",
         border: `${ wrapperBorders ? "2px solid green" : "none" } `,
     }
+
+    console.log( "search page props", props );
     
     return (
         <div id="SearchPage" style={ searchPageWrapper as React.CSSProperties }>
