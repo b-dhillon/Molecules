@@ -179,7 +179,8 @@ export default function SearchPageBody( props: any ): JSX.Element {
             fontWeight: "400",
             padding: "0px",
             margin: "10px 0px 0px 0px",
-            fontSize: "1.1rem",
+            fontSize: "1rem",
+            lineHeight: "25px",
         },
 
 

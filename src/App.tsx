@@ -7,7 +7,6 @@ import DATA from './data';
 /*
 
 UI:
-  - Make structures larger
   - Make home logo clickable.
   - Add a fixed width to the table so that it only scrolls vertically.
   - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties

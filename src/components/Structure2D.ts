@@ -3,33 +3,42 @@ import Render from './render.js';
 
 function DisplayLineStructure( mol2d: any, size2d: number ) {
 
+  
   let molecule = Render.readMOL( mol2d );
-
+  
   let display2D = new Render.TransformCanvas(
     'display2d', // name
     size2d, // width
     size2d, // height
     false // is3D
-  );
-
+    );
+    
+  console.log( "Transformer Canvas Styles", display2D.styles );
   display2D.styles.atoms_HBlack_2D = false;
 
   display2D.styles.atoms_color = 'white';
   display2D.styles.bonds_color = 'white';
-  display2D.styles.atoms_font_size_2D = 10;
+  display2D.styles.atoms_font_size_2D = 16;
   display2D.styles.atoms_displayTerminalCarbonLabels_2D = true;
   display2D.styles.backgroundColor = '#141414';
+
+  display2D.styles.bonds_colorGradient = true;
+
+  display2D.styles.bonds_hashWidth_2D = 2;
+
+  display2D.styles.bonds_width_2D = 1.75;
+
 
 
   display2D.styles.atoms_implicitHydrogens_2D = true;
   display2D.styles.atoms_useJMOLColors = true;
-  // display2D.styles.angstromsPerBondLength = 1.5;
+  // display2D.styles.angstromsPerBondLength = 5.5;
   // display2D.styles.atoms_displayAllCarbonLabels_2D = true;
 
 
   let HydrogenReducer = new Render.informatics.HydrogenDeducer;
   HydrogenReducer.removeHydrogens(molecule, false);
-  molecule.scaleToAverageBondLength(25);
+  molecule.scaleToAverageBondLength(40);
   display2D.loadMolecule(molecule);
 }
 
