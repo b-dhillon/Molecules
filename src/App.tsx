@@ -9,8 +9,11 @@ import DATA from './data';
 UI:
 
 - Keep tuning 3D model
-  - Make colors more vibrant -- should match 2d structure colors
-  - Zoom out a bit or make 3D model smaller.
+  - Make colors more darker and more vibrant -- should match 2d structure colors
+
+- Fix bugs 
+  - Canvas boxes not being hidden when you do a 2nd search 
+  - Going home via the logo doesn't reset the search input and breaks the next search. 
 
 
   - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties

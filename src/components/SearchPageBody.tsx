@@ -319,20 +319,18 @@ export default function SearchPageBody( props: any ): JSX.Element {
 
             </ div >
 
-            < div id="right-side-wrapper" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
+            {/* < div id="right-side-wrapper" style={ inlineStyles.rightSideWrapper as React.CSSProperties } >
 
                 < div id="properties-wrapper" style={ inlineStyles.propertiesWrapper as React.CSSProperties } className="hidden" ref={ domNodes.propertiesWrapper } >
 
                     <div id="properties-box" style={ inlineStyles.propertiesBox as React.CSSProperties } >
-                        {/* < div id="properties-title-wrapper" style={ inlineStyles.propertiesTitleWrapper } >                 */}
-                            <h4 id="properties-title" style={ inlineStyles.propertiesTitleText } ref={ domNodes.propertiesTitle }></h4>
-                        {/* </ div > */}
+                        <h4 id="properties-title" style={ inlineStyles.propertiesTitleText } ref={ domNodes.propertiesTitle }></h4>
                         < PropertyTables domNodes={ domNodes } />
                     </div>
 
                 </div>
 
-            </ div > 
+            </ div >  */}
         	
         </div>
     )
@@ -409,8 +407,8 @@ async function RenderSearchResults( _SearchResults: any, domNodes: any ) {
     }
 
     await RenderStructures();
-    await RenderDescription();
-    await RenderProperties();
+    // await RenderDescription();
+    // await RenderProperties();
 
     console.log( "Finished streaming all search results to page.");
 };

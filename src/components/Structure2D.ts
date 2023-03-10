@@ -11,16 +11,18 @@ function DisplayLineStructure( mol2d: any, size2d: number ) {
     size2d, // width
     size2d, // height
     false // is3D
-    );
+  );
     
+  
+  // Colors
+  display2D.styles.bonds_color = 'white';
+  display2D.styles.atoms_useJMOLColors = true;
+  display2D.styles.backgroundColor = '#141414';
+  display2D.styles.bonds_colorGradient = true;
   display2D.styles.atoms_HBlack_2D = false;
 
-  display2D.styles.atoms_color = 'white';
-  display2D.styles.bonds_color = 'white';
   display2D.styles.atoms_displayTerminalCarbonLabels_2D = true;
-  display2D.styles.backgroundColor = '#141414';
 
-  display2D.styles.bonds_colorGradient = true;
 
 
   // render sizing of line structure
@@ -31,15 +33,17 @@ function DisplayLineStructure( mol2d: any, size2d: number ) {
 
 
   display2D.styles.atoms_implicitHydrogens_2D = true;
-  display2D.styles.atoms_useJMOLColors = true;
   // display2D.styles.angstromsPerBondLength = 5.5;
-  // display2D.styles.atoms_displayAllCarbonLabels_2D = true;
 
 
   let HydrogenReducer = new Render.informatics.HydrogenDeducer;
   HydrogenReducer.removeHydrogens(molecule, false);
   molecule.scaleToAverageBondLength(40);
   display2D.loadMolecule(molecule);
+
+
+  display2D.styles.scale = 0.9;
+  display2D.repaint();
 }
 
 export default DisplayLineStructure;
