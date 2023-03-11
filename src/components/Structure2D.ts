@@ -42,7 +42,7 @@ function DisplayLineStructure( mol2d: any, size2d: number ) {
   display2D.loadMolecule(molecule);
 
 
-  display2D.styles.scale = 0.9;
+  display2D.styles.scale = 0.7;
   display2D.repaint();
 }
 

@@ -10,7 +10,10 @@ export default function Structure3D( mol3d: any, size3d: any ) {
   let molecule = Render.readMOL( mol3d );
 
   // Setting custom styles: 
+
+  TC.styles.set3DRepresentation('Ball and Stick');
   TC.styles = CustomizeStyles( TC );
+
 
   // Adding drag functionality:
   TC.dragPath = [], TC.oldDrag = TC.drag;
@@ -32,6 +35,10 @@ export default function Structure3D( mol3d: any, size3d: any ) {
 }
 
 
+
+
+
+
 function CustomizeStyles( TC: any ) {
 
   // Copying default styles:
@@ -40,10 +47,12 @@ function CustomizeStyles( TC: any ) {
   // Scaling atoms and bonds
   cs.bonds_cylinderDiameter_3D = 1;
   cs.atoms_useVDWDiameters_3D = true;
-  cs.atoms_vdwMultiplier_3D = 2;
+  cs.atoms_vdwMultiplier_3D = 2.5;
+  cs.bonds_showBondOrders_3D = true;
 
   // Color
   cs.atoms_useJMOLColors = true;
+  cs.bonds_color = 'white';
   cs.backgroundColor = '#141414';
   cs.bonds_splitColor = true;
 
@@ -55,7 +64,7 @@ function CustomizeStyles( TC: any ) {
   cs.shadow_3D = false;
 
   // Lighting 
-  cs.lightDirection_3D = [0,0,0];
+  cs.lightDirection_3D = [0,1,0];
 
   return cs;
 
@@ -67,19 +76,35 @@ function CustomizeStyles( TC: any ) {
 
 
     // Setting Ball and Stick Representation
-    TC.styles.set3DRepresentation('Ball and Stick');
 
   
     // Outline 
-    TC.styles.outline_3D = true; 
-    TC.styles.outline_thickness = 1;
+    carbonStyle.outline_3D = true; 
+
     TC.styles.outline_depth_threshold = .2;
     TC.styles.outline_normal_threshold = .9;
 
   */
 };
 
+
+
+
+
+
+
+
+
+
 function ChangeAtomColors( molecule: any, TC: any ) {
+
+  // Changing Carbon Color
+  let carbonStyle = TC.styles.copy();
+  carbonStyle.atoms_useJMOLColors = false;
+  // carbonStyle.atoms_color = '#363635';
+  carbonStyle.atoms_color = '#242423';
+
+
 
   // Changing Nitrogen Color
   let nitrogenStyle = TC.styles.copy();
@@ -91,15 +116,39 @@ function ChangeAtomColors( molecule: any, TC: any ) {
   oxygenStyle.atoms_useJMOLColors = false;
   oxygenStyle.atoms_color = 'red';
 
+  // Changing Phosphorus Color
+  let phosphorusStyle = TC.styles.copy();
+  phosphorusStyle.atoms_useJMOLColors = false;
+  phosphorusStyle.atoms_color = '#944203';
+
+  // Changing Sulfur Color
+  let sulfurStyle = TC.styles.copy();
+  sulfurStyle.atoms_useJMOLColors = false;
+  sulfurStyle.atoms_color = 'yellow';
+
+
   for(let i = 0; i < molecule.atoms.length; i++) {
     let a = molecule.atoms[i];
+    if( a.label === 'C' ) {
+      a.styles = carbonStyle;
+    }
+
     if( a.label === 'N' ) {
       a.styles = nitrogenStyle;
     }
     if( a.label === 'O' ) {
       a.styles = oxygenStyle;
     }
-  }
+
+    if( a.label === 'P' ) {
+      a.styles = phosphorusStyle;
+    }
+
+    if( a.label === 'S' ) {
+      a.styles = sulfurStyle;
+    }
+
+  };
 };
 
 
