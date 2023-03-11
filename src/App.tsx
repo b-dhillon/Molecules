@@ -8,8 +8,10 @@ import DATA from './data';
 
 UI:
 
-- Keep tuning 3D model
-  - Make colors more darker and more vibrant -- should match 2d structure colors
+- Rebuild 3D Model 
+  - Make colors darker and more vibrant -- should match 2d structure colors
+
+
 
 - Fix bugs 
   - Canvas boxes not being hidden when you do a 2nd search 
@@ -17,12 +19,20 @@ UI:
 
 
   - Add boiling point, melting point, taste? odor? optical rotation, pKa!!! to table properties
+
+
 --//--
+
+
+
+
 
 AutoComplete | AutoSuggest
   - Binary search for list of compound names and their synonyms?
     - React Select library does this for us. 
   - Or should we use Machine Learning reccomendations using an Embeddings API?
+
+
 --//--
 
 
